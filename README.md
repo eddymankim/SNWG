@@ -1,5 +1,5 @@
 # Spatial Narratives via Web Graphics
-<iframe width="100%" height="100" frameborder="0" src="http://eddyman.kim/emk/particles.html" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen>&nbsp;</iframe>
+![](assets/banner.png)
 
 ### Course Information
 XX-XXX (9 Units)<br>
