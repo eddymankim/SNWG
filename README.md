@@ -11,7 +11,7 @@ Instructor: Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))<br>
 Office Hours: By Appointment<br>
 Office Location: MMCH 308
 
-Teaching Assistant: Benjamin Scott ([bescott@andrew.cmu.edu](bescott@andrew.cmu.edu))<br>
+Teaching Assistant: Benjamin Scott ([bescott@andrew.cmu.edu](bescott@andrew.cmu.edu)), Rehan Butt ([rab@andrew.cmu.edu](rab@andrew.cmu.edu))<br>
 Office Hours & Location: TBA
 
 ### Course Description
