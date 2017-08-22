@@ -26,18 +26,18 @@ By the end of the course, students should have the following outcomes:
 
 ### Weekly Logistics
 
-- Week 1: Course Introduction
-- Week 2: 
-- Week 3:
-- Week 4:
-- Week 5:
-- Week 6:
-- Week 7:
-- Week 8:
-- Week 9:
-- Week 10:
-- Week 11:
-- Week 12:
-- Week 13:
-- Week 14:
-- Week 15:
+- Week 1: No Class
+- Week 2: Course Introduction
+- Week 3: Overview of Web Graphics
+- Week 4: Getting Started with THREE.js
+- Week 5: 3D Modeling, UV mapping
+- Week 6: Text, Audio, Video Inclusion
+- Week 7: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics
+- Week 8: Animation, Shaders, Events
+- Week 9: Getting Final Projects Started
+- Week 10: Project Progress Review, Hack Session
+- Week 11: Project Progress Review, Hack Session
+- Week 12: Project Progress Review, Hack Session
+- Week 13: Project Progress Review, Hack Session
+- Week 14: Project Progress Review, Hack Session
+- Week 15: Project Progress Review, Hack Session
