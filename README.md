@@ -27,8 +27,8 @@ By the end of the course, students should have the following outcomes:
 ### Weekly Logistics
 
 - Week 1: No Class
-- Week 2: Course Introduction
-- Week 3: Overview of Web Graphics
+- Week 2: Course Introduction; Github Workflow
+- Week 3: Overview of Web Development
 - Week 4: Getting Started with THREE.js
 - Week 5: 3D Modeling, UV mapping
 - Week 6: Text, Audio, Video Inclusion
