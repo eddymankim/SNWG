@@ -14,6 +14,7 @@ Instructor:
 - Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))
 
 Office Hours: By Appointment
+
 Office Location: MMCH 308
 
 Teaching Assistants: 
