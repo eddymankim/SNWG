@@ -47,7 +47,7 @@ By the end of the course, students should have the following outcomes:
 
 From a technical perspective, the students can hope to learn how to: 
 - collaborate on multimedia projects, organizing work and assets
-- model evocative environments and models in CAD and 3DS Max
+- model evocative environments and models in CAD softwares (3DS Max, Sketchup, Rhino)
 - create simple animations and write simple interactive scripts
 - leverage audio, video, images, and prose in 3D experiences
 
