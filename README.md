@@ -2,19 +2,18 @@
 ![](assets/banner.png)
 
 ### Course Information
-XX-XXX (9 Units)
+62-633 (9 Units)<br>
 
-Carnegie Mellon University School of Architecture
+Carnegie Mellon University College of Fine Arts Interdisciplinary Course<br>
+Open to all graduate students; Instructor permission required for undergraduate students
 
-Class Times: W 6:30PM – 8:20PM
-
+Class Times: W 6:30PM – 8:20PM<br>
 Class Room: MMCH 303
 
 Instructor: 
 - Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))
 
-Office Hours: By Appointment
-
+Office Hours: By Appointment<br>
 Office Location: MMCH 308
 
 Teaching Assistants: 
