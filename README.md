@@ -10,10 +10,10 @@ Class Times: W 6:30PM – 8:20PM
 
 Class Room: MMCH 303
 
-Instructor: Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))
+Instructor: 
+- Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))
 
 Office Hours: By Appointment
-
 Office Location: MMCH 308
 
 Teaching Assistants: 
@@ -25,7 +25,7 @@ Office Hours & Location: TBA
 ### Course Description
 This course explores experimental applications of web graphics technology in the service of communicating spatial narratives.
 The spatial narratives will strive to reimagine the concept of space and the practice of storytelling in the context of browser-based graphics environments.
-This course will contemplate specifically the use of 3-dimensional media via the web as a vehicle for delivering spatial narratives.
+This course will contemplate specifically the use of multi-dimensional media via the web as a vehicle for delivering spatial narratives.
 Web graphics technologies, such as CSS, SVG, Canvas and WebGL, have dramatically increased in their compatibility with both mobile and desktop computing devices and have consequently broadened the reach of graphically rich content to the masses.
 Students will work on a semester-long project in the form of an interactive web application that challenges, augments, or reaffirms the sense of space through deliberate use of storytelling devices.
 Upon culmination, the projects will be exhibited on the course website for public viewing.
