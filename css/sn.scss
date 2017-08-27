@@ -1,0 +1,164 @@
+---
+---
+
+$grey2: #666666;
+
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,500,600,700');
+
+$zilla: 'Zilla Slab', serif;
+
+$regular: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+
+html, body, h1, h2, h3, h4, h5, h6{
+  font-family: $zilla;
+  color: $grey2;
+}
+
+body{
+  font-size: 18px;
+}
+
+
+// Header
+.logo{
+  height: 160px;
+}
+
+svg{
+  .st3{
+//    fill="url(#skyGradient)";
+  }
+}
+
+//-webkit-animation: AnimationName 41s ease infinite;
+//-moz-animation: AnimationName 41s ease infinite;
+//-o-animation: AnimationName 41s ease infinite;
+//animation: AnimationName 41s ease infinite;
+//
+//@-webkit-keyframes AnimationName {
+//    0%{background-position:94% 0%}
+//    50%{background-position:7% 100%}
+//    100%{background-position:94% 0%}
+//}
+//@-moz-keyframes AnimationName {
+//    0%{background-position:94% 0%}
+//    50%{background-position:7% 100%}
+//    100%{background-position:94% 0%}
+//}
+//@-o-keyframes AnimationName {
+//    0%{background-position:94% 0%}
+//    50%{background-position:7% 100%}
+//    100%{background-position:94% 0%}
+//}
+//@keyframes AnimationName { 
+//    0%{background-position:94% 0%}
+//    50%{background-position:7% 100%}
+//    100%{background-position:94% 0%}
+//}
+
+
+
+.site-header{
+  border-top: none;
+  border-bottom: none;
+  position: none;
+  min-height: none;
+  margin-top: 30px;
+}
+
+.site-title{
+  float: none;
+}
+
+.nav-bar{
+  float: none;
+  line-height: 120px;
+  font-size: 30px;
+  a{
+    color: $grey2;
+  }
+  .nav-item{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+
+
+
+// Footer
+footer{
+  background-color: #f2f2f2;
+  color: #b5b5b5;
+  .link{
+    color: #b5b5b5;
+  }
+}
+
+.footerLeft{
+  line-height: 45px;
+}
+
+.footerRight{
+  line-height: 45px;
+}
+
+div.medium-4.columns.footerRight{
+  text-align:right;
+}
+
+.footerCenter{
+  text-align: center;
+  line-height: 45px;
+}
+
+.rehanLogo{
+  height: 18px;
+}
+.twitterLogo{
+  height: 30px;
+}
+
+.site-footer{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.noSelect{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+}
+
+/*measurments pulled from foundation css file*/
+
+/*for mobile friendly styling*/
+@media screen and (max-width: 40em) {
+
+  header{
+    margin-bottom: 10px;
+  }
+
+  footerLeft, div.medium-4.columns.footerRight, footer{
+    text-align: center;
+  }
+
+  .footerCenter{
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+}
+
+/*for tablet friendly styling*/
+@media screen and (max-width: 64em) {
+
+}

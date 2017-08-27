@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Zilla+Slab:400,500,600,700");
+html, body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Zilla Slab", serif;
+  color: #666666; }
+
+body {
+  font-size: 18px; }
+
+.logo {
+  height: 160px; }
+
+.site-header {
+  border-top: none;
+  border-bottom: none;
+  position: none;
+  min-height: none;
+  margin-top: 30px; }
+
+.site-title {
+  float: none; }
+
+.nav-bar {
+  float: none;
+  line-height: 120px;
+  font-size: 30px; }
+  .nav-bar a {
+    color: #666666; }
+  .nav-bar .nav-item {
+    margin-left: 5px;
+    margin-right: 5px; }
+
+footer {
+  background-color: #f2f2f2;
+  color: #b5b5b5; }
+  footer .link {
+    color: #b5b5b5; }
+
+.footerLeft {
+  line-height: 45px; }
+
+.footerRight {
+  line-height: 45px; }
+
+div.medium-4.columns.footerRight {
+  text-align: right; }
+
+.footerCenter {
+  text-align: center;
+  line-height: 45px; }
+
+.rehanLogo {
+  height: 18px; }
+
+.twitterLogo {
+  height: 30px; }
+
+.site-footer {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  user-drag: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none; }
+
+/*measurments pulled from foundation css file*/
+/*for mobile friendly styling*/
+@media screen and (max-width: 40em) {
+  header {
+    margin-bottom: 10px; }
+
+  footerLeft, div.medium-4.columns.footerRight, footer {
+    text-align: center; }
+
+  .footerCenter {
+    padding-top: 20px;
+    padding-bottom: 20px; } }
+/*for tablet friendly styling*/
