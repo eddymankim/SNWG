@@ -35,6 +35,7 @@ The second half of the course will focus on the production of the final project 
 While there is no prerequisite for this course, some familiarity of the technologies mentioned above and basic programming skills are highly preferred.
 First class will meet after Labor Day on September 6, 2017.
 
+**_In short, this course is a research seminar that will explore affordances of spatial narratives by experimenting with various web graphics technologies._**
 
 ### Learning Objectives
 Students will collaboratively produce an interactive 3D narrative experience for the web,
