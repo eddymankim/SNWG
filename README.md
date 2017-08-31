@@ -106,3 +106,11 @@ There will be a few field trips organized over the course of the semester....
 
 ## Supplemental Lynda Tutorials
 - JavaScript Essential Training by Morten Rand-Hendriksen
+
+## Grading Breakdown
+- Progress Work
+  - 10% Weekly Assignments (Weeks 3-8)
+- Final Project
+  - 15% Conceptual Execution
+  - 15% Technical/Organization Implementation
+  - 10% Documentation & Process
