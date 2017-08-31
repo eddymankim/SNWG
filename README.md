@@ -55,17 +55,54 @@ From a technical perspective, the students can hope to learn how to:
 ### Weekly Logistics
 
 - Week 1: No Class
-- Week 2: Course Introduction; Github Workflow
-- Week 3: Overview of Web Development
-- Week 4: Getting Started with THREE.js
-- Week 5: 3D Modeling, UV mapping
-- Week 6: Text, Audio, Video Inclusion
-- Week 7: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics
-- Week 8: Animation, Shaders, Events
-- Week 9: Getting Final Projects Started
-- Week 10: Project Progress Review, Hack Session
-- Week 11: Project Progress Review, Hack Session
-- Week 12: Project Progress Review, Hack Session
-- Week 13: Project Progress Review, Hack Session
-- Week 14: Project Progress Review, Hack Session
-- Week 15: Project Progress Review, Hack Session
+- Week 2: Course Introduction; Github Workflow; Markdown/Jekyll Overview
+  - Jekyll post due next class
+    - Fork the course repository
+    - Embed a 3D model into the post using SketchFab
+- Week 3: Overview of Web Development; Introduction to ES6/JS
+  - Jekyll post due next class
+    - Research on the examples of the technologies discussed in class
+    - Create a gallery within a post that links to the examples
+- Week 4: ES6/JS Recap, Getting Started with THREE.js
+  - Jekyll post due next class
+    - Create an interactive THREE.js sketch embedded in the post
+- Week 5: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics; User Experience Design
+  - Jekyll post due next class
+    - Narrative proposal(s) in the form of storyboards
+- Week 6: 3D Modeling; Other asset creation & pipelines; Decimation as low-polygon workflow
+  - Jekyll post due next class
+    - Embed two 3D models into the post using SketchFab
+- Week 7: 3D Modeling; UV mapping
+  - Jekyll post due next class
+    - Embed a texture-mapped 3D model
+- Week 8: Animation; Blend shapes; Shaders; Interactivity
+  - Jekyll post due next class
+    - Animated and interactive THREE.js prototype based on the storyboards
+- Week 9: Getting Final Projects Started; Principles of Software Design
+  - Jekyll post due next class
+    - Insights and challenges
+    - Goals for next week
+- Week 10: Project Progress Review; Hack Session
+  - Jekyll post due next class
+    - Insights and challenges
+    - Goals for next week
+- Week 11: Project Progress Review; Hack Session
+  - Jekyll post due next class
+    - Insights and challenges
+    - Goals for next week
+- Week 12: Project Progress Review; Hack Session
+  - Jekyll post due next class
+    - Insights and challenges
+    - Goals for next week
+- Week 13: No Class (Thanksgiving)
+- Week 14: Project Progress Review; Hack Session
+  - Jekyll post due next class
+    - Insights and challenges
+    - Goals for next week
+- Week 15: Final Presentations
+
+## Field Trips
+There will be a few field trips organized over the course of the semester....
+
+## Supplemental Lynda Tutorials
+- JavaScript Essential Training by Morten Rand-Hendriksen
