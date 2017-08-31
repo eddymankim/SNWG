@@ -106,6 +106,7 @@ There will be a few field trips organized over the course of the semester....
 
 ## Supplemental Lynda Tutorials
 - JavaScript Essential Training by Morten Rand-Hendriksen
+- 3ds Max: Hard Surface Modeling by Joel Bradley
 
 ## Grading Breakdown
 - Progress Work
