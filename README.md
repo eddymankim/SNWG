@@ -64,57 +64,57 @@ Week 1: No Class
 
 Week 2: Course Introduction; Github Workflow; Markdown/Jekyll Overview
 > Due next class:
-  - Fork the course repository
-  - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
+> - Fork the course repository
+> - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
 
 Week 3: Overview of Web Development; Introduction to ES6/JS
 > Due next class:
-  - Research on the examples of the technologies discussed in class
-  - Create a gallery within a new Jekyll post that links to the examples
+> - Research on the examples of the technologies discussed in class
+> - Create a gallery within a new Jekyll post that links to the examples
 
 Week 4: ES6/JS Recap, Getting Started with THREE.js
 > Due next class:
-  - Create an interactive THREE.js sketch embedded in a new Jekyll post
+> - Create an interactive THREE.js sketch embedded in a new Jekyll post
 
 Week 5: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics; User Experience Design
 > Due next class:
-  - Narrative proposal(s) in the form of storyboards in a new Jekyll post
+> - Narrative proposal(s) in the form of storyboards in a new Jekyll post
 
 Week 6: 3D Modeling; Other asset creation & pipelines; Decimation as low-polygon workflow
 > Due next class:
-  - Embed two 3D models into a new Jekyll post using SketchFab
+> - Embed two 3D models into a new Jekyll post using SketchFab
 
 Week 7: 3D Modeling; UV mapping
 > Due next class:
-  - Embed a texture-mapped 3D model into a new Jekyll post
+> - Embed a texture-mapped 3D model into a new Jekyll post
 
 Week 8: Animation; Blend shapes; Shaders; Interactivity
 > Due next class:
-  - Animated and interactive THREE.js prototype based on the storyboards in a new Jekyll post
+> - Animated and interactive THREE.js prototype based on the storyboards in a new Jekyll post
 
 Week 9: Getting Final Projects Started; Principles of Software Design
 > Due next class:
-  - A new Jekyll post with insights and challenges so far, and goals for next week
+> - A new Jekyll post with insights and challenges so far, and goals for next week
 
 Week 10: Project Progress Review; Hack Session
 > Due next class:
-  - A new Jekyll post with insights and challenges so far, and goals for next week
+> - A new Jekyll post with insights and challenges so far, and goals for next week
 
 Week 11: Project Progress Review; Hack Session
 > Due next class:
-  - A new Jekyll post with insights and challenges so far, and goals for next week
+> - A new Jekyll post with insights and challenges so far, and goals for next week
 
 Week 12: Project Progress Review; Hack Session
 > Due next class:
-  - A new Jekyll post with insights and challenges so far, and goals for next week
+> - A new Jekyll post with insights and challenges so far, and goals for next week
 
 Week 13: No Class (Thanksgiving)
 
 Week 14: Project Progress Review; Hack Session
 > Due next class:
-  - Final project presentation
-  - Final project live demonstration
-  - Final Jekyll post summarizing the project
+> - Final project presentation
+> - Final project live demonstration
+> - Final Jekyll post summarizing the project
 
 Week 15: **Final Project Presentations**
 
