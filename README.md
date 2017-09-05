@@ -46,7 +46,7 @@ By the end of the course, students should have the following outcomes:
 - Web-based interactive 3D application programmed to deliver spatial narratives
 - Theoretical insight into the potential applications for spatial communication using web graphics technologies
 - Spatial narratives evaluated in terms of the following criteria:
-  - Material
+  - Materiality
   - Scale
   - Other senses
 
@@ -58,7 +58,7 @@ From a technical perspective, the students can hope to learn how to:
 
 
 ### Weekly Logistics
-
+For every class meeting, the course will work collaboratively to make the best use of the 
 
 ##### Week 1: No Class
 
