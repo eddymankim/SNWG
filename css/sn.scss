@@ -86,7 +86,45 @@ svg{
   }
 }
 
+.thumbnail-container {
+  position: relative;
+  display: block;
+  background-color: black;
+  opacity: 1;
+  //border-radius: 30px;
+  
+}
 
+.thumbnail-container:hover .thumbnail-text {
+  opacity: 1;
+}
+
+.thumbnail-container:hover .thumbnail-image {
+  opacity: 0.8;
+}
+
+.thumbnail-text {
+  position: absolute;
+  bottom: 20px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  color: white;
+  opacity: 0;
+  text-shadow: 0px 0px 5px rgba(50, 50, 50, 1);
+  font-size: 33px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.thumbnail-tile {
+  margin-bottom: 30px;
+}
+
+//.thumbnail-image{
+//  //border-radius: 10px;
+//  width: 100%;
+//}
 
 
 // Footer
