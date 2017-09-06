@@ -8,7 +8,7 @@ Carnegie Mellon University College of Fine Arts Interdisciplinary Course<br>
 Open to all graduate students; Instructor permission required for undergraduate students
 
 Class Times: W 6:30PM – 8:20PM<br>
-Class Room: MMCH 303
+Class Room: MMCH 303 (TBC)
 
 Instructor: 
 - Eddy Man Kim ([eddymankim@cmu.edu](mailto:eddymankim@cmu.edu))
@@ -35,36 +35,106 @@ The second half of the course will focus on the production of the final project 
 While there is no prerequisite for this course, some familiarity of the technologies mentioned above and basic programming skills are highly preferred.
 First class will meet after Labor Day on September 6, 2017.
 
+**_In short, this course is a research seminar that will explore affordances of spatial narratives by experimenting with various web graphics technologies._**
 
 ### Learning Objectives
-Students will collaboratively produce an interactive 3D narrative experience for the web,
+Students will produce an interactive 3D narrative experience for the web,
 and will gain technical, conceptual, and organizational insights along the way.
-
 
 ### Outcomes
 By the end of the course, students should have the following outcomes:
+- Web-based interactive 3D application programmed to deliver spatial narratives
+- Theoretical insight into the potential applications for spatial communication using web graphics technologies
+- Spatial narratives evaluated in terms of the following criteria:
+  - Materiality
+  - Scale
+  - Other senses
 
 From a technical perspective, the students can hope to learn how to: 
-- collaborate on multimedia projects, organizing work and assets
-- model evocative environments and models in CAD softwares (3DS Max, Sketchup, Rhino)
-- create simple animations and write simple interactive scripts
-- leverage audio, video, images, and prose in 3D experiences
+- Work on web-based multimedia projects, organizing work and assets
+- Model evocative environments and models in CAD softwares (3DS Max, Rhino)
+- Create simple animations and write simple interactive scripts
+- Leverage audio, video, images, and prose in 3D experiences
 
 
 ### Weekly Logistics
+For every class meeting, the course will work collaboratively to make the best use of the 
 
-- Week 1: No Class
-- Week 2: Course Introduction; Github Workflow
-- Week 3: Overview of Web Development
-- Week 4: Getting Started with THREE.js
-- Week 5: 3D Modeling, UV mapping
-- Week 6: Text, Audio, Video Inclusion
-- Week 7: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics
-- Week 8: Animation, Shaders, Events
-- Week 9: Getting Final Projects Started
-- Week 10: Project Progress Review, Hack Session
-- Week 11: Project Progress Review, Hack Session
-- Week 12: Project Progress Review, Hack Session
-- Week 13: Project Progress Review, Hack Session
-- Week 14: Project Progress Review, Hack Session
-- Week 15: Project Progress Review, Hack Session
+##### Week 1: No Class
+
+##### Week 2: Course Introduction; Github Workflow; Markdown/Jekyll Overview
+> Due next class:
+> - Fork the course repository
+> - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
+
+##### Week 3: Overview of Web Development; Introduction to ES6/JS
+> Due next class:
+> - Research on the examples of the technologies discussed in class
+> - Create a gallery within a new Jekyll post that links to the examples
+
+##### Week 4: ES6/JS Recap, Getting Started with THREE.js
+> Due next class:
+> - Create an interactive THREE.js sketch embedded in a new Jekyll post
+
+##### Week 5: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics; User Experience Design
+> Due next class:
+> - Narrative proposal(s) in the form of storyboards in a new Jekyll post
+
+##### Week 6: 3D Modeling; Other asset creation & pipelines; Decimation as low-polygon workflow
+> Due next class:
+> - Embed two 3D models into a new Jekyll post using SketchFab
+
+##### Week 7: 3D Modeling; UV mapping
+> Due next class:
+> - Embed a texture-mapped 3D model into a new Jekyll post
+
+##### Week 8: Animation; Blend shapes; Shaders; Interactivity
+> Due next class:
+> - Animated and interactive THREE.js prototype based on the storyboards in a new Jekyll post
+
+##### Week 9: Getting Final Projects Started; Principles of Software Design
+> Due next class:
+> - A new Jekyll post with insights and challenges so far, and goals for next week
+
+##### Week 10: Project Progress Review; Hack Session
+> Due next class:
+> - A new Jekyll post with insights and challenges so far, and goals for next week
+
+##### Week 11: Project Progress Review; Hack Session
+> Due next class:
+> - A new Jekyll post with insights and challenges so far, and goals for next week
+
+##### Week 12: Project Progress Review; Hack Session
+> Due next class:
+> - A new Jekyll post with insights and challenges so far, and goals for next week
+
+##### Week 13: No Class (Thanksgiving)
+
+##### Week 14: Project Progress Review; Hack Session
+> Due next class:
+> - Final project presentation
+> - Final project live demonstration
+> - Final Jekyll post summarizing the project
+
+##### Week 15: **Final Project Presentations**
+
+## Field Trips
+There will be a few field trips organized over the course of the semester to companies, labs, and institutions relevant to the course. More information will be posted here.
+
+## Supplemental Lynda Tutorials
+- JavaScript Essential Training by Morten Rand-Hendriksen
+- Learning 3D Graphics on the Web with Three.js by Engin Arslan
+- 3ds Max: Hard Surface Modeling by Joel Bradley
+
+## Grading Breakdown
+- Progress Work
+  - 10% Week 3 Assignment
+  - 10% Week 4 Assignment
+  - 10% Week 5 Assignment
+  - 10% Week 6 Assignment
+  - 10% Week 7 Assignment
+  - 10% Week 8 Assignment
+- Final Project
+  - 15% Conceptual Execution
+  - 15% Technical/Organization Implementation
+  - 10% Documentation & Process
