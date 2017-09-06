@@ -1,20 +1,17 @@
 ---
 layout: default
 ---
-
-<div class="home">
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}{% if post.author %} • {{ post.author }}{% endif %}</span>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+  {% assign project_order = site.projects | sort: 'week-assignment' | reverse %}
+  {% for project in project_order %}
+  <div class="small-12 medium-4 large-3 columns thumbnail-tile">
+      <a class="post-link" href="{{ project.url | prepend: site.baseurl }}">
+          <div class="thumbnail-container">
+            <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}">
+            <span class="thumbnail-text">{{ project.title }}</span>
+            {% if project.banner %}
+            <span class="banner">{{ project.banner }}</span>
+            {% endif %}
+          </div>
+      </a>
+  </div>
+  {% endfor %}
