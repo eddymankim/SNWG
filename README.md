@@ -67,10 +67,12 @@ Experimentation is encouraged in this course. The experiments shall strive to ch
 > Due next class:
 > - Fork the course repository
 > - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
+> - Analyze and describe the experience of publishing your 3D model SketchFab
+> - Describe your motivations for taking this course
 
 ##### Week 3: Overview of Web Development; Introduction to ES6/JS (Recording)
 > Due next class:
-> - Research on the examples of the technologies discussed in class
+> - Research and gather more examples of the technologies discussed in class
 > - Create a gallery within a new Jekyll post that links to the examples
 
 ##### Week 4: ES6/JS Recap, Getting Started with THREE.js (Recording)
