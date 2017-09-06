@@ -43,12 +43,9 @@ and will gain technical, conceptual, and organizational insights along the way.
 
 ### Outcomes
 By the end of the course, students should have the following outcomes:
-- Web-based interactive 3D application programmed to deliver spatial narratives
-- Theoretical insight into the potential applications for spatial communication using web graphics technologies
-- Spatial narratives evaluated in terms of the following criteria:
-  - Materiality
-  - Scale
-  - Other senses
+- Gain experience in programming web-based interactive 3D applications
+- Gain experience in conceptualizing, constructing, and delivering spatial narratives
+- Gain theoretical insights into the potential applications for spatial communication using web graphics technologies
 
 From a technical perspective, the students can hope to learn how to: 
 - Work on web-based multimedia projects, organizing work and assets
@@ -56,43 +53,47 @@ From a technical perspective, the students can hope to learn how to:
 - Create simple animations and write simple interactive scripts
 - Leverage audio, video, images, and prose in 3D experiences
 
+### Evaluation Criteria
+Experimentation is encouraged in this course. The experiments shall strive to challenge, accentuate, and intertwine the following spatial concepts:
+- Dimensionality
+- Materiality
+- Scale
 
 ### Weekly Logistics
-For every class meeting, the course will work collaboratively to make the best use of the 
 
 ##### Week 1: No Class
 
-##### Week 2: Course Introduction; Github Workflow; Markdown/Jekyll Overview
+##### Week 2: [Course Introduction](https://slides.com/eddymankim/snwg-wk02/); Github Workflow; Markdown/Jekyll Overview (Recording)
 > Due next class:
 > - Fork the course repository
 > - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
 
-##### Week 3: Overview of Web Development; Introduction to ES6/JS
+##### Week 3: Overview of Web Development; Introduction to ES6/JS (Recording)
 > Due next class:
 > - Research on the examples of the technologies discussed in class
 > - Create a gallery within a new Jekyll post that links to the examples
 
-##### Week 4: ES6/JS Recap, Getting Started with THREE.js
+##### Week 4: ES6/JS Recap, Getting Started with THREE.js (Recording)
 > Due next class:
 > - Create an interactive THREE.js sketch embedded in a new Jekyll post
 
-##### Week 5: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics; User Experience Design
+##### Week 5: Post-processing Effects; Narrative Devices & Atmospheric Aesthetics; User Experience Design (Recording)
 > Due next class:
 > - Narrative proposal(s) in the form of storyboards in a new Jekyll post
 
-##### Week 6: 3D Modeling; Other asset creation & pipelines; Decimation as low-polygon workflow
+##### Week 6: 3D Modeling; Other asset creation & pipelines; Decimation as low-polygon workflow (Recording)
 > Due next class:
 > - Embed two 3D models into a new Jekyll post using SketchFab
 
-##### Week 7: 3D Modeling; UV mapping
+##### Week 7: 3D Modeling; UV mapping (Recording)
 > Due next class:
 > - Embed a texture-mapped 3D model into a new Jekyll post
 
-##### Week 8: Animation; Blend shapes; Shaders; Interactivity
+##### Week 8: Animation; Blend shapes; Shaders; Interactivity (Recording)
 > Due next class:
 > - Animated and interactive THREE.js prototype based on the storyboards in a new Jekyll post
 
-##### Week 9: Getting Final Projects Started; Principles of Software Design
+##### Week 9: Getting Final Projects Started; Principles of Software Design (Recording)
 > Due next class:
 > - A new Jekyll post with insights and challenges so far, and goals for next week
 
@@ -116,15 +117,21 @@ For every class meeting, the course will work collaboratively to make the best u
 > - Final project live demonstration
 > - Final Jekyll post summarizing the project
 
-##### Week 15: **Final Project Presentations**
+##### Week 15: **Final Project Presentations** (Recording)
 
 ## Field Trips
 There will be a few field trips organized over the course of the semester to companies, labs, and institutions relevant to the course. More information will be posted here.
 
-## Supplemental Lynda Tutorials
-- JavaScript Essential Training by Morten Rand-Hendriksen
-- Learning 3D Graphics on the Web with Three.js by Engin Arslan
-- 3ds Max: Hard Surface Modeling by Joel Bradley
+## Supplemental Tutorials
+- [Lynda – HTML Essential Training](https://www.lynda.com/Web-Development-tutorials/HTML-Essential-Training/170427-2.html)
+- [Lynda – CSS Essential Training 1](https://www.lynda.com/CSS-tutorials/CSS-Essential-Training-1/569190-2.html)
+- [Lynda – CSS Essential Training 2](https://www.lynda.com/CSS-tutorials/CSS-Essential-Training-2/569189-2.html)
+- [Lynda – JavaScript Essential Training](https://www.lynda.com/JavaScript-tutorials/JavaScript-Essential-Training/574716-2.html)
+- [Lynda – Learning 3D Graphics on the Web with Three.js](https://www.lynda.com/JavaScript-tutorials/Learning-3D-Graphics-Web-Three-js/586668-2.html)
+- [Lynda – Rhino 5 Essential Training](https://www.lynda.com/Rhino-tutorials/Rhino-5-Essential-Training/133324-2.html)
+- [Lynda – 3ds Max 2018 Essential Training](https://www.lynda.com/CAD-tutorials/3ds-Max-2018-Essential-Training/577359-2.html)
+- [Lynda – 3ds Max: Hard Surface Modeling](https://www.lynda.com/3ds-Max-tutorials/3ds-Max-Hard-Surface-Modeling-Basics/479385-2.html)
+- [Udacity – Interactive 3D Graphics](https://www.udacity.com/course/interactive-3d-graphics--cs291)
 
 ## Grading Breakdown
 - Progress Work
