@@ -6,8 +6,4 @@ thumbnail: sea.png
 week-assignment: 2
 ---
 
-lwfjwihjfoiwdjnfwfji'wlfj
-wfi'whf;wfjk;
-wejkfweffw
-;oefjw'efjwe
-fjwefjwekfjweifjwifjwhfkwehfoiwh
+hello this is a test
