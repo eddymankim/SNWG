@@ -6,4 +6,4 @@ thumbnail: sea.png
 week-assignment: 2
 ---
 
-#big hello this is a test
+hello this is a test
