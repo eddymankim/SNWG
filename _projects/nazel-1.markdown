@@ -17,7 +17,7 @@ week-assignment: 2
     <div class="large-12 cell row">
       <div class="large-4 medium-4 cell columns">
         <img class="point_images"
-        src="{{site.url}}/img/nazel_imgs/post1/Survey_PointCloud_Buildings_01.png"
+        src="{{site.url}}/img/nazel/nazel-1/Survey_PointCloud_Buildings_01.png"
         style="
         min-width: 100px
         max-width: 300px;
@@ -27,7 +27,7 @@ week-assignment: 2
 
       <div class="large-4 medium-4 cell columns">
           <img class="point_images"
-          src="/img/nazel_imgs/post1/Survey_PointCloud_SparceCloud_01.png"
+          src="/img/nazel/nazel-1/Survey_PointCloud_SparceCloud_01.png"
           style="
           min-width: 100px
           max-width: 300px;
@@ -37,7 +37,7 @@ week-assignment: 2
 
       <div class="large-4 medium-4 cell columns">
           <img class="point_images"
-          src="/img/nazel_imgs/post1/Survey_PointCloud_Classification_01.png"
+          src="/img/nazel/nazel-1/Survey_PointCloud_Classification_01.png"
           style="
           min-width: 100px
           max-width: 600px;
@@ -95,18 +95,18 @@ week-assignment: 2
 <script>
 $(document).ready(function(){
 
-    $( "#result" ).load( "/img/nazel_imgs/post1/Survey_PointCloud_Site_01.png" );
+    $( "#result" ).load( "/img/nazel/nazel-1/Survey_PointCloud_Site_01.png" );
     $(".point_images").each(function(){
       var thisSRC = $(this).attr("src");
       $(this).hover(
         function(){
             $(this).attr('src', function (i, src) {
-              return src.replace(thisSRC, "/img/nazel_imgs/post1/Survey_PointCloud_Site_01.png")
+              return src.replace(thisSRC, "/img/nazel/nazel-1/Survey_PointCloud_Site_01.png")
               })
           },
           function(){
             $(this).attr('src', function (i, src) {
-            return src.replace("/img/nazel_imgs/post1/Survey_PointCloud_Site_01.png", thisSRC)
+            return src.replace("/img/nazel/nazel-1/Survey_PointCloud_Site_01.png", thisSRC)
             })
           }
       );
