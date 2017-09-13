@@ -63,7 +63,11 @@ Experimentation is encouraged in this course. The experiments shall strive to ch
 
 ##### Week 1: No Class
 
+<<<<<<< HEAD
+##### Week 2: [Course Introduction](https://slides.com/eddymankim/snwg-wk02/); Github Workflow; Markdown/Jekyll Overview ([Recording](https://cmu.zoom.us/recording/play/Y1Qtiv3r2_Wutd-vwEnVg6x4fxs5yAuwT01_9mD_Zk_H8GFZRy6Asy1lE621ZFMy))
+=======
 ##### Week 2: [Course Introduction](https://slides.com/eddymankim/snwg-wk02/); Github Workflow; Markdown/Jekyll Overview (Recording)
+>>>>>>> eddymankim/development
 > Due next class:
 > - Fork the course repository
 > - Create a new Jekyll post with an embedded 3D model (that you've created) using SketchFab
