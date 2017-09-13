@@ -2,7 +2,7 @@
 layout: post
 author: Nico
 title: Post A1
-thumbnail: sea.png
+thumbnail: Nico-W2.png
 week-assignment: 2
 ---
 <div class="grid-container" >
