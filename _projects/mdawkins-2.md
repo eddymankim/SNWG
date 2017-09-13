@@ -6,7 +6,11 @@ thumbnail: PutuWeek2-Crab.png
 week-assignment: 2
 ---
 
-This is my first post. These are crabs under a blanket.
+<h1>
+Crabs
+</h1>
+
+These are crabs under a blanket.
 
 <div align="center">
 <div class="sketchfab-embed-wrapper"><iframe width="640" height="480" src="https://sketchfab.com/models/e843f39b44474df49e30affc7e166902/embed" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
