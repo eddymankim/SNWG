@@ -2,7 +2,7 @@
 layout: post
 author: Putu
 title: Crabs in a Blanket
-thumbnail: PutuWeek2-Crab.jpg
+thumbnail: PutuWeek2-Crab.png
 week-assignment: 2
 ---
 
