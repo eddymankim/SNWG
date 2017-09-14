@@ -1,0 +1,27 @@
+# compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# OS temp files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# jekyll
+_site/
+_drafts/
+_site/
+.sass-cache/
+.jekyll-metadata
+
+# sublime text project files
+*.sublime-workspace
+*.sublime-project
