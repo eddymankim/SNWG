@@ -2,7 +2,7 @@
 layout: post
 author: Camille Baumann-Jaeger
 title: Trials and Motivations
-thumbnail: cbaumann-thumbail.png
+thumbnail: cbaumann-thumbnail.png
 week-assignment: 2
 ---
 
