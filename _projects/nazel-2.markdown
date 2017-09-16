@@ -10,39 +10,20 @@ week-assignment: 2
   <div class="large-12 cell row"> <!-- drone stuff Group group-->
 
     <div class="large-12 cell columns">
-      <h1 align="center">
-             Nico's First Post</h1>
+      <h1 align="center">Nico's First Post</h1>
     </div><!-- Row 1 end-->
 
     <div class="large-12 cell row">
       <div class="large-4 medium-4 cell columns">
-        <img class="point_images"
-        src="{{site.url}}/img/nazel/nazel-1/Survey_PointCloud_Buildings_01.png"
-        style="
-        min-width: 100px
-        max-width: 300px;
-        min-height:100px
-        max-height 300px:">
+        <img class="point_images" src="{{site.url}}/img/nazel/nazel-1/Survey_PointCloud_Buildings_01.png" style="min-width:100px;max-width:300px;min-height:100px;max-height:300px;">
       </div>
 
       <div class="large-4 medium-4 cell columns">
-          <img class="point_images"
-          src="/img/nazel/nazel-1/Survey_PointCloud_SparceCloud_01.png"
-          style="
-          min-width: 100px
-          max-width: 300px;
-          min-height:100px
-          max-height 300px:">
+          <img class="point_images"src="/img/nazel/nazel-1/Survey_PointCloud_SparceCloud_01.png" style="min-width: 100px; max-width: 300px; min-height:100px;max-height:300px;">
       </div>
 
       <div class="large-4 medium-4 cell columns">
-          <img class="point_images"
-          src="/img/nazel/nazel-1/Survey_PointCloud_Classification_01.png"
-          style="
-          min-width: 100px
-          max-width: 600px;
-          min-height:100px
-          max-height 600px:">
+          <img class="point_images" src="/img/nazel/nazel-1/Survey_PointCloud_Classification_01.png" style="min-width: 100px;max-width: 600px;min-height: 100px;max-height: 600px;">
       </div>
     </div><!-- Row 2 end-->
 
@@ -51,9 +32,8 @@ week-assignment: 2
     </div><!-- Row 3 end-->
 
     <div class="large-12 cell row">
-
       <div class="large-3 cell columns">
-        < p align="center"style = "padding-top: 4em;"> This interactive frame was made using Potree A app built on Three.js</p>
+        <p align="center"style = "padding-top: 4em;"> This interactive frame was made using Potree A app built on Three.js</p>
       </div> <!-- col with side caption end-->
 
       <div class="large-9 cell columns">
