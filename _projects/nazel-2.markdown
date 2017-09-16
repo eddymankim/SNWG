@@ -37,11 +37,7 @@ week-assignment: 2
       </div> <!-- col with side caption end-->
 
       <div class="large-9 cell columns">
-          <iframe src="http://riverroots.computingurbanism.com"
-            style = "
-            min-height:600px;
-            min-width:800px;">
-          </iframe>
+          <iframe src="http://riverroots.computingurbanism.com" style="min-height:600px; min-width:800px;"></iframe>
         </div><!-- col with potree end-->
     </div><!-- Row 4 end-->
   </div><!-- drone stuff Group END-->
