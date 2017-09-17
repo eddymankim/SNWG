@@ -6,7 +6,7 @@ thumbnail: sleepy_computer_big.png
 week-assignment: 2
 ---
 
-Here is a 3D model I whipped up using signed distance functions + raymarching, using Reza Ali's [F3](www.syedrezaali.com/f3-mac-app/) to turn it into a mesh.
+Here is a 3D model I whipped up using signed distance functions + raymarching, using Reza Ali's [F3](http://www.syedrezaali.com/f3-mac-app/) to turn it into a mesh.
 
 <div class="sketchfab-embed-wrapper" height="500px" ><iframe width="100%" height="500px" src="https://sketchfab.com/models/a954f911f6d0444487c5cd864b6490a1/embed?autospin=0.2&amp;autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
 
