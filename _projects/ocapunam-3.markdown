@@ -2,7 +2,7 @@
 layout: post
 author: Ozguc
 title: Exploration on Web Based AR
-thumbnail: ocapunam-2.png
+thumbnail: ocapunam-3.png
 week-assignment: 3
 ---
 
