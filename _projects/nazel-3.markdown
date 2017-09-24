@@ -5,6 +5,17 @@ title: Checking out Design Explorer
 thumbnail: Nico-W3.png
 week-assignment: 3
 ---
+
+<!-- cd /mnt/c/Users/nicol/GitHub/SNWG -->
+<!-- jekyll serve -->
+
+<script src="/js/vendor/jquery.js"></script>
+<script src="/js/vendor/foundation-nazel.js"></script>
+<!-- Other JS plugins can be included here -->
+
+
+
+
 <div class="grid-container" >
   <div class="grid-x grid-padding-x" ><!-- this is my primary group-->
 
@@ -14,44 +25,48 @@ week-assignment: 3
              Nico's Second Post</h1>
     </div><!-- Row 1 end-->
 
-  <div class="large-12 cell row"> <!-- drone stuff Group group-->
+  <div class="large-12 cell row" data-equalizer> <!-- drone stuff Group group-->
 
-    <div class="large-4 medium-4 cell columns">
+    <div class="large-4 medium-4 cell columns" data-equalizer-watch>
         <img
-        alt-"image of d3"
-        src="/img/nazel/nazel-2/d3-icon-data-dynamic-documentation-svg"
+        alt="image of d3"
+        src="/img/nazel/nazel-2/d3-icon-data-dynamic-documentation-svg.jpg"
         style="
-        min-width: 100px
-        max-width: 600px;
-        min-height:100px
-        max-height 600px:">
+        position: relative;
+        align = center;
+        min-width: 100px;
+        max-width: 250px;
+        min-height:100px;
+        max-height 250px;">
     </div>
 
-      <div class="large-4 medium-4 cell columns">
+      <div class="large-4 medium-4 cell columns" data-equalizer-watch>
           <img
-          alt-"image of svg"
-          src="/img/nazel/nazel-2/SVG-logo-graphic-vector-icon.svg"
+          alt="image of svg"
+          src="/img/nazel/nazel-2/SVG-logo-graphic-vector-icon.jpg"
           style="
-          min-width: 100px
-          max-width: 600px;
-          min-height:100px
-          max-height 600px:">
+          min-width: 100px;
+          max-width: 250px;
+          min-height:100px;
+          max-height 250px;">
       </div>
 
-      <div class="large-4 medium-4 cell columns">
+      <div class="large-4 medium-4 cell columns" data-equalizer-watch>
           <img
-          alt-"image of Three-js"
+          alt="image of Three-js"
           src="/img/nazel/nazel-2/three-js-3d-web-graphics-icon.jpg"
           style="
-          min-width: 100px
-          max-width: 600px;
-          min-height:100px
-          max-height 600px:">
+          min-width: 100px;
+          max-width: 250px;
+          min-height:100px;
+          max-height 250px;">
       </div>
     </div><!-- Row 2 end-->
     <div class="large-12 cell row"> <!-- design explorer -->
-
-        https://goo.gl/Zf85Po>
+      <iframe src="https://goo.gl/Zf85Po"
+       title="design exploror embed" width="1200px" height="600px">
+        <p>Hey! Did it not show up?</p>
+      </iframe>        >
     </div><!-- design explorer end -->
 
     <div class="large-12 cell row"> <!-- notes -->
@@ -79,8 +94,10 @@ week-assignment: 3
 
 </div><!-- end container-->
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  $(document).foundation();
+</script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 <script>
 $(document).ready(function(){
 
