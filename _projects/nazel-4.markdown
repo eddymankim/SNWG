@@ -2,7 +2,7 @@
 layout: post
 author: Nico
 title: Checking Out Design Explorer
-thumbnail: Nico-W3.png
+thumbnail: Nico-W4.png
 week-assignment: 3
 ---
 
@@ -26,7 +26,7 @@ week-assignment: 3
              <button style="outline-color: #9d9d9e;" onClick="GridSizeEnterButton()"> >Press to Enter< </button>
     </div><!-- Row 1 end-->
 
-    <div class="large-12 cell row" align = "center" id="gameSpace"> <!-- drone stuff Group group-->
+    <div class="large-12 row" align="center" id="gameSpace" > <!-- drone stuff Group group-->
     </div><!-- Row 2 end-->
 
     <div class="large-12 cell row"  align="center"> <!-- notes -->
@@ -41,12 +41,6 @@ week-assignment: 3
 </div><!-- end container-->
 <script>
     var gameDiv = document.getElementById("gameSpace");
-    var cardDiv = document.createElement('div');
-    cardDiv.style.color= "black";
-    cardDiv.addEventListener("mouseenter",
-      function(event){
-          event.target.style.color = "#8bc5c5";
-        }, false);
 
     function GridSizeEnterButton() {
         var inPutObj = document.getElementById("gridSizeInputField");
@@ -54,13 +48,15 @@ week-assignment: 3
             while (gameDiv.hasChildNodes()) {
                   gameDiv.removeChild(gameDiv.lastChild);
               }
-            var ahahahGif = document.createElement("IMG");
-                ahahahGif.setAttribute("src","/img/nazel/nazel-3/Denis-jurasic-park-gif-ahahah.gif");
-                ahahahGif.setAttribute("height", "500");
-                ahahahGif.setAttribute("width", "500");
-            var payAttention = document.createElement('p').innerHTML ="follow the directions";
-            document.getElementById("gameSpace").appendChild("ahahahGif");
-            document.getElementById("gameSpace").appendChild("payAttention");
+            var ahahahGif = document.createElement("img");
+                ahahahGif.setAttribute("src",'/img/nazel/nazel-3/Denis-jurasic-park-gif-ahahah.gif');
+                ahahahGif.setAttribute("height", "500px");
+                ahahahGif.setAttribute("width", "500px");
+            var payAttention = document.createElement('p');
+            payAttention.innerHTML ="follow the directions";
+            document.getElementById("gameSpace").appendChild(ahahahGif);
+            document.getElementById("gameSpace").appendChild(payAttention);
+
 
         } // end if
         else {
@@ -68,10 +64,19 @@ week-assignment: 3
                   gameDiv.removeChild(gameDiv.lastChild);
               }//end while
             var inputGridSize = document.getElementById("gridSizeInputField").value;
-            for (var i = 0; i<inputGridSize; i++){
-              for (var j = 0; i<inputGridSize; j++){
-                gameDiv.addChild("cardDiv");
+            for (var i = 0; i<inputGridSize; i+=1){
+              for (var j = 0; j<inputGridSize; j+=1){
+                var cardDiv = document.createElement('div');
+                cardDiv.style.background= "black";
+                cardDiv.style.width= "25px";
+                cardDiv.style.height= "25px";
+
+                cardDiv.addEventListener("mouseenter",function(event){ event.target.style.color = "#8bc5c5";}, false);
+
+                gameDiv.appendChild(cardDiv);
+                console.log("doin-suptin");
               }
+
             }//end for grid
         }//end else
     }//end grid size function
