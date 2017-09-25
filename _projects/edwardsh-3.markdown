@@ -6,7 +6,7 @@ thumbnail: shin_thumbnail.png
 week-assignment: 3
 ---
 
-<a href=""> <img src="edwardsh_3/jenga.png" alt="Jenga Physics" height="400" width="600"> </a> 
+<a href=""> <img src="img/edwardsh_3/jenga.png" alt="Jenga Physics" height="400" width="600"> </a> 
 Three.js Physics plug-in
 
 This is a three.js plug-in that simulates the physics of a Jenga Tower. Users can pull Jenga blocks out and watch the laws of physics at work.
