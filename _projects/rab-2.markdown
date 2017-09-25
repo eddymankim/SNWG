@@ -1,17 +1,17 @@
 ---
 layout: post
-author: ;sdj
+author: Rehan Butt
 title: This is a Title
-thumbnail: sea.png
+thumbnail: rab-2.png
 week-assignment: 2
 ---
 
-![Hero Image](/img/test/hero.png)
+![Hero Image](/img/rab-2/hero.png)
 
 Your short description goes here. 100 word max.
 
 this is what an image looks like
-![2 Word Image Description](/img/test/thisImage.png)
+![2 Word Image Description](/img/rab-2/thisImage.png)
 
 this is what a video embed looks. please update width to be `100%` otherwise it will break on mobile devices.
 
