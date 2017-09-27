@@ -3,7 +3,7 @@ layout: post
 author: Nico
 title: JS Week
 thumbnail: Nico-W4.png
-week-assignment: 3
+week-assignment: 4
 ---
 
 <div class="grid-container" >
@@ -50,7 +50,6 @@ week-assignment: 3
 
 <script>
     var gameDiv = document.getElementById("gameSpace");
-
     function GridSizeEnterButton() {
         var inPutObj = document.getElementById("gridSizeInputField");
         if (inPutObj.checkValidity() == false) {
@@ -65,8 +64,6 @@ week-assignment: 3
             payAttention.innerHTML ="follow the directions";
             document.getElementById("gameSpace").appendChild(ahahahGif);
             document.getElementById("gameSpace").appendChild(payAttention);
-
-
         } // end if
         else {
             while (gameDiv.hasChildNodes()) {
@@ -84,7 +81,6 @@ week-assignment: 3
                 isDivClicked.value = "off";
                 cardDiv.setAttributeNode(isDivClicked)
                 cardDiv.addEventListener("mouseenter",function(event){
-
                   let clickStatus = event.target.getAttribute('data-wasclicked');
                     if(clickStatus== "off"){
                       event.target.style.background = "#8bc5c5";
@@ -110,7 +106,6 @@ week-assignment: 3
                   }
                   else{ event.target.dataset.wasclicked = "on";}
                 }, false);
-
                 gameDiv.appendChild(cardDiv);
               }
             }//end for grid
