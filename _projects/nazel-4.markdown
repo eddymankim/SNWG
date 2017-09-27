@@ -47,7 +47,7 @@ week-assignment: 3
     </div><!-- notes END-->
   </div><!-- grix x end-->
 </div><!-- end container-->
-      <!-- ps. eddy is a homework nagg -->
+
 <script>
     var gameDiv = document.getElementById("gameSpace");
 
