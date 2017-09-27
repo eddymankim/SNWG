@@ -17,7 +17,7 @@ Thumbs.db
 
 # jekyll
 _drafts/
-# _site/
+_site/
 .sass-cache/
 .jekyll-metadata
 
