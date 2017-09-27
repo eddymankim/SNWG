@@ -72,7 +72,7 @@ week-assignment: 3
       <h2 align = "center"  style = "padding: 1em;" >  Design Explorer Example </h2>
     </div>
     <div class="large-12 cell row"> <!-- design explorer -->
-      <iframe src="https://goo.gl/Zf85Po"
+      <iframe src="https://goo.gl/7sGAcb"
        title="design exploror embed" width="1200px" height="600px">
         <p>Hey! Did it not show up?</p>
       </iframe>        >
@@ -83,7 +83,7 @@ week-assignment: 3
         This is open source and can upload handle any models, images, and data you want.
         <h4> It even lets you refrance your data right out of google drive. </h4>
       </h3>
-      <p align = "left" style = "margin-left:2em;"> It's all hosted on GitHub so you can hack it yourself. I would like to try and take some time to trim down the interface so that it is a little more simple and clean and then use it with students to study thier own designs in comparison to one another. </p>
+      <p align = "left" style = "margin-left:2em;"> It's all hosted on GitHub so you can hack it yourself. I would like to try and take some time to trim down the interface so that it is a little more simple and clean and then use it with students to study thier own designs in comparison to one another. I has issues though when I tried to upload my 3d models. </p>
       <ul align = "left" style = "margin-left:2em;">
         <li>
           <h5>Link test Grasshopper plugin? :<a href="https://github.com/va3c/GHva3c">https://github.com/va3c/GHva3c</a>   [this exports 3d models to three.js]</h5>
