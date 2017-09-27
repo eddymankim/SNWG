@@ -7,7 +7,7 @@ import Pass from './Pass.js'
 import FilmShader from '../shaders/FilmShader.js'
 
 export default class FilmPass extends Pass {
-    constructor(noise, scan, scanlines, grayscale) { super()
+    constructor({ noise=0.5, scan=0.05, scanlines=2048, grayscale=0 }) { super()
         let shader = FilmShader
         this.uniforms = THREE.UniformsUtils.clone(shader.uniforms)
         this.material = new THREE.ShaderMaterial({

@@ -1,6 +1,6 @@
 ---
 layout: code
-title: A Quiet Saunter into WebGL
+title: A Foray into WebGL
 permalink: /code/foray-into-webgl/
 code: evan-erdos/snwg-intro
 ---
@@ -76,7 +76,7 @@ It's a very simple layout, it looks like this in the frontmatter:
 ~~~yaml
 ---
 layout: code
-title: A Quiet Saunter into WebGL
+title: A Foray into WebGL
 code: evan-erdos/snwg-intro
 ---
 ~~~
@@ -120,7 +120,7 @@ Apparently they're a substitute for actual code documentation.
 ~~~
 
 Things are about to get pretty rough, so it's good to be fastidious.
-You might get to the point where you forget what your own files do.
+You might get to the point where you forget what whole files do.
 
 ~~~JavaScript
 import * as THREE from '../lib/module.js'
@@ -147,7 +147,7 @@ export const pick = n => Math.floor(Math.random()*n)
 The "module" is exporting a bunch of things we usually use together.
 The main THREE implementation is getting passed through in the first line,
 the postprocessing effects are exported on the second, and so on.
-This is a good way of organizing related groups of files together.
+This is a good way of importing related groups of files.
 
 ~~~JavaScript
 /// root directory for asset files

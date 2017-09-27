@@ -6,19 +6,22 @@
 
 import * as THREE from '../lib/module.js'
 
+/// a variable
+var background = 0xFFFFFF
+
+/// a variable which cannot be redefined
+let id = '#RenderCanvas'
+
 /// root directory for asset files
 const dir = '../../data/evan-erdos'
 
-var background = 0xFFFFFF
 
 let clock = new THREE.Clock()
 
 function getRatio() {
-    // return window.innerWidth / window.innerHeight
     return 756/512
 }
 
-// const getAspect = () => [window.innerWidth, window.innerHeight]
 const getAspect = () => [756, 512]
 
 let camera = new THREE.PerspectiveCamera(60, getRatio(), 1, 2e5)
@@ -37,7 +40,7 @@ let scene = new THREE.Scene()
     scene.fog = new THREE.Fog(background, 2**16, 2e5)
     scene.add(camera, light, new THREE.AmbientLight(0x14031B))
 
-document.querySelector('#RenderCanvas').appendChild(renderer.domElement)
+document.querySelector(id).appendChild(renderer.domElement)
 
 window.onResize = () => {
     camera.aspect = window.innerWidth/window.innerHeight

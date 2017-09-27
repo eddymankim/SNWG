@@ -1,8 +1,10 @@
 ---
-layout: post
+layout: page
 ---
 
-<div id='RenderCanvas'></div>
-<script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
+<div class="page-content" style="margin: 2em">
+    <div id='RenderCanvas'></div>
+    <script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
+    {{ content }}
+</div>
 
-{{ content }}

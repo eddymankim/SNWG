@@ -10,14 +10,14 @@ import LuminShader from '../shaders/LuminosityHighPassShader.js'
 export default class BloomPass extends Pass {
     static get blurX() { return new THREE.Vector2(1.0, 0.0) }
     static get blurY() { return new THREE.Vector2(0.0, 1.0) }
-    constructor(resolution, strength, radius, threshold) { super()
+    constructor({ strength=1, threshold=0.4, radius=3, resolution=256 }={}) {
+        super()
         const copy = CopyShader
         const shader = LuminShader
-        this.strength = strength || 1
+        this.strength = strength
         this.radius = radius
         this.threshold = threshold
-        this.resolution = (resolution===undefined)?new THREE.Vector2(256,256)
-            : new THREE.Vector2(resolution.x, resolution.y)
+        this.resolution = new THREE.Vector2(resolution, resolution)
         const pars = { format: THREE.RGBAFormat,
             minFilter: THREE.LinearFilter,
             magFilter: THREE.LinearFilter }
@@ -39,14 +39,16 @@ export default class BloomPass extends Pass {
             renderTarget.texture.name = `{BloomPass.v}{i}`
             renderTarget.texture.generateMipmaps = false
             this.renderTargetsVertical.push(renderTarget)
-            resx = Math.round(resx/2); resy = Math.round(resy/2)
+            resx = Math.round(resx/2)
+            resy = Math.round(resy/2)
         }
 
         this.highPassUniforms = THREE.UniformsUtils.clone(shader.uniforms)
         this.highPassUniforms[`luminosityThreshold`].value = threshold
         this.highPassUniforms[`smoothWidth`].value = 0.01
         this.materialHighPassFilter = new THREE.ShaderMaterial({
-            defines: {}, uniforms: this.highPassUniforms,
+            defines: {},
+            uniforms: this.highPassUniforms,
             vertexShader: shader.vertexShader,
             fragmentShader: shader.fragmentShader })
 
