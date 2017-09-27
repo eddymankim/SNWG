@@ -7,7 +7,6 @@ week-assignment: 4
 ---
 
 <div class="grid-container" >
-  <!--<div class="grid-x grid-padding-x" > this is my primary group-->
 <div class="large-12 columns" >
     <div class="large-12 cell row" style = "padding: 1em;">
       <div class="large-12 cell row">
@@ -29,8 +28,6 @@ week-assignment: 4
          </div>
      </div> <!-- end input row-->
     </div><!-- Row 1 end-->
-
-    <!-- <div class="large-12 " align="center" id="gameSpace" style="background:pink;overflow:auto; min-height:5em; border-radius:1em; border-style:solid; border-color:#732665;"> drone stuff Group group-->
       <div class="large-12  medium-12 row" align="center" id="gameSpace"
           style="background:pink;
               min-height:5em;
@@ -47,7 +44,6 @@ week-assignment: 4
     </div><!-- notes END-->
   </div><!-- grix x end-->
 </div><!-- end container-->
-
 <script>
     var gameDiv = document.getElementById("gameSpace");
     function GridSizeEnterButton() {
@@ -73,7 +69,6 @@ week-assignment: 4
             for (var i = 0; i<inputGridSize; i+=1){
               for (var j = 0; j<inputGridSize; j+=1){
                 var cardDiv = document.createElement('canvas');
-                //cardDiv.style.overflow= "auto";
                 cardDiv.style.background= "black";
                 cardDiv.style.width= "25px";
                 cardDiv.style.height= "25px";
