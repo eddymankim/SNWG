@@ -7,32 +7,24 @@ week-assignment: 5
 ---
 
 <script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
+<script src="../code/nazel/nazel-modules/dat.gui.min.js"></script>
+<script src="../code/nazel/nazel-modules/OrbitControls.js"></script>
 <div class="grid-container" >
-<div class="large-12 columns" >
-    <div class="row" style = "padding: 1em;">
-    </div>
-    <div id="3dDiv">
-    </div>
-</div><!-- end gridcontainer-->
+  <div class="large-12 columns" >
 
-<script>
-  var boxscene = new THREE.Scene();
-  var overHeadCamera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-  var basicRenderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  document.3dDiv.appendChild( renderer.domElement );
+      <div class="row" style = "padding: 1em;">
+        <div class = "large-4 medium-4 colums">
+        </div>
+        <div class = "large-4 medium-4 colums">
+        </div>
+        <div class = "large-4 medium-4 colums">
+        </div>
+      </div>
 
+      <div class = "row" id="3dDiv">
+      </div>
 
-  var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-  var cube = new THREE.Mesh( geometry, material );
-  scene.add( cube );
+  </div> <!-- end large colummn -->
+</div><!-- end grid container-->
 
-  camera.position.z = 5;
-
-  function animate() {
-	   requestAnimationFrame( animate );
-	 renderer.render( scene, camera );
-  }
-  animate();
-</script>
+<script src="/../code/nazel/nazel-5-ws.js"></script>
