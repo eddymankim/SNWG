@@ -3,8 +3,8 @@
 ///
 /// 2017-09-26 Ben Scott @evan-erdos <bescott.org>
 ///
-import * as THREE from '../lib/module.js'
 
+import * as THREE from '../lib/module.js'
 
 /// a variable
 var background = 0xFFFFFF
