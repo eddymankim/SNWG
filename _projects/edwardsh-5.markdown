@@ -6,6 +6,10 @@ thumbnail: edwardsh_thumb_2.png
 week-assignment: 5
 ---
 
-A fun Three.js project featuring a water wheel. Click the link and enjoy.
+A fun Three.js project featuring a water wheel. Link below for full window.
+
+
+<embed src="edwardsh_5/index.html" width="1100px" height="700px">
+
 
 <a href="edwardsh_5/index.html">Project Link</a>
