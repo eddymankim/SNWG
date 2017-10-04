@@ -13,20 +13,21 @@ import ConvolutionShader from '../shaders/ConvolutionShader.js'
 export default class BloomFastPass extends Pass {
     static get blurX() { return new THREE.Vector2(0.001953125, 0.0) }
     static get blurY() { return new THREE.Vector2(0.0, 0.001953125) }
-    constructor(strength, kernelSize, sigma, resolution) { super()
-        const copyShader = CopyShader
-        const convolutionShader = ConvolutionShader
-        strength = (strength!==undefined) ? strength : 1
-        kernelSize = (kernelSize!==undefined) ? kernelSize : 25
-        sigma = (sigma!==undefined) ? sigma : 4
-        resolution = (resolution!==undefined) ? resolution : 256
+    constructor({
+            strength = 1,
+            size = 25,
+            sigma = 4,
+            width = 256,
+            height = 256, },
+            }={}) { super()
+        const copyShader = CopyShader, convolutionShader = ConvolutionShader
 
         const pars = { format: THREE.RGBAFormat,
             minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter }
 
-        this.renderTargetX = new THREE.WebGLRenderTarget(resolution,resolution, pars)
+        this.renderTargetX = new THREE.WebGLRenderTarget(width, height, pars)
         this.renderTargetX.texture.name = 'BloomPass.x'
-        this.renderTargetY = new THREE.WebGLRenderTarget(resolution,resolution, pars)
+        this.renderTargetY = new THREE.WebGLRenderTarget(width, height, pars)
         this.renderTargetY.texture.name = 'BloomPass.y'
         this.copyUniforms = THREE.UniformsUtils.clone(copyShader.uniforms)
         this.copyUniforms['opacity'].value = strength
@@ -47,8 +48,8 @@ export default class BloomFastPass extends Pass {
             vertexShader: convolutionShader.vertexShader,
             fragmentShader: convolutionShader.fragmentShader,
             defines: {
-                'KERNEL_SIZE_FLOAT': kernelSize.toFixed(1),
-                'KERNEL_SIZE_INT': kernelSize.toFixed(0) } })
+                'KERNEL_SIZE_FLOAT': size.toFixed(1),
+                'KERNEL_SIZE_INT': size.toFixed(0) } })
 
         this.needsSwap = false
         this.camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1)

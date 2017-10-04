@@ -15,12 +15,9 @@ let id = '#RenderCanvas'
 /// root directory for asset files
 const dir = '../../data/evan-erdos'
 
-
 let clock = new THREE.Clock()
 
-function getRatio() {
-    return 756/512
-}
+function getRatio() { return 756/512 }
 
 const getAspect = () => [756, 512]
 
@@ -55,8 +52,7 @@ function render(deltaTime=0.01) {
 
 
 const geometry = new THREE.SphereGeometry(32,16,16)
-const material = new THREE.MeshPhongMaterial({
-    color: 0xAAAAAA, shininess: 20 })
+const material = new THREE.MeshPhongMaterial({ color: 0xAAAAAA, shininess: 20 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
