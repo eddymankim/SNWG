@@ -126,3 +126,4 @@ class Planet {
 
 I'm still pretty undecided on whether or not the `defaults` should be in the argument, but I'll write all this later
 
+Navigate to `code/snwg-space.js` to follow along.

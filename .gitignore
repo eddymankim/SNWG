@@ -24,3 +24,6 @@ _site/
 # sublime text project files
 *.sublime-workspace
 *.sublime-project
+.eslintrc.yml
+.jshintrc
+
