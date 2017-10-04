@@ -3,38 +3,7 @@
 
 const nicoCodeDir = "/nazel-modules";
 const nicoAssetDir = "../../data/nazel";
-/*
-class My3dThing{
-  constructor(divID,width,weight){
-    this.height = height;
-    this.width = width;
-    this.divID = divID;
-  }
 
-
-}
-
-
-var boxscene = new THREE.Scene();
-var overHeadCamera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-var basicRenderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.getElementById("3dDiv").appendChild( renderer.domElement );
-
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-var cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-camera.position.z = 5;
-
-function animate() {
-   requestAnimationFrame( animate );
- renderer.render( scene, camera );
-}
-animate();
-
-*/
 ///<<--Key Codes-->>//
 /////w////////87//////
 ///a/s/d///65/83/68///
@@ -48,27 +17,27 @@ threeControler.onkeydown = function(e) {
     console.log(e.keyCode);
     //if(masterKeyCodes[e.keyCode] == 'w'){}
     if(e.keyCode == '87'){
-      let theCube = scene.children[0].geometry;
+      let theCube = scene.children[3].geometry;
       let cent = theCube.boundingSphere.center;
       theCube.translate(.1, .1, .1);
       console.log(cent);
     }
     if(e.keyCode == '83'){
-      let theCube = scene.children[0].geometry;
+      let theCube = scene.children[3].geometry;
       let cent = theCube.boundingSphere.center;
       theCube.translate(-.1, -.1, -.1);
       console.log(cent);
     }
     if(e.keyCode == '68'){
-      let theCube = scene.children[0].geometry;
+      let theCube = scene.children[3].geometry;
       theCube.scale(1.1, 1.1, 1.1);
     }
     if(e.keyCode == '65'){
-      let theCube = scene.children[0].geometry;
+      let theCube = scene.children[3].geometry;
       theCube.scale(.9, .9, .9);
     }
     if (e.keyCode =="13"){
-      scene.children[0].geometry.center();
+      scene.children[3].geometry.center();
     }
 };
 //minupulated from :  http://keycode.info/
@@ -93,9 +62,14 @@ gui.add(directionalLight.position, 'y', 0, 20);
 gui.add(directionalLight.position, 'z', 0, 20);
 var camera = new THREE.PerspectiveCamera(
   45,
-  window.innerWidth/window.innerHeight,
+  400/500,/*window.innerWidth/window.innerHeight,*/
   1,
-  1000
+  5000
+  //fov — Camera frustum vertical field of view.
+  //aspect — Camera frustum aspect ratio.
+  //near — Camera frustum near plane.
+  //far — Camera frustum far plane.
+
 );
 camera.position.x = 1;
 camera.position.y = 2;
@@ -103,7 +77,7 @@ camera.position.z = 5;
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 var renderer = new THREE.WebGLRenderer();
 renderer.shadowMap.enabled = true;
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(400, 500);
 renderer.setClearColor('rgb(120, 120, 120)');
 document.getElementById('3dDiv').appendChild(renderer.domElement);
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -133,7 +107,7 @@ var planeGeometry = new THREE.PlaneBufferGeometry( 20, 20, 32, 32 );
 var planeMaterial = new THREE.MeshStandardMaterial( { color:"#9e9e9e" } )
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.receiveShadow = true;
-scene.add( plane );
+//scene.add( plane );
 
 //Create a SpotLight and turn on shadows for the light
 var light = new THREE.SpotLight( 0xffffff );

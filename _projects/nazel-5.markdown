@@ -20,8 +20,12 @@ week-assignment: 5
         <div class = "large-4 medium-4 colums">
         </div>
       </div>
+      <div align="CENTER">
+        <h3> Use ASWD and see what happens.</h3>
+        <h2> Press Enter to reset </h2>
+      </div>
 
-      <div class = "row" id="3dDiv">
+      <div class = "row" id="3dDiv" align = "center" style = "width:400, hieght:400">
       </div>
 
   </div> <!-- end large colummn -->
