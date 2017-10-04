@@ -39,14 +39,12 @@ week-assignment: 4
       <h3>
         ^^drawing thingy^^
       </h3>
-      <p> How can I ditch this overflow padding?</p>
-      <p> Its really bothersome</p>
+      <p> How can I ditch this overflow padding? Its really bothersome :-/</p>
     </div><!-- notes END-->
   </div><!-- grix x end-->
 </div><!-- end container-->
 <script>
     var gameDiv = document.getElementById("gameSpace");
-
     function GridSizeEnterButton() {
         var inPutObj = document.getElementById("gridSizeInputField");
         if (inPutObj.checkValidity() == false) {
@@ -61,8 +59,6 @@ week-assignment: 4
             payAttention.innerHTML ="follow the directions";
             document.getElementById("gameSpace").appendChild(ahahahGif);
             document.getElementById("gameSpace").appendChild(payAttention);
-
-
         } // end if
         else {
             while (gameDiv.hasChildNodes()) {
@@ -72,7 +68,6 @@ week-assignment: 4
             for (var i = 0; i<inputGridSize; i+=1){
               for (var j = 0; j<inputGridSize; j+=1){
                 var cardDiv = document.createElement('canvas');
-                //cardDiv.style.overflow= "auto";
                 cardDiv.style.background= "black";
                 cardDiv.style.width= "25px";
                 cardDiv.style.height= "25px";
@@ -80,7 +75,6 @@ week-assignment: 4
                 isDivClicked.value = "off";
                 cardDiv.setAttributeNode(isDivClicked)
                 cardDiv.addEventListener("mouseenter",function(event){
-
                   let clickStatus = event.target.getAttribute('data-wasclicked');
                     if(clickStatus== "off"){
                       event.target.style.background = "#8bc5c5";
@@ -106,11 +100,9 @@ week-assignment: 4
                   }
                   else{ event.target.dataset.wasclicked = "on";}
                 }, false);
-
                 gameDiv.appendChild(cardDiv);
               }
             }//end for grid
         }//end else
     }//end grid size function
-
 </script>
