@@ -3,11 +3,10 @@ layout: post
 author: Nico
 title: JS Week
 thumbnail: Nico-W4.png
-week-assignment: 3
+week-assignment: 4
 ---
 
 <div class="grid-container" >
-  <!--<div class="grid-x grid-padding-x" > this is my primary group-->
 <div class="large-12 columns" >
     <div class="large-12 cell row" style = "padding: 1em;">
       <div class="large-12 cell row">
@@ -29,8 +28,6 @@ week-assignment: 3
          </div>
      </div> <!-- end input row-->
     </div><!-- Row 1 end-->
-
-    <!-- <div class="large-12 " align="center" id="gameSpace" style="background:pink;overflow:auto; min-height:5em; border-radius:1em; border-style:solid; border-color:#732665;"> drone stuff Group group-->
       <div class="large-12  medium-12 row" align="center" id="gameSpace"
           style="background:pink;
               min-height:5em;
@@ -42,15 +39,12 @@ week-assignment: 3
       <h3>
         ^^drawing thingy^^
       </h3>
-      <p> How can I ditch this overflow padding?</p>
-      <p> Its really bothersome</p>
+      <p> How can I ditch this overflow padding? Its really bothersome :-/</p>
     </div><!-- notes END-->
   </div><!-- grix x end-->
 </div><!-- end container-->
-      <!-- ps. eddy is a homework nagg -->
 <script>
     var gameDiv = document.getElementById("gameSpace");
-
     function GridSizeEnterButton() {
         var inPutObj = document.getElementById("gridSizeInputField");
         if (inPutObj.checkValidity() == false) {
@@ -65,8 +59,6 @@ week-assignment: 3
             payAttention.innerHTML ="follow the directions";
             document.getElementById("gameSpace").appendChild(ahahahGif);
             document.getElementById("gameSpace").appendChild(payAttention);
-
-
         } // end if
         else {
             while (gameDiv.hasChildNodes()) {
@@ -76,7 +68,6 @@ week-assignment: 3
             for (var i = 0; i<inputGridSize; i+=1){
               for (var j = 0; j<inputGridSize; j+=1){
                 var cardDiv = document.createElement('canvas');
-                //cardDiv.style.overflow= "auto";
                 cardDiv.style.background= "black";
                 cardDiv.style.width= "25px";
                 cardDiv.style.height= "25px";
@@ -84,7 +75,6 @@ week-assignment: 3
                 isDivClicked.value = "off";
                 cardDiv.setAttributeNode(isDivClicked)
                 cardDiv.addEventListener("mouseenter",function(event){
-
                   let clickStatus = event.target.getAttribute('data-wasclicked');
                     if(clickStatus== "off"){
                       event.target.style.background = "#8bc5c5";
@@ -110,11 +100,9 @@ week-assignment: 3
                   }
                   else{ event.target.dataset.wasclicked = "on";}
                 }, false);
-
                 gameDiv.appendChild(cardDiv);
               }
             }//end for grid
         }//end else
     }//end grid size function
-
 </script>
