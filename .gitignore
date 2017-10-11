@@ -16,12 +16,16 @@ ehthumbs.db
 Thumbs.db
 
 # jekyll
-_site/
 _drafts/
 _site/
 .sass-cache/
 .jekyll-metadata
 
 # sublime text project files
+.jshintrc
+.eslintrc.yml
 *.sublime-workspace
 *.sublime-project
+.eslintrc.yml
+.jshintrc
+

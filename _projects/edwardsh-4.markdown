@@ -2,7 +2,7 @@
 layout: post
 author: Edward Shin
 title: Shin Post 3
-thumbnail: edwardsh_thumbnail.png
+thumbnail: shin_thumbnail.png
 week-assignment: 4
 ---
 

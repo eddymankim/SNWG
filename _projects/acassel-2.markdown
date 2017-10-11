@@ -1,0 +1,22 @@
+---
+layout: post
+author: adrienne
+title: Blobperson
+thumbnail: acassel-thumbnail-2.png
+week-assignment: 3
+---
+
+This is a model of a blob person that I made.
+
+Publishing my model to sketchfab was relatively easy and intuitive.
+
+My motives for taking this class are learning to create fluid and seamless interactive virtual spaces and getting better with code. I am primarily studying neuroscience, biology, and art, and combining these areas in this virutal space is ultimately my goal as an artist.
+
+<div class="sketchfab-embed-wrapper"><iframe width="100%" height="480" src="https://sketchfab.com/models/4da98d005f054c39a8b20f2badfc22a4/embed" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+
+<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">
+    <a href="https://sketchfab.com/models/4da98d005f054c39a8b20f2badfc22a4?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Blob person</a>
+    by <a href="https://sketchfab.com/adriennecassel?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">adriennecassel</a>
+    on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campain=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>
+</p>
+</div>
