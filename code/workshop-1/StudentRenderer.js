@@ -6,11 +6,14 @@
 /// your encapsulation of my typical render setup
 ///
 
-
 ///
 /// In this workshop you will get to create your own customized renderer.
 /// You'll be "encapsulating" the stuff you usually use to render the scene,
 /// so that you can reuse it and spend your time actually doing fun things.
+///
+/// Begin by copying the contents of this folder (`workshop-1`)
+/// into your named folder in `code/`, and then renaming `your-name-workshop-1.md`
+/// to something more appropriate, and then putting it in `_projects` as usual.
 ///
 /// In some places you'll see "mystery comments": `/* ??? */`
 ///
@@ -27,7 +30,7 @@
 ///
 ///
 /// If something is too difficult for you at the moment, that's OK.
-/// A working example can be found here: `code/evan-erdos/SimpleRenderer.js`.
+/// A working example can be found here: `code/workshop-1/SimpleRenderer.js`.
 /// If you're bored to death, take a look at `code/evan-erdos/FancyRenderer.js`.
 ///
 ///
