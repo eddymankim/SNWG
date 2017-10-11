@@ -2,6 +2,9 @@
 ///
 /// Convolution shader, ported from o3d sample to WebGL / GLSL
 /// http://o3d.googlecode.com/svn/trunk/samples/convolution.html
+
+import * as THREE from '../../three.js'
+
 const ConvolutionShader = {
 
     defines: { 'KERNEL_SIZE_FLOAT': '25.0', 'KERNEL_SIZE_INT': '25' },
@@ -41,7 +44,9 @@ const ConvolutionShader = {
         let kMaxKernelSize = 25, size = 2*Math.ceil(sigma*3.0)+1
         if (size>kMaxKernelSize) size = kMaxKernelSize
         let halfWidth = (size-1)*0.5, sum=0.0, values = new Array(size)
-        for (i=0;i<size;++i) sum += (values[i] = gauss(i-halfWidth,sigma))
-        for (i=0;i<size;++i) values[i] /= sum // normalize
+        for (let i=0;i<size;++i) sum += (values[i] = gauss(i-halfWidth,sigma))
+        for (let i=0;i<size;++i) values[i] /= sum // normalize
         return values }
 }
+
+export default ConvolutionShader
