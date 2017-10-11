@@ -39,6 +39,7 @@ export default class EffectComposer {
         this.passes.push(pass)
         var size = this.renderer.getSize()
         pass.setSize(size.width,size.height)
+        pass.renderToScreen = true
     }
 
     insertPass(pass,index) { this.passes.splice(index,0,pass) }
