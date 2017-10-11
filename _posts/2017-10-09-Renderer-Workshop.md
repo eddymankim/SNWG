@@ -16,7 +16,7 @@ author: Ben Scott
 import * as T from '../lib/module.js'
 
 // you should rename this to match your own renderer
-import SimpleRenderer from '../workshop-1-files/SimpleRenderer.js'
+import SimpleRenderer from '../workshop-1/SimpleRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
