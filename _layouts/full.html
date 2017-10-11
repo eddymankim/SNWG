@@ -3,8 +3,7 @@
   {% include head.html %}
   <body>
     <style> body { margin: 0; overflow: hidden; color: #cccccc; } </style>
-    <div id='RenderCanvas'></div>
-    <script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
+    <script src='{{site.baseurl}}/code/{{page.name}}/{{page.code}}.js' deferred type='module'></script>
     {{ content }}
   </body>
 </html>

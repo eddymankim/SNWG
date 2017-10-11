@@ -12,7 +12,7 @@ import * as T from '../lib/module.js'
 ///
 export class Planet {
     constructor({
-            file = '../../data/',                   /// resource path (url)
+            path = '../../data/',                   /// resource path (url)
             orbit = T.random(-0.05,0.05),           /// orbit time (sec)
             height = T.random(5e2,1e4),             /// orbit altitude (km)
             period = T.random(-2,2),                /// day period (sec)
@@ -31,7 +31,7 @@ export class Planet {
                 normal: 'planet-normal.jpg',        /// normal map (url)
                 albedo: 'planet-albedo.png', },     /// albedo map (url)
             }={}) {
-        this.data = { orbit: orbit, height: height, period: period, declin: declin }
+        this.data = { orbit, height, period, declin }
         this.mesh = new T.Mesh(
             new T.SphereGeometry(...Object.values(geometry)),
             new T.MeshStandardMaterial(material))
@@ -40,7 +40,7 @@ export class Planet {
         this.object.add(this.mesh)
         this.object.rotation.y += offset
         this.object.rotation.x = declin
-        Star.load(this.mesh.material, file, files)
+        Star.load(this.mesh.material, path, files)
     }
 
     update(time) {
@@ -57,7 +57,7 @@ export class Planet {
 /// represents smaller bodies
 ///
 export class Moon extends Planet { constructor({
-    file = '../../data/',
+    path = '../../data/',
     height = T.random(10, 100),
     geometry = {
         radius: T.random(16,24),
@@ -66,7 +66,7 @@ export class Moon extends Planet { constructor({
     material = {
         roughness: 1e-3,
         metalness: 0.2, },
-    }={}) { super({ file, height, geometry, material }) } }
+    }={}) { super({ path, height, geometry, material }) } }
 
 
 ///
@@ -75,7 +75,7 @@ export class Moon extends Planet { constructor({
 ///
 export class GasGiant extends Planet {
     constructor({
-            file = '../../data/',
+            path = '../../data/',
             orbit = T.random(-5e-3, 6e-3),
             height = T.random(1e3, 5e3),
             period = T.random(-5e-2, 5e-2),
@@ -94,9 +94,9 @@ export class GasGiant extends Planet {
                 normal: 'gas-giant-normal.jpg',
                 albedo: 'gas-giant-albedo.png', },
             }={}) {
-        super({ file,orbit,height,period,declin,geometry,material,files })
+        super({ path,orbit,height,period,declin,geometry,material,files })
         this.moons = []
-        for (let i=0;i<moons;++i) this.moons.push(new Moon({file}))
+        for (let i=0;i<moons;++i) this.moons.push(new Moon({path}))
         this.object.add(...this.moons.map(o => o.object))
     }
 
@@ -115,7 +115,7 @@ export class GasGiant extends Planet {
 ///
 export class StarField {
     constructor({
-            file = '../../data',
+            path = '../../data',
             count = 1e3,                            /// total star count (int)
             limit = 3e5,                            /// maximum distance (real)
             size = 2,                               /// star size (int)
@@ -138,7 +138,7 @@ export class StarField {
 ///
 export class Star {
     constructor({
-            file = '../../data/',                   /// resources path (url)
+            path = '../../data/',                   /// resources path (url)
             power = 1,                              /// light power [0..n]
             range = 3e4,                            /// light max distance (real)
             period = T.random(-1e-3, 1e-3),         /// day period (sec)
@@ -158,15 +158,15 @@ export class Star {
         this.light = new T.PointLight(color, power, range, 2)
         this.object = new T.Object3D()
         this.planets = []
-        for (let i=0;i<T.pick(18);++i) this.planets.push(new Planet({file}))
-        for (let i=1;i<T.pick(6);++i) this.planets.push(new GasGiant({file}))
+        for (let i=0;i<T.pick(18);++i) this.planets.push(new Planet({path}))
+        for (let i=1;i<T.pick(6);++i) this.planets.push(new GasGiant({path}))
         for (let p of this.planets) p.height += geometry[0]
         this.object.add(this.mesh, this.light, ...this.planets.map(p=>p.object))
-        Star.load(this.mesh.material, file, files)
+        Star.load(this.mesh.material, path, files)
     }
 
-    static async load(material, dir='../../data/', {albedo,normal,physic}={}) {
-        const loader = new T.TextureLoader().setPath(`${dir}/`)
+    static async load(material, path='../../data/', {albedo,normal,physic}={}) {
+        const loader = new T.TextureLoader().setPath(`${path}/`)
         const loadImage = f => new Promise((c,r) => loader.load(f,c))
         if (albedo) material.map = await loadImage(albedo)
         if (normal) material.normalMap = await loadImage(normal)

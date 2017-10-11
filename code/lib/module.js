@@ -5,7 +5,6 @@
 ///
 import { TextureLoader as L } from './three.js'
 export * from './three.js'
-export * from './effects/module.js'
 export { default as OrbitControls } from './orbit.js'
 
 
