@@ -71,7 +71,7 @@ export default class SimpleRenderer {
 
 
         window.addEventListener('resize', resize, false)
+        window.addEventListener('load', () => render(), false)
         document.body.appendChild(renderer.domElement)
-        render()
     }
 }

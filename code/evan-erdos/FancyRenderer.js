@@ -21,7 +21,7 @@ export default class FancyRenderer {
             fog = { color: 0xCBDBFE, near: 1e2, far: 1e3 },
             cam = { fov: 60, aspect: width/height, near: 0.1, far: 2e5 },
             webgl = { antialias: true, logarithmicDepthBuffer: true },
-            bloom = { strength: 1, threshold: 0.4, radius: 3 },
+            bloom = { strength: 2, size: 30, sigma: 2, },
             film = { noise: 0.5, scan: 0.1, grayscale: 0.5 },
             files = { sky: 'ash-canyon', },
             update = (time) => { },
@@ -31,11 +31,13 @@ export default class FancyRenderer {
         const listener = new T.AudioListener()
         const raycaster = new T.Raycaster()
         const mouse = new T.Vector2()
+        let time = clock.getDelta()
 
         let renderer = new T.WebGLRenderer(webgl)
             renderer.setSize(width, height)
             renderer.setPixelRatio(window.devicePixelRatio)
             renderer.setClearColor(ambient, 0)
+            renderer.toneMapping = T.LinearToneMapping
             renderer.shadowMap.enabled = true
             renderer.shadowMap.type = T.PCFSoftShadowMap
 
@@ -43,41 +45,49 @@ export default class FancyRenderer {
             camera.position.set(...Object.values(position))
             camera.rotation.set(...Object.values(rotation))
 
-        let sun = new T.HemisphereLight(light,ground,1)
-            sun.position.set(1,2,0)
+        let controls = new T.OrbitControls(camera,renderer.domElement)
 
         let scene = new T.Scene()
             scene.fog = new T.Fog(...Object.values(fog))
             scene.background = new T.Color(background)
-            scene.add(camera, sun, new T.AmbientLight(ambient))
+            scene.add(camera, new T.AmbientLight(ambient))
+
+        let sun = new T.HemisphereLight(light,ground,1)
+            sun.position.set(1,2,0)
+            scene.add(sun)
+
+        let bloomPass = new E.BloomPass(bloom)
+            bloomPass.renderToScreen = true
 
         let composer = new E.EffectComposer(renderer)
             composer.addPass(new E.RenderPass(scene, camera))
-            composer.addPass(new E.FilmPass(film))
             composer.addPass(new E.BloomPass(bloom))
-            composer.addPass(new E.TXAAPass(scene,camera,background,1))
 
-        for (let o of composer.passes) o.renderToScreen = true
-        for (let o of scenery) scene.add(o)
-        for (let o of objects) scene.add(o.object)
 
-        objects.push(new T.OrbitControls(camera,renderer.domElement))
-
-        scene.background = this.envMap = new T.CubeTextureLoader()
-            .setPath(`${path}/${files.sky}/`).load([
+        if (files.sky)  scene.background = this.envMap =
+            new T.CubeTextureLoader().setPath(`${path}/${files.sky}/`).load([
                 `${files.sky}+z.png`, `${files.sky}-z.png`,
                 `${files.sky}+y.png`, `${files.sky}-y.png`,
                 `${files.sky}+x.png`, `${files.sky}-x.png`])
 
-        this.add = (...things) => things.forEach(o => scene.add(o))
+        this.add = (...things) => {
+            for (let thing of things) {
+                scene.add(thing)
+                if (!thing.material) return
+                thing.material.envMap = this.envMap
+                thing.material.needsUpdate = true
+            }
+        }
 
-        this.addObject = (...things) => { this.add(things)
-            things.forEach(o => objects.push(o)) }
+        this.addObject = (...things) => {
+            this.add(...Object.values(things.map(o => o.object)))
+            for (let thing of things) objects.push(thing)
+        }
 
-        const render = (time=clock.getDelta()) => {
-            requestAnimationFrame(render.bind(this, clock.getDelta()))
-            for (let o of objects) o.update(time)
-            update(time); composer.render(time)
+        const render = () => {
+            requestAnimationFrame(render.bind(this))
+            update(clock.getDelta()); controls.update()
+            composer.render(time) // renderer.render(scene, camera)
         }
 
         const mousedown = (e) => {
@@ -97,10 +107,12 @@ export default class FancyRenderer {
             composer.setSize(width, height)
         }
 
-        window.addEventListener('mousedown', mousedown)
-        window.addEventListener('resize', resize)
+        // window.addEventListener('blur', blur, false)
+        // window.addEventListener('focus', render, false)
+        window.addEventListener('mousedown', mousedown, false)
+        window.addEventListener('resize', resize, false)
+        window.addEventListener('load', render, false)
         document.body.appendChild(renderer.domElement)
-        render()
     }
 
 

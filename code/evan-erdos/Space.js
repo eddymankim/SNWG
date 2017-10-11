@@ -5,7 +5,6 @@
 ///
 import * as T from '../lib/module.js'
 
-
 ///
 /// Planet
 /// represents any kind of celestial body
@@ -42,6 +41,11 @@ export class Planet {
         this.object.rotation.x = declin
         Star.load(this.mesh.material, path, files)
     }
+
+    // onclick() {
+    //     this.mesh.material.emissionIntensity = 1
+    //     this.mesh.material.needsUpdate = true
+    // }
 
     update(time) {
         this.mesh.rotation.y += this.data.period*time
@@ -95,17 +99,17 @@ export class GasGiant extends Planet {
                 albedo: 'gas-giant-albedo.png', },
             }={}) {
         super({ path,orbit,height,period,declin,geometry,material,files })
-        this.moons = []
-        for (let i=0;i<moons;++i) this.moons.push(new Moon({path}))
-        this.object.add(...this.moons.map(o => o.object))
+        // this.moons = []
+        // for (let i=0;i<moons;++i) this.moons.push(new Moon({path}))
+        // this.object.add(...this.moons.map(o => o.object))
     }
 
-    update(time) { super.update(time)
-        for (let moon of this.moons) {
-            moon.update(time)
-            moon.mesh.position.z = this.object.position+moon.height
-        }
-    }
+    // update(time) { super.update(time)
+    //     for (let moon of this.moons) {
+    //         // moon.update(time)
+    //         moon.mesh.position.z = this.object.position+moon.height
+    //     }
+    // }
 }
 
 
@@ -154,7 +158,6 @@ export class Star {
         this.mesh = new T.Mesh(
             new T.SphereGeometry(...Object.values(geometry)),
             new T.MeshBasicMaterial(material))
-        this.mesh.castShadow = this.mesh.recieveShadow = false
         this.light = new T.PointLight(color, power, range, 2)
         this.object = new T.Object3D()
         this.planets = []
@@ -175,7 +178,7 @@ export class Star {
 
     update(time) {
         this.object.rotation.y += this.data.period*time
-        for (let p of this.planets) p.update(time)
+        // for (let p of this.planets) p.update(time)
     }
 }
 
