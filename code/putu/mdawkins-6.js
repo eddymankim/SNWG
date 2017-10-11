@@ -1,11 +1,13 @@
 import * as THREE from '../lib/module.js'
 
 var background = 0xFFFFFF
+var meshNumber = 200
+var meshObjects = []
 
 ////////////////////////////////////////////////////////////////
 
 let id = '#RenderCanvas'
-const dir = '../../data/evan-erdos'
+const dir = '../../data/mdawkins'
 let clock = new THREE.Clock()
 const getAspect = () => [756, 512]
 
@@ -33,16 +35,50 @@ function render(deltaTime=0.01) {
     requestAnimationFrame(() => render(clock.getDelta()))
 }
 
+function update() {
+  /*var mouseDown = 0; 
+  document.body.onmousedown = function() { 
+    mouseDown = 1;}
+  document.body.onmouseup = function() {
+    mouseDown = 0;}*/
+  for (var i=0; i<meshObjects.length; i++)[
+  /*const mousedown = (e) => {
+      e.preventDefault()
+      mouse.x = (e.clientX/window.innerWidth)*2+1
+      mouse.y = -(e.clientY/window.innerHeight)*2+1
+        }
+  if (mousedown){
+    var meshPosition = meshObjects[i].position
+    var d = meshPosition.distanceTo(mouse.x, mouse.y, 0)
+    }
+    else {*/
+    meshObjects[i].position.x += .3
+    meshObjects[i].position.y += .3
+    meshOBjects[i].position.z += .1
+  }
+}
+
 ////////////////////////////////////////////////////////////////
 
-const geometry = new THREE.SphereGeometry(32,16,16)
-const material = new THREE.MeshPhongMaterial({
+for (var i = 0;i<meshNumber;i++){
+    const geometry = new THREE.SphereGeometry(32,16,16)
+    const material = new THREE.MeshPhongMaterial({
     color: 0xAAAAAA, shininess: 20 })
-const mesh = new THREE.Mesh(geometry, material)
-scene.add(mesh)
+    var mesh = new THREE.Mesh( geometry, material);
+    mesh.position.x = ( Math.random() - 0.5) * 4000 * Math.random();
+    mesh.position.y = ( Math.random() - 0.5) * 4000 * Math.random() ;
+    mesh.position.z = ( Math.random() - 0.5) * 4000 * Math.random() ;
+
+    mesh.rotation.x = Math.random();
+    mesh.rotation.y = Math.random();
+    mesh.rotation.z = Math.random();
+
+    scene.add(mesh);
+    meshObjects.push(mesh); //put them in an array to update their positions and have behaviors on click using update
+    }
+
 
 ////////////////////////////////////////////////////////////////
 
 render()
-
-
+update()
