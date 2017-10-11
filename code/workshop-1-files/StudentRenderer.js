@@ -6,11 +6,14 @@
 /// your encapsulation of my typical render setup
 ///
 
-
 ///
 /// In this workshop you will get to create your own customized renderer.
 /// You'll be "encapsulating" the stuff you usually use to render the scene,
 /// so that you can reuse it and spend your time actually doing fun things.
+///
+/// Begin by copying the contents of this folder (`workshop-1-files`)
+/// into your named folder in `code/`, and then renaming `your-name-workshop-1.md`
+/// to something more appropriate, and then put it in `_projects` as usual.
 ///
 /// In some places you'll see "mystery comments": `/* ??? */`
 ///
