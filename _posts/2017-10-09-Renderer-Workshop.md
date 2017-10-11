@@ -16,7 +16,7 @@ author: Ben Scott
 import * as T from '../lib/module.js'
 
 // you should rename this to match your own renderer
-import FancyRenderer from '../evan-erdos/FancyRenderer.js'
+import SimpleRenderer from '../workshop-1-files/SimpleRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
@@ -169,7 +169,7 @@ function update(time) {
 
 
 
-let renderer = new FancyRenderer({
+let renderer = new SimpleRenderer({
     position: { x: 0, y: 10, z: 15 },
     update: (t) => update(t),
     path: '../../data/evan-erdos/' })
