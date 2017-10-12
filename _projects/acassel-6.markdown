@@ -1,6 +1,6 @@
 ---
 layout: code
-author: adrienne
+author: Adrienne
 title: Flat - Week 6
 thumbnail: acassel-thumbnail-6.png
 week-assignment: 6
