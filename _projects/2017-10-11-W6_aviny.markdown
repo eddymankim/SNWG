@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Andrew Viny
-title: 2017-09-27-W4_aviny
+title: 2017-10-11-W6_aviny
 thumbnail: w4_aviny_thumbnail.png
 week-assignment: 4
 ---
