@@ -6,9 +6,9 @@ thumbnail: Nico-W6.png
 week-assignment: 6
 ---
 
-<script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
+<!--<script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script> -->
 <script src="../code/nazel/nazel-snips/dat.gui.min.js"></script>
-<script src="../code/nazel/nazel-snips/OrbitControls.js"></script>
+<!--<script src="../code/nazel/nazel-snips/OrbitControls.js"></script>-->
 <div class="grid-container" >
       <div class="row" style = "padding: 1em;">
         <div class = "large-4 medium-4 colums">
@@ -21,7 +21,7 @@ week-assignment: 6
       <div class="row" style = "padding: 1em;">
         <div align="CENTER">
           <h3> Testing Stable Scene </h3>
-          <h2> I'm still not understanding something around the update function</h2>
+          <p> I would Really Like to introduce some controls to the left but still a little unsure about how that works.</p>
         </div>
     </div>
     <div class="row" style = "padding: 1em;">
@@ -33,5 +33,4 @@ week-assignment: 6
         </div>
     </div>
 </div><!-- end grid container-->
-
-<script src="/../code/nazel/nazel-6/nazel-6.js"></script>
+<script deferred type="module" src="../code/nazel/nazel-6/nazel-6.js">
