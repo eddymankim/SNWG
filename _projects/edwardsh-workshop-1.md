@@ -1,7 +1,7 @@
 ---
 layout: full
 title: Renderer Workshop Example
-permalink: /code/edwardsh/
+permalink: /code/edwardsh-workshop-1/
 author: Edward Shin
 ---
 
