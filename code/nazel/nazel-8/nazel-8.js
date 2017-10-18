@@ -246,6 +246,15 @@ function boxMaker(
   return {obj3d:Object3d, LightArray:oA}
 }
 
+
+async function load(){
+  let thisModel = await pgkLib.load("../model/nicos_snow_man/scene.gltf");
+
+}
+
+
+
+
 console.log(colorName());
 lightsObj3d.position.set(0,2.5,0);
 light1Obj3d.position.set(0,10,-2);
