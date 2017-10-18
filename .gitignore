@@ -22,5 +22,10 @@ _site/
 .jekyll-metadata
 
 # sublime text project files
+.jshintrc
+.eslintrc.yml
 *.sublime-workspace
 *.sublime-project
+.eslintrc.yml
+.jshintrc
+
