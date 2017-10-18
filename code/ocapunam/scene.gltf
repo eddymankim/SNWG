@@ -1,0 +1,239 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 851,
+      "max": [
+        -4.7096261978149414,
+        0.77848798036575317,
+        2.0780060291290283
+      ],
+      "min": [
+        -5.5931200981140137,
+        -0.53428298234939575,
+        0.0017049999441951513
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 10212,
+      "componentType": 5126,
+      "count": 851,
+      "max": [
+        0.99808335304260254,
+        0.86563843488693237,
+        0.99626034498214722
+      ],
+      "min": [
+        -0.99808365106582642,
+        -0.9603162407875061,
+        -0.99999409914016724
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 851,
+      "max": [
+        0.95119702816009521,
+        0.96701902151107788
+      ],
+      "min": [
+        0.030968999490141869,
+        0.047391001135110855
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 851,
+      "max": [
+        1,
+        0.98748230934143066,
+        0.97348177433013916,
+        1
+      ],
+      "min": [
+        -1,
+        -0.99323832988739014,
+        -0.89598596096038818,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 1242,
+      "max": [
+        850
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "generator": "Sketchfab (OSG glTF plugin)",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 4968,
+      "byteOffset": 0,
+      "name": "ScalarBufferView",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 6808,
+      "byteOffset": 4968,
+      "byteStride": 8,
+      "name": "Vec3BufferView",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 20424,
+      "byteOffset": 11776,
+      "byteStride": 12,
+      "name": "Vec4BufferView",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 13616,
+      "byteOffset": 32200,
+      "byteStride": 16,
+      "name": "MatrixBufferView",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 45816,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "extensionsUsed": [
+    "KHR_materials_pbrSpecularGlossiness"
+  ],
+  "images": [
+    {
+      "uri": "textures/chickenb%3Achickenb%3Alambert2SG_diffuse.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "extensions": {
+        "KHR_materials_pbrSpecularGlossiness": {
+          "diffuseFactor": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "diffuseTexture": {
+            "index": 0,
+            "texCoord": 0
+          },
+          "glossinessFactor": 0,
+          "specularFactor": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "name": "chickenb:chickenb:lambert2SG",
+      "occlusionFactor": 1
+    }
+  ],
+  "meshes": [
+    {
+      "name": "chickenb:chickenb:Merged_ZSphere2 chickenb:group",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 3,
+            "TEXCOORD_0": 2
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Chicken.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "chickenb:chickenb:Merged_ZSphere2 chickenb:group"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
+

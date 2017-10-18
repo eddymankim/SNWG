@@ -5,8 +5,6 @@ permalink: /code/ocapunam-workshop-1/
 author: Ozguc
 ---
 
-
-
 <script deferred type="module">
 
 ///
