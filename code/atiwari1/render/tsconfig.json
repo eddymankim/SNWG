@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
     "module": "es6",
+    "allowJs": true,
+    "outDir": "dist",
     "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "three": [
-        "../../lib/module.js"
-      ]
-    }
-  },
+    "lib": ["es2015", "es2015.iterable", "dom"]
+    },
   "files": [
-    "render-atmospheric.ts"
+    "render-atmospheric.ts",
+    "hw-7.ts"
+  ],
+  "exclude": [
+    "render-toon.ts",
+    "CollaLoader.ts"
   ],
   "compileOnSave": true
 }

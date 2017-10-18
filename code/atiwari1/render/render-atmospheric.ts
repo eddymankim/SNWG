@@ -1,4 +1,4 @@
-import * as THREE from 'THREE';
+import * as THREE from 'three';
 
 
 ///
@@ -63,38 +63,6 @@ export default class AtmosRenderer {
 
   private scene;
 
-  ///
-  /// (3) Write your `constructor` so that it can flexibly take in data:
-  ///
-  ///     3a. You're going to want to have good defaults for missing info:
-  ///
-  ///     3b. Instead of trying to keep track of hundreds of variables,
-  ///         let's destructure the incoming argument and find them by name.
-  ///
-  ///     3c. Some constructors expect their input to be an `object`,
-  ///         namely the `THREE.Material` constructor, and we can do the same.
-  ///
-  ///     3d. We could just have one object and see if it has certain data,
-  ///         or we could use an ES6 trick called "pattern matching".
-  ///
-  ///     3e. First we assign the empty object `{}` into our argument,
-  ///         and then we use destructuring to extract certain variables.
-  ///
-  ///     3f. Elsewhere, destructuring might look something like this:
-  ///         `let { date, name, time } = someObject`.
-  ///
-  ///     3g. Use the same syntax inside the constructor arguments,
-  ///         and notice how, just like regular functions,
-  ///         you don't need to write `var` before each argument.
-  ///
-  ///     3h. Once your constructor is set up to destructure,
-  ///         then you can *add* defaults to the destructured variables,
-  ///         which would look like the below example (if it were a declaration):
-  ///         `let { date, name='Jeff' } = someObject`.
-  ///
-  ///     3i. If you get stuck you can look at `evan-erdos/SimpleRenderer.js`,
-  ///         you don't have to completely understand how it works to use it.
-  ///
   constructor({
         path = '../../data/',
     width = window.innerWidth,
@@ -117,8 +85,6 @@ export default class AtmosRenderer {
     ///
     let clock = new THREE.Clock()
     let listener = new THREE.AudioListener()
-
-
     ///
     /// (5) The more conceptually mundane boilerplate has been added for you,
     ///     but there are some details that you have to fill in yourself:
@@ -151,7 +117,7 @@ export default class AtmosRenderer {
     ///
     scene.fog = new THREE.Fog(fog.color, fog.near, fog.far);
     scene.background = new THREE.Color(background);
-
+  
 
     ///
     /// 6b. Anything that has an impact on rendering (lights, meshes, etc)
