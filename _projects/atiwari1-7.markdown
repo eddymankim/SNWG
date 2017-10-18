@@ -1,6 +1,6 @@
 ---
 layout: code
-title: THREE Boids
+title: B Library
 code: atiwari1/render/dist/hw-7
 thumbnail: atiwari1-7-library.png
 week-assignment: 7
