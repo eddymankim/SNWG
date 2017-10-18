@@ -1,6 +1,6 @@
 ---
 layout: full
-title: Renderer Workshop
+title: Shin Renderer Workshop
 permalink: /code/shin-workshop-1/
 author: Edward Shin
 ---
@@ -23,9 +23,93 @@ import ShinRenderer from '../shin-workshop-1/ShinRenderer.js'
 let rate = 3, dt = 0
 
 // a "terrain" and a "thing", our object containers
-let terrain = new T.Object3D(), thing = new T.Object3D()
+let terrain = new T.Object3D(), thing = new T.Object3D(), city = new T.Object3D(), stonehenge = new T.Object3D()
 
 
+// shin's added city
+let building1 = new T.Mesh(
+    new T.CubeGeometry(15,35,10),
+    new T.MeshStandardMaterial({ color: 0xFFAABB }))
+    building1.position.set(0,-10,0)
+    building1.receiveShadow = true
+    building1.castShadow = true
+    city.add(building1)
+    
+let building2 = new T.Mesh(
+    new T.CubeGeometry(15,70,10),
+    new T.MeshStandardMaterial({ color: 0xFFFFFF }))
+    building2.position.set(12,-15,5)
+    building2.receiveShadow = true
+    building2.castShadow = true
+    city.add(building2)
+
+let building3 = new T.Mesh(
+    new T.CubeGeometry(5,60, 30),
+    new T.MeshStandardMaterial({ color: 0x83DDEE }))
+    building3.position.set(-12,-20,-8)
+    building3.receiveShadow = true
+    building3.castShadow = true
+    city.add(building3)
+    
+let building4 = new T.Mesh(
+    new T.CubeGeometry(7, 40, 46),
+    new T.MeshStandardMaterial({ color: 0xFFFFFF }))
+    building4.position.set(-3,-14,-26)
+    building4.receiveShadow = true
+    building4.castShadow = true
+    city.add(building4)
+
+let building5 = new T.Mesh(
+    new T.CubeGeometry(3, 24, 126),
+    new T.MeshStandardMaterial({ color: 0xF1DDA0 }))
+    building5.position.set(12,-5,57)
+    building5.receiveShadow = true
+    building5.castShadow = true
+    city.add(building5)
+    
+    
+let building6 = new T.Mesh(
+    new T.CubeGeometry(35, 12, 14),
+    new T.MeshStandardMaterial({ color: 0xDDA0D0 }))
+    building6.position.set(24, 3, 27)
+    building6.receiveShadow = true
+    building6.castShadow = true
+    city.add(building6)
+    
+    
+let building7 = new T.Mesh(
+    new T.CubeGeometry(14, 43, 14),
+    new T.MeshStandardMaterial({ color: 0xDDA0D0 }))
+    building7.position.set(-27, -8, 29)
+    building7.receiveShadow = true
+    building7.castShadow = true
+    city.add(building7)
+
+
+// shin's added stonehenge
+for (var i = 0; i < 15; i++) {
+    let topRad = (Math.random() + 0.2) * 10
+    let bottomRad = (Math.random() + 0.2) * 10
+    let height = (Math.random() * 30) + 10
+    let radSeg = (Math.random() * 10) + 3
+    
+    let d = (Math.random() * 35) + 90
+    let stoneX = d * Math.cos(2 * (Math.PI / 15) * i)
+    let stoneZ = d * Math.sin(2 * (Math.PI / 15) * i)
+    let stoneY = (Math.random() * 20) - 10;
+    
+    let stone = new T.Mesh(
+        new T.CylinderGeometry(topRad, bottomRad, height, radSeg),
+        new T.MeshStandardMaterial({ color: 0xD04444 }))
+        stone.position.set(stoneX, stoneY, stoneZ)
+        stone.receiveShadow = true
+        stone.castShadow = true
+        stonehenge.add(stone)
+}
+
+
+
+// everything else
 let cube = new T.Mesh(
     new T.CubeGeometry(10,10,10),
     new T.MeshStandardMaterial({ color: 0xDDDDDD }))
@@ -54,7 +138,7 @@ let tree = new T.Mesh(
 
 
 let ground = new T.Mesh(
-    new T.PlaneGeometry(1e2,1e2,32,32),
+    new T.PlaneGeometry(104,34,32,32),
     new T.MeshPhongMaterial({ color: 0xAAAAAA }))
     ground.rotation.set(-Math.PI/2,0,0)
     ground.castShadow = true
@@ -110,7 +194,6 @@ let torus = new T.Mesh(
     torus.receiveShadow = true
     torus.castShadow = true
     thing.add(torus)
-
 
 
 function createPylon() {
@@ -171,16 +254,16 @@ function update(time) {
 
 
 let renderer = new ShinRenderer({
-    position: { x: 0, y: 10, z: 15 },
+    /* position: { x: 0, y: 10, z: 15 }, */
     /* update: (t) => update(t), */
     updateVar: time => update(time),
     path: '../../data/evan-erdos/' })
 
 
-thing.position.set(0,2.5,0)
+thing.position.set(-2,9,0)
 
 
 // adds our terrain and the spinning thing to the renderer
-renderer.add(terrain, thing)
+renderer.add(terrain, thing, city, stonehenge)
 
 </script>

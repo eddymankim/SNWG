@@ -97,13 +97,13 @@ export default class ShinRenderer {
                     width = window.innerWidth,
                     webgl = {antialias: true, alpha: true},
                     fog = {color: 0xD7FFFD, near: 1e2, far: 1e3},
-                    ambient = 0xFF0000,
+                    ambient = 0x005500,
                     background = 0x5A7F8B,
-                    sunlight = 0xFFCCCC,
-                    groundlight = 0x0000FF,
-                    intensity = 1,
-                    cam = {fov: 60, aspect: height/width, near: 1, far: 1e3},
-                    position = {x: 0, y: 10, z: 15},
+                    sunlight = 0x5533CC,
+                    groundlight = 0x44BBFF,
+                    intensity = .5,
+                    cam = {fov: 60, aspect: width/height, near: 1, far: 1e3},
+                    position = {x: 0, y: 20, z: 30},
                     updateVar = time => {},
                 }={} ) {
 
@@ -221,7 +221,6 @@ export default class ShinRenderer {
         ///         any number of arguments, or a whole array of objects.
         ///
         this.add = (...things) => { for (let thing of things) scene.add(thing) }
-
 
         ///
         /// (10) This will be a pretty ordinary render loop, but with a crucial difference:
