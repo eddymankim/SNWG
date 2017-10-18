@@ -1,46 +1,53 @@
 import * as THREE from '../lib/module.js'
-var camera, scene, renderer, geometry, object, material, line, controls;
-var parentTransform, sphereInter, raycaster;
-var currentIntersected;
 
-var wX = 0
-var wY = 0
-var wZ = 0
-var mouse = new THREE.Vector2();
+var camera, scene, renderer, geometry, material, line, controls, sphereInter, currentIntersected;
+var wX = 0;
+var wY = 0;
+var wZ = 0;
+var mouse, raycaster;
+var objects = [];
 let container
-const width = window.innerWidth
-const height = window.innerHeight
+const width = window.innerWidth;
+const height = window.innerHeight;
 init();
 animate();
 
+
 function init() {
     scene = new THREE.Scene();
+    
     camera = new THREE.PerspectiveCamera(50, width / height, 1, 10000);
     camera.position.z = 30;
     scene.add(camera);
+    
     raycaster = new THREE.Raycaster();
-    raycaster.linePrecision = 3;
-    createLine(0, 0, 200)
+    raycaster.linePrecision = 5;
+    mouse = new THREE.Vector2();
     
-    var geometry = new THREE.SphereGeometry(5);
-    var material = new THREE.MeshBasicMaterial({
-        color: 0xff0000
-    });
     
-    sphereInter = new THREE.Mesh(geometry, material);
-    sphereInter.visible = false;
-    scene.add(sphereInter);
-    renderer = new THREE.WebGLRenderer({
-        alpha: 1
-        , antialias: true
-        , clearColor: 0xffffff
-    });
+    
+    geometry = new THREE.SphereGeometry( 1 );
+    var material = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+    
+    sphereInter = new THREE.Mesh( geometry, material );
+	sphereInter.visible = false;
+	scene.add( sphereInter );
+    
+    createLine();
+
+    renderer = new THREE.WebGLRenderer({ alpha: 1, antialias: true, clearColor: 0xffffff });
     renderer.setSize(width, height);
     container = renderer.domElement
-    controls = new THREE.OrbitControls(camera, container);
+
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+    
     document.querySelector("#RenderCanvas").appendChild(container)
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    }
+    window.addEventListener('keydown', handleKeyPressed, false);
+
+
+}
 
 function animate() {
     requestAnimationFrame(animate);
@@ -48,50 +55,43 @@ function animate() {
 }
 
 function render() {
-    
-    var intersects = raycaster.intersectObjects( object, true);
-
-    
-    camera.updateMatrixWorld();
-    raycaster.setFromCamera(mouse, camera);
     renderer.render(scene, camera);
-    if (intersects.length > 0) {
-        if (currentIntersected !== undefined) {
-            currentIntersected.material.linewidth = 1;
-        }
-        currentIntersected = intersects[0].object;
-        currentIntersected.material.linewidth = 5;
+    var sphereCen
+    var intersects = raycaster.intersectObjects( objects );
+    currentIntersected = intersects[ 0 ];
+    if ( intersects.length > 0 ){
         sphereInter.visible = true;
-        sphereInter.position.copy(intersects[0].point);
-    }
-    else {
-        if (currentIntersected !== undefined) {
-            currentIntersected.material.linewidth = 1;
-        }
-        currentIntersected = undefined;
+        sphereInter.position.copy( intersects[ 0 ].point )
+    } else {
         sphereInter.visible = false;
+        
     }
+
 }
 
-function createLine(x, y, step) {
-    wX = x
-    wY = y
-    object = new THREE.Geometry();
-    for (let i = 0; i < step; i++) {
+function createLine(wX, wY, wZ) {
+    geometry = new THREE.Geometry();
+    for (let i = 0; i < 10; i++) {
         addStep();
     };
-    line = new THREE.Line(object, material);
+    material = new THREE.LineBasicMaterial({ color: 0x587498 });
+    line = new THREE.Line(geometry, material);
     scene.add(line);
+    scene.traverse(function(children){
+    objects.push(children)
+    })
 }
 
 function addStep() {
-    var choiceX = getRandomInt(-1, 1);
-    var choiceY = getRandomInt(-1, 1);
-    var choiceZ = getRandomInt(-1, 1);
+    var choiceX = getRandomInt(-5, 5);
+    var choiceY = getRandomInt(-5, 5);
+    var choiceZ = getRandomInt(-5, 5);
+    
+    geometry.vertices.push(new THREE.Vector3(wX, wY, wZ));
+    
     wX = wX + choiceX;
     wY = wY + choiceY;
     wZ = wZ + choiceZ;
-    object.vertices.push(new THREE.Vector3(wX, wY, wZ));
 };
 
 function getRandomInt(min, max) {
@@ -102,5 +102,22 @@ function onDocumentMouseMove(event) {
     event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    console.log(mouse.x)
+    
+    raycaster.setFromCamera( mouse, camera );    
+}
+
+function handleKeyPressed(event) {
+  if (event.keyCode === 65) {
+    wX = currentIntersected.point.x
+    wY = currentIntersected.point.y
+    wZ = currentIntersected.point.z
+    createLine();
+  }
+  if (event.keyCode === 68) {
+      objects.pop( objects.indexOf( currentIntersected.object ))
+      scene.remove( currentIntersected.object );
+  }
+}
+function onKeyPressed(event){
+
 }
