@@ -11,7 +11,7 @@ import * as T from '../lib/module.js'
 ///
 export class Planet {
     constructor({
-            path = '../../data/',                   /// resource path (url)
+            path = './',                            /// resource path (url)
             orbit = T.random(-0.05,0.05),           /// orbit time (sec)
             height = T.random(5e2,1e4),             /// orbit altitude (km)
             period = T.random(-2,2),                /// day period (sec)
@@ -61,7 +61,7 @@ export class Planet {
 /// represents smaller bodies
 ///
 export class Moon extends Planet { constructor({
-    path = '../../data/',
+    path = './',
     height = T.random(10, 100),
     geometry = {
         radius: T.random(16,24),
@@ -79,7 +79,7 @@ export class Moon extends Planet { constructor({
 ///
 export class GasGiant extends Planet {
     constructor({
-            path = '../../data/',
+            path = './',
             orbit = T.random(-5e-3, 6e-3),
             height = T.random(1e3, 5e3),
             period = T.random(-5e-2, 5e-2),
@@ -142,7 +142,7 @@ export class StarField {
 ///
 export class Star {
     constructor({
-            path = '../../data/',                   /// resources path (url)
+            path = './',                   /// resources path (url)
             power = 1,                              /// light power [0..n]
             range = 3e4,                            /// light max distance (real)
             period = T.random(-1e-3, 1e-3),         /// day period (sec)
@@ -168,8 +168,8 @@ export class Star {
         Star.load(this.mesh.material, path, files)
     }
 
-    static async load(material, path='../../data/', {albedo,normal,physic}={}) {
-        const loader = new T.TextureLoader().setPath(`${path}/`)
+    static async load(material, path='./images/', {albedo,normal,physic}={}) {
+        const loader = new T.TextureLoader().setPath(path)
         const loadImage = f => new Promise((c,r) => loader.load(f,c))
         if (albedo) material.map = await loadImage(albedo)
         if (normal) material.normalMap = await loadImage(normal)
