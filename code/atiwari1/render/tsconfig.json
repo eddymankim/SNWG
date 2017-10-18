@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "three": [
+        "../../lib/module.js"
+      ]
+    }
+  },
+  "files": [
+    "render-atmospheric.ts"
+  ],
+  "compileOnSave": true
+}
