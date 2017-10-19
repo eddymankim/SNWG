@@ -46,7 +46,7 @@ button { margin: auto; margin-top: 75px;}
 </style>
 
 <br>
-<div id= "bob"> <button id="b1" class="btn"> Change texture </button> 
+<div id= "bob"> <button id="b1" class="btn"> Change texture </button>
 <br><br><br>
 Use arrow keys to rotate object
 </div>
@@ -74,7 +74,7 @@ var ambient = new THREE.AmbientLight( 0x101030 );
 scene.add( ambient );
 var directionalLight = new THREE.DirectionalLight( 0xffeedd );
 directionalLight.position.set( 0, 0, 1 );
-scene.add( directionalLight );		
+scene.add( directionalLight );
 
 var manager = new THREE.LoadingManager();
 manager.onProgress = function ( item, loaded, total ) {
