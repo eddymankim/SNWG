@@ -7,8 +7,8 @@ week-assignment: 5
 ---
 
 <script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
-<script src="../code/nazel/nazel-modules/dat.gui.min.js"></script>
-<script src="../code/nazel/nazel-modules/OrbitControls.js"></script>
+<script src="../code/nazel/nazel-snips/dat.gui.min.js"></script>
+<script src="../code/nazel/nazel-snips/OrbitControls.js"></script>
 <div class="grid-container" >
   <div class="large-12 columns" >
 
