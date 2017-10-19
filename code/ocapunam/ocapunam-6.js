@@ -118,6 +118,3 @@ function handleKeyPressed(event) {
       scene.remove( currentIntersected.object );
   }
 }
-function onKeyPressed(event){
-
-}
