@@ -54,3 +54,17 @@ export const load = (path='./', ...files) => {
 }
 
 
+export function loadSound(file='') {
+    return new Promise((cont,r) => soundLoader.load(file,cont))
+}
+
+
+export function loadModel(file='') {
+    return new Promise((cont,r) => modelLoader.load(file,cont))
+}
+
+
+
+
+
+
