@@ -1,6 +1,6 @@
 ---
 layout: full
-title: Renderer Workshop
+title: Field of Lights
 permalink: /code/ocapunam-workshop-1/
 author: Ozguc
 ---
@@ -21,14 +21,14 @@ import ozRenderer from '../ocapunam/ozRenderer.js'
 // a rate of rotation and delta time
 let rate = 3, dt = 0
 
-raycaster = new THREE.Raycaster();
-mouse = new THREE.Vector2();
+raycaster = new T.Raycaster();
+mouse = new T.Vector2();
 
 var mouse, raycaster;
 var objects = [];
 
 document.addEventListener('mousemove', onDocumentMouseMove, false);
-window.addEventListener('keydown', handleKeyPressed, false);
+document.addEventListener('keydown', handleKeyPressed, false);
 
 // a "terrain" and a "thing", our object containers
 let terrain = new T.Object3D(), thing = new T.Object3D()
@@ -79,16 +79,15 @@ function createPylon(x, y, z) {
 }
 
 
-function addLight(x,y,z){
+function addLight(x, y, z){
     let o = new T.Object3D()
-    o.add(createPylon(0,3,0))
+    o.add(createPylon(x, y, z))
     thing.add(o)
     
     thing.traverse(function(children){
     objects.push(children)
     })
 }
-
 
 // this is the update function that we pass to the renderer,
 // who then calls us back before it renders the scene.
@@ -103,30 +102,34 @@ let renderer = new ozRenderer({
     position: { x: 0, y: 10, z: 15 },
     update: (t) => update(t),
     path: '../../data/evan-erdos/' })
-
-
-thing.position.set(0,2.5,0)
+    
+    thing.position.set(0,2.5,0)
 
 
 // adds our terrain and the spinning thing to the renderer
 renderer.add(terrain, thing)
-
-</script>
 
 function onDocumentMouseMove(event) {
     event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     
-    raycaster.setFromCamera( mouse, camera );    
+    raycaster.setFromCamera( mouse, this.camera );    
 }
 
 function handleKeyPressed(event) {
   if (event.keyCode === 65) {
-  addLight()
-    createLine();
-  }
-  if (event.keyCode === 68) {
-      objects.pop( objects.indexOf( currentIntersected.object ))
-      scene.remove( currentIntersected.object );
-  }
+    var randX = getRandom(-1e2/2+10,1e2/2-10)
+    var randY = getRandom(-2,0)
+    var randZ = getRandom(-1e2/2+10,1e2/2-10)
+    addLight(randX, randY, randZ);
+    ///if (objects.length > 10){
+    ///  objects.pop(0);
+    ///  thing.remove(objects.pop(0));}
+}
+}
+
+function getRandom(min, max) {
+    return Math.random() * (max - min + 1) + min;
+}
+</script>
