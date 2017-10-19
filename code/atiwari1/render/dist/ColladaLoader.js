@@ -30,7 +30,7 @@ export function ColladaLoader() {
     var options = {
         // Force Geometry to always be centered at the local origin of the
         // containing Mesh.
-        centerGeometry: false,
+        centerGeometry: true,
         // Axis conversion is done for geometries, animations, and controllers.
         // If we ever pull cameras or lights out of the COLLADA file, they'll
         // need extra work.
@@ -744,7 +744,7 @@ export function ColladaLoader() {
                 var material = first_material || new THREE.MeshLambertMaterial({ color: 0xdddddd, side: geometry.doubleSided ? THREE.DoubleSide : THREE.FrontSide });
                 var geom = geometry.mesh.geometry3js;
                 if (num_materials > 1) {
-                    material = new THREE.MultiMaterial(used_materials_array);
+                    material = used_materials_array;
                     for (j = 0; j < geom.faces.length; j++) {
                         var face = geom.faces[j];
                         face.materialIndex = used_materials[face.daeMaterial];
@@ -2239,7 +2239,7 @@ export function ColladaLoader() {
                 case 'normal':
                     var cot = this[prop];
                     if (cot instanceof ColorOrTexture) {
-                        if (cot.isTexture()) {
+                        /*if (false && cot.isTexture()) {
                             var samplerId = cot.texture;
                             var sampler = this.effect.sampler[samplerId];
                             if (sampler !== undefined && sampler.source !== undefined) {
@@ -2287,7 +2287,7 @@ export function ColladaLoader() {
                                 }
                             }
                         }
-                        else if (prop === 'diffuse' || !transparent) {
+                        else */ if (prop === 'diffuse' || !transparent) {
                             if (prop === 'emission') {
                                 props['emissive'] = cot.color.getHex();
                             }

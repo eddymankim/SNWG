@@ -212,10 +212,10 @@ export function ColladaLoader() {
             newData = {
                 fps: 60,
                 hierarchy: [{
-                    node: n,
-                    keys: n.keys,
-                    sids: n.sids
-                }],
+                        node: n,
+                        keys: n.keys,
+                        sids: n.sids
+                    }],
                 node: node,
                 name: 'animation_' + node.name,
                 length: 0
@@ -228,9 +228,9 @@ export function ColladaLoader() {
         else {
             newData = {
                 hierarchy: [{
-                    keys: [],
-                    sids: []
-                }]
+                        keys: [],
+                        sids: []
+                    }]
             };
         }
         for (var i = 0, il = node.children.length; i < il; i++) {
@@ -3383,4 +3383,5 @@ export function ColladaLoader() {
     };
 }
 ;
+//# sourceMappingURL=ColladaLoader.js.map 
 //# sourceMappingURL=ColladaLoader.js.map

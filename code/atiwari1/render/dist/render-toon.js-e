@@ -6,7 +6,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-import * as THREE from '../../../lib/module.js';
+import * as THREE from 'three';
 /* aman's dumb toon renderer
  * adapted from evan-erdos' boilerplate
  */

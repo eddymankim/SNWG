@@ -74,11 +74,11 @@ export default class AtmosRenderer {
     webgl = { antialias: true, shadowMapEnabled: true },
     position = { x: 0, y: 0, z: 0 },
     fog = { color: 0x0000FF, near: 1, far: 1e3 },
-    cam = { fov: 120, aspect: width / height, near: 0.1, far: 2e4 },
+    cam = undefined,
     update = (t) => { }
       } = {}) {
 
-
+    cam = cam || { fov: 120, aspect: width / height, near: 0.1, far: 2e4 }
     ///
     /// (4) You should pick a sensible import name instead of `THREE`,
     ///     when you import *en masse*, you need a way to refer to everything.
@@ -117,7 +117,7 @@ export default class AtmosRenderer {
     ///
     scene.fog = new THREE.Fog(fog.color, fog.near, fog.far);
     scene.background = new THREE.Color(background);
-  
+
 
     ///
     /// 6b. Anything that has an impact on rendering (lights, meshes, etc)

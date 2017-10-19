@@ -1,0 +1,358 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2344,
+      "max": [
+        -2.4579000473022461,
+        5.0387001037597656,
+        4.0174798965454102
+      ],
+      "min": [
+        -6.1615700721740723,
+        -0.75135999917984009,
+        -2.4391000270843506
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 28128,
+      "componentType": 5126,
+      "count": 2344,
+      "max": [
+        0.99938637018203735,
+        0.9985319972038269,
+        0.99970334768295288
+      ],
+      "min": [
+        -0.99971705675125122,
+        -0.99849677085876465,
+        -0.99884641170501709
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 14040,
+      "max": [
+        2343
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 56256,
+      "componentType": 5126,
+      "count": 2344,
+      "max": [
+        5.6708998680114746,
+        4.6900200843811035,
+        3.6005599498748779
+      ],
+      "min": [
+        2.5424799919128418,
+        -1.0456199645996094,
+        -2.7351200580596924
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 84384,
+      "componentType": 5126,
+      "count": 2344,
+      "max": [
+        0.99898099899291992,
+        0.9985319972038269,
+        0.99970334768295288
+      ],
+      "min": [
+        -0.99971777200698853,
+        -0.99977630376815796,
+        -0.99884641170501709
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 56160,
+      "componentType": 5125,
+      "count": 14040,
+      "max": [
+        2343
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 112512,
+      "componentType": 5126,
+      "count": 2040,
+      "max": [
+        9.800450325012207,
+        5.0607700347900391,
+        8.3836002349853516
+      ],
+      "min": [
+        -8.3481101989746094,
+        -5.0174298286437988,
+        2.1513299942016602
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 136992,
+      "componentType": 5126,
+      "count": 2040,
+      "max": [
+        0.99792474508285522,
+        0.99874216318130493,
+        0.99999850988388062
+      ],
+      "min": [
+        -0.99810951948165894,
+        -0.99883192777633667,
+        -0.99995356798171997
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 112320,
+      "componentType": 5125,
+      "count": 12228,
+      "max": [
+        2039
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "generator": "Sketchfab (OSG glTF plugin)",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 161232,
+      "byteOffset": 0,
+      "name": "ScalarBufferView",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 161472,
+      "byteOffset": 161232,
+      "byteStride": 12,
+      "name": "Vec4BufferView",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 322704,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Scene - Root",
+      "occlusionFactor": 1,
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0.20000000000000001,
+        "roughnessFactor": 0.47999999999999998
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "GeodeCircle.005",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "GeodeCircle.009",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "GeodeCircle.002",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6
+          },
+          "indices": 8,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3,
+        5,
+        7
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        0.41599000000000003,
+        0.90937000000000001,
+        -0,
+        0,
+        0.58339000000000008,
+        -0.26687000000000005,
+        0.76709000000000016,
+        0,
+        0.69757000000000013,
+        -0.31910000000000005,
+        -0.64154000000000011,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "bathtub_b_feet"
+    },
+    {
+      "mesh": 0,
+      "name": "GeodeCircle.005"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        -0.34093000000000007,
+        0.94009000000000009,
+        -0,
+        0,
+        0.60310000000000008,
+        0.21872000000000003,
+        0.76709000000000016,
+        0,
+        0.72113000000000005,
+        0.26152999999999998,
+        -0.64154000000000011,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "bathtub_f_feet"
+    },
+    {
+      "mesh": 1,
+      "name": "GeodeCircle.009"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "bathtub_body"
+    },
+    {
+      "mesh": 2,
+      "name": "GeodeCircle.002"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+

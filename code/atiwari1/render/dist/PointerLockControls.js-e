@@ -1,7 +1,7 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-import * as THREE from '../../../lib/module.js';
+import * as THREE from 'three';
 export function PointerLockControls(camera) {
     var scope = this;
     camera.rotation.set(0, 0, 0);
