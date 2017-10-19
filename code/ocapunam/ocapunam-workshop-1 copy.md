@@ -1,53 +1,28 @@
 ---
 layout: full
-title: Importing Files
-permalink: /code/importing-files/
-author: Ben Scott
+title: Renderer Workshop
+permalink: /code/ocapunam-workshop-1/
+author: Ozguc
 ---
 
 
 <script deferred type="module">
 
 ///
-/// SNWG - make your own files day
+/// SNWG - make your own atmosphere day
 ///
-/// 2017-10-18 Ben Scott @evan-erdos <bescott.org>
+/// 2017-10-11 Ben Scott @evan-erdos <bescott.org>
 ///
 import * as T from '../lib/module.js'
-import SimpleRenderer from '../workshop-1/SimpleRenderer.js'
+
+// you should rename this to match your own renderer
+import ozRenderer from '../ocapunam/ozRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
 
 // a "terrain" and a "thing", our object containers
 let terrain = new T.Object3D(), thing = new T.Object3D()
-
-
-let cube = new T.Mesh(
-    new T.CubeGeometry(10,10,10),
-    new T.MeshStandardMaterial({ color: 0xDDDDDD }))
-    cube.position.set(-50,0,0)
-    cube.receiveShadow = true
-    cube.castShadow = true
-    terrain.add(cube)
-
-
-let box = new T.Mesh(
-    new T.CubeGeometry(20,20,15),
-    new T.MeshStandardMaterial({ color: 0xBBAAAA }))
-    box.position.set(30,0,10)
-    box.receiveShadow = true
-    box.castShadow = true
-    terrain.add(box)
-
-
-let tree = new T.Mesh(
-    new T.CubeGeometry(5,30,6),
-    new T.MeshStandardMaterial({ color: 0x777777 }))
-    tree.position.set(30,0,-40)
-    tree.receiveShadow = true
-    tree.castShadow = true
-    terrain.add(tree)
 
 
 let ground = new T.Mesh(
@@ -155,11 +130,6 @@ for (let theta of (function*() { yield 0; yield 180 })()) {
 }
 
 
-let renderer = new SimpleRenderer({
-    position: { x: 0, y: 10, z: 15 },
-    update: (t) => update(t),
-    path: '../evan-erdos/' })
-
 // this is the update function that we pass to the renderer,
 // who then calls us back before it renders the scene.
 function update(time) {
@@ -171,43 +141,14 @@ function update(time) {
 }
 
 
-async function load() {
-    console.log("I'm Here!") 
-    let lampMesh = await T.loadModel('../evan-erdos/models/brass-lantern/lamp.gltf')
 
-    console.log("I'm Here Now!")
-    
-    // let albedo = await T.load('planet-albedo.png')
-    // let normal = await T.load('planet-normal.png')
-
-    terrain.add(lampMesh.scene)
-
-    let wav = await T.loadSound('../evan-erdos/sounds/red-alert.wav')
-
-    let sound = new T.PositionalAudio(renderer.listener)
-    sound.setBuffer(wav)
-    sound.play()
-
-    terrain.add(sound)
-
-    let material = new T.MeshPhysicalMaterial({
-        color: 0xBBEEFF,
-        metalness: 0.1,
-        roughness: 0.1,
-        emissive: 1.0, 
-        // map: albedo,
-        // normalMap: normal, 
-    })
-
-    // myLoadingThing.load('asvdok', () => )
-}
+let renderer = new ozRenderer({
+    position: { x: 0, y: 10, z: 15 },
+    update: (t) => update(t),
+    path: '../../data/evan-erdos/' })
 
 
-
-
-load() // 1
-
-thing.position.set(0,2.5,0) // 3
+thing.position.set(0,2.5,0)
 
 
 // adds our terrain and the spinning thing to the renderer
