@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    <style> body { margin: 0; overflow: hidden; color: #cccccc; } </style>
+    {% if page.name and page.code %}
+    <script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
+    {% endif %}
+    {{ content }}
+  </body>
+</html>

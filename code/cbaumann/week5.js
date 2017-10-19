@@ -1,13 +1,7 @@
-///
-/// SNWG - now in spaceeeeeeee
-///
-/// 2017-09-26 Ben Scott @evan-erdos <bescott.org>
-///
+/// local directory for assets
+const dir = '../../../data/evan-erdos'
 
 import * as T from '../lib/module.js'
-
-/// local directory for assets
-const dir = '../../data/evan-erdos'
 
 /// Planet
 /// represents any kind of celestial body
@@ -71,18 +65,18 @@ class Moon extends Planet {
 /// represents bigger planets
 class GasGiant extends Planet {
     constructor({
-            orbit = T.random(-5e-3, 6e-3),
-            height = T.random(1e3, 5e3),
-            period = T.random(-5e-2, 5e-2),
+            orbit = T.random(-2e-1, 2e-3),
+            height = T.random(1e3, 1e3),
+            period = T.random(-1e-2, 2e-2),
             declin = T.random(-0.24, 0.4),
-            moonCount = T.random(1, 10),
+            moonCount = T.random(50, 100),
             geometry = [ T.random(2e2,5e2),32,32],
             material = {
                 color: 0xFFFFFF, specular: 0x555555,
                 shininess: 10, reflectivity: 0 },
             files = {
-                physic: 'gas-giant-physic.jpg',
-                normal: 'gas-giant-normal.jpg',
+                physic: 'gas-giant-albedo.jpg',
+                normal: 'gas-giant-physic.jpg',
                 albedo: 'gas-giant-albedo.png'} }={}) {
         super({orbit, height, period, declin, geometry, material, files})
         this.moons = []
@@ -106,11 +100,11 @@ class Star {
             period = T.random(-1e-3, 1e-3),
             geometry = [ T.random(3e2, 8e2), 64, 64 ],
             material = { color: 0xFFE600 },
-            files = { albedo: 'star-sun-albedo.png' },
+            files = { albedo: 'star-blue-albedo.png' },
             light = {
                 color: 0xFFFAD3,
                 intensity: 1,
-                distance: 3e4,
+                distance: 1e8,
                 decay: 2 } }={}) {
         this.data = { period }
         this.mesh = new T.Mesh(
@@ -222,3 +216,4 @@ class Main {
 
 
 new Main().render()
+
