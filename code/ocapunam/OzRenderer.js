@@ -1,5 +1,5 @@
 ///
-/// OzRenderer
+/// ozRenderer
 ///
 /// 2017-10-11 Your Name @your-andrew-id
 ///
@@ -57,7 +57,7 @@
 ///     2b. While there are ways to `export` many things,
 ///         you just want to `export` this specific class *automatically*.
 ///
-export default class OzRenderer {
+export default class ozRenderer {
 
 
     ///
@@ -92,7 +92,7 @@ export default class OzRenderer {
     ///     3i. If you get stuck you can look at `evan-erdos/SimpleRenderer.js`,
     ///         you don't have to completely understand how it works to use it.
     ///
-    constructor(
+    constructor({
             path = '../../data/',
             width = window.innerWidth,
             height = window.innerHeight,
@@ -192,7 +192,7 @@ export default class OzRenderer {
         ///     using a HemisphereLight will result in a tasteful gradient,
         ///     based on two colors and an intensity value.
         ///
-        let sun = new YourImportedStuff.HemisphereLight(light, ground, 0.5)
+        let sun = new THREE.HemisphereLight(light, ground, 0.5)
             sun.position.set(1,2,0)
             scene.add(sun)
 

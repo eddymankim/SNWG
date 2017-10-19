@@ -1,21 +1,22 @@
 ---
 layout: full
-title: Renderer Workshop Example
+title: Renderer Workshop
 permalink: /code/ocapunam-workshop-1/
 author: Ozguc
 ---
+
 
 <script deferred type="module">
 
 ///
 /// SNWG - make your own atmosphere day
 ///
-/// 2017-10-11 Your Name Here @your-andrew-id
+/// 2017-10-11 Ben Scott @evan-erdos <bescott.org>
 ///
 import * as T from '../lib/module.js'
 
 // you should rename this to match your own renderer
-import OzRenderer from '../ocapunam/OzRenderer.js'
+import ozRenderer from '../ocapunam/ozRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
@@ -60,6 +61,7 @@ let ground = new T.Mesh(
     terrain.add(ground)
 
 
+
 let tetrahedron = new T.Mesh(
     new T.TetrahedronGeometry(1,2),
     new T.MeshStandardMaterial({
@@ -85,6 +87,7 @@ let sphere = new T.Mesh(
     thing.add(sphere)
 
 
+
 let diamond = new T.Mesh(
     new T.IcosahedronGeometry(0.25,0),
     new T.MeshStandardMaterial({
@@ -108,7 +111,6 @@ let torus = new T.Mesh(
     torus.receiveShadow = true
     torus.castShadow = true
     thing.add(torus)
-
 
 
 function createPylon() {
@@ -146,7 +148,6 @@ function createPylon() {
 }
 
 
-
 // superfluous iterator pattern for very fast overdesigning!
 for (let theta of (function*() { yield 0; yield 180 })()) {
     let o = new T.Object3D()
@@ -168,10 +169,10 @@ function update(time) {
 
 
 
-let renderer = new OzRenderer({
+let renderer = new ozRenderer({
     position: { x: 0, y: 10, z: 15 },
     update: (t) => update(t),
-    path: '../../data/ocapunam/' })
+    path: '../../data/evan-erdos/' })
 
 
 thing.position.set(0,2.5,0)
@@ -181,3 +182,4 @@ thing.position.set(0,2.5,0)
 renderer.add(terrain, thing)
 
 </script>
+
