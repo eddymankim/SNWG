@@ -21,15 +21,6 @@ import ozRenderer from '../ocapunam/ozRenderer.js'
 // a rate of rotation and delta time
 let rate = 3, dt = 0
 
-raycaster = new THREE.Raycaster();
-mouse = new THREE.Vector2();
-
-var mouse, raycaster;
-var objects = [];
-
-document.addEventListener('mousemove', onDocumentMouseMove, false);
-window.addEventListener('keydown', handleKeyPressed, false);
-
 // a "terrain" and a "thing", our object containers
 let terrain = new T.Object3D(), thing = new T.Object3D()
 
@@ -44,7 +35,58 @@ let ground = new T.Mesh(
 
 
 
-function createPylon(x, y, z) {
+let tetrahedron = new T.Mesh(
+    new T.TetrahedronGeometry(1,2),
+    new T.MeshStandardMaterial({
+        wireframe: true,
+        color: 0xFFFFFFAA,
+        metalness: 0.3,
+        roughness: 0.6,
+        emissiveIntensity: 1.5, }))
+    tetrahedron.position.set(0,2.5,0)
+    tetrahedron.scale.set(1,2,1)
+    thing.add(tetrahedron)
+
+
+let sphere = new T.Mesh(
+    new T.SphereGeometry(0.8,32,32),
+    new T.MeshStandardMaterial({
+        color: 0xFFAAEEAA,
+        metalness: 0.1,
+        roughness: 0.8, }))
+    sphere.position.set(0,3,0)
+    sphere.receiveShadow = true
+    sphere.castShadow = true
+    thing.add(sphere)
+
+
+
+let diamond = new T.Mesh(
+    new T.IcosahedronGeometry(0.25,0),
+    new T.MeshStandardMaterial({
+        color: 0xC1BAB1,
+        metalness: 0.8,
+        roughness: 0.3, }))
+    diamond.position.set(0,1,0)
+    diamond.receiveShadow = true
+    diamond.castShadow = true
+    thing.add(diamond)
+
+
+let torus = new T.Mesh(
+    new T.TorusKnotGeometry(1,0.1,32,16),
+    new T.MeshStandardMaterial({
+        color: 0x00FFAA,
+        metalness: 0.0,
+        roughness: 1.0, }))
+    torus.position.set(0,0.5,0)
+    torus.rotation.set(Math.PI/2,Math.PI/9,0)
+    torus.receiveShadow = true
+    torus.castShadow = true
+    thing.add(torus)
+
+
+function createPylon() {
 
     let light = new T.PointLight(0xFFDDFF, 1, 10, 2)
         light.position.set(0,1.5,0)
@@ -70,8 +112,8 @@ function createPylon(x, y, z) {
             roughness: 0.1,
             emissive: 1.0, }))
         pylon.add(light, bulb)
-        pylon.rotation.set(0,0,0)
-        pylon.position.set(x,y-1.5,z+1.5)
+        pylon.rotation.set(Math.PI/2,0,0)
+        pylon.position.set(0,3,1.5)
         pylon.castShadow = false
         pylon.receiveShadow = false
 
@@ -79,14 +121,12 @@ function createPylon(x, y, z) {
 }
 
 
-function addLight(x,y,z){
+// superfluous iterator pattern for very fast overdesigning!
+for (let theta of (function*() { yield 0; yield 180 })()) {
     let o = new T.Object3D()
-    o.add(createPylon(0,3,0))
+    o.add(createPylon())
+    o.rotateY(T.Math.degToRad(theta))
     thing.add(o)
-    
-    thing.traverse(function(children){
-    objects.push(children)
-    })
 }
 
 
@@ -94,7 +134,10 @@ function addLight(x,y,z){
 // who then calls us back before it renders the scene.
 function update(time) {
     dt += time
-
+    torus.position.z = 10*Math.sin(1+dt)*time
+    torus.position.x = Math.cos(dt)*time
+    torus.rotateY(-2*rate*time)
+    thing.rotateY(rate*time)
 }
 
 
@@ -113,20 +156,3 @@ renderer.add(terrain, thing)
 
 </script>
 
-function onDocumentMouseMove(event) {
-    event.preventDefault();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    
-    raycaster.setFromCamera( mouse, camera );    
-}
-
-function handleKeyPressed(event) {
-  if (event.keyCode === 65) {
-  addLight()
-    createLine();
-  }
-  if (event.keyCode === 68) {
-      objects.pop( objects.indexOf( currentIntersected.object ))
-      scene.remove( currentIntersected.object );
-  }
