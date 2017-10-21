@@ -31,4 +31,4 @@ week-assignment: 5
   </div> <!-- end large colummn -->
 </div><!-- end grid container-->
 
-<script src="/../code/nazel/nazel-5-ws.js"></script>
+<script src="/../code/nazel/nazel-5/nazel-5.js"></script>
