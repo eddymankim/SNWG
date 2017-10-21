@@ -8,38 +8,40 @@
 import * as T from '../lib/module.js'
 import * as E from '../lib/effects/module.js'
 
-const loader = new T.TextureLoader()
-
 export default class FancyRenderer {
     constructor({
-            path = '../../data/', id = '#RenderCanvas',
-            width = window.innerWidth, height = window.innerHeight,
+            path = '', id = '#RenderCanvas',
+            width = ()=>window.innerWidth, height = ()=>window.innerHeight,
             background = 0x5A7F8B, ambient = 0x14031B,
             light = 0xFEEBC1, ground = 0xF2E9CF,
             objects = [], scenery = [], selectables = [],
-            position = { x:0, y:10, z:10 }, rotation = { x:0, y:0, z:0 },
-            fog = { color: 0xCBDBFE, near: 1e2, far: 1e3 },
-            cam = { fov: 60, aspect: width/height, near: 0.1, far: 2e5 },
-            webgl = { antialias: true, logarithmicDepthBuffer: true },
-            bloom = { strength: 2, size: 30, sigma: 2, },
-            film = { noise: 0.5, scan: 0.1, grayscale: 0.5 },
-            files = { sky: 'ash-canyon', },
-            update = (time) => { },
-            onclick = (object) => object.onclick(),
+            position = {x:0, y:10, z:10}, rotation = {x:0, y:0, z:0},
+            webgl = {
+                antialias: true, logarithmicDepthBuffer: true, alpha: false,
+                exposure: 1.1, clearColor: 0xffffff,
+                devicePixelRatio: window.devicePixelRatio, },
+            fog = { color:0xCBDBFE, near:1e2, far:1e3 },
+            cam = { fov:60, aspect:width()/height(), near:0.1, far:2e5, },
+            bloom = { strength:2, size:30, sigma:2, },
+            film = { noise:0.5, scan:0.1, grayscale:0.5, },
+            files = { sky:'ash-canyon', },
+            update = (time) => {},
+            onclick = (object) => {},
             }={}) {
         const clock = new T.Clock()
         const listener = new T.AudioListener()
         const raycaster = new T.Raycaster()
-        const mouse = new T.Vector2()
+        let mouse = new T.Vector2()
         let time = clock.getDelta()
 
         let renderer = new T.WebGLRenderer(webgl)
-            renderer.setSize(width, height)
-            renderer.setPixelRatio(window.devicePixelRatio)
-            renderer.setClearColor(ambient, 0)
+            renderer.setSize(width(),height())
+            renderer.setPixelRatio(webgl.devicePixelRatio)
+            renderer.physicallyCorrectLights = true
             renderer.toneMapping = T.LinearToneMapping
             renderer.shadowMap.enabled = true
             renderer.shadowMap.type = T.PCFSoftShadowMap
+            renderer.toneMappingExposure = webgl.exposure
 
         let camera = new T.PerspectiveCamera(...Object.values(cam))
             camera.position.set(...Object.values(position))
@@ -60,12 +62,12 @@ export default class FancyRenderer {
             bloomPass.renderToScreen = true
 
         let composer = new E.EffectComposer(renderer)
-            composer.addPass(new E.RenderPass(scene, camera))
+            composer.addPass(new E.RenderPass(scene,camera))
             composer.addPass(new E.BloomPass(bloom))
 
 
         if (files.sky)  scene.background = this.envMap =
-            new T.CubeTextureLoader().setPath(`${path}/${files.sky}/`).load([
+            new T.CubeTextureLoader().setPath(`${path}/images/${files.sky}/`).load([
                 `${files.sky}+z.png`, `${files.sky}-z.png`,
                 `${files.sky}+y.png`, `${files.sky}-y.png`,
                 `${files.sky}+x.png`, `${files.sky}-x.png`])
@@ -90,8 +92,7 @@ export default class FancyRenderer {
             composer.render(time) // renderer.render(scene, camera)
         }
 
-        const mousedown = (e) => {
-            e.preventDefault()
+        const mousedown = (e) => { e.preventDefault()
             mouse.x = (e.clientX/window.innerWidth)*2+1
             mouse.y = -(e.clientY/window.innerHeight)*2+1
             raycaster.setFromCamera(mouse, camera)
@@ -100,14 +101,13 @@ export default class FancyRenderer {
         }
 
         const resize = () => {
-            width = window.innerWidth
-            height = window.innerHeight
-            camera.aspect = width / height
+            let [w,h] = [width(), height()]
+            camera.aspect = w/h
             camera.updateProjectionMatrix()
-            composer.setSize(width, height)
+            composer.setSize(w,h)
         }
 
-        // window.addEventListener('blur', blur, false)
+        // window.addEventListener('blur', disable, false)
         // window.addEventListener('focus', render, false)
         window.addEventListener('mousedown', mousedown, false)
         window.addEventListener('resize', resize, false)
@@ -115,10 +115,18 @@ export default class FancyRenderer {
         document.body.appendChild(renderer.domElement)
     }
 
+    static load(...files) {
 
-    static *load(path='../../data/', ...files) {
-        for (let file of files)
-            yield new Promise((c,r) => loader.load(`${path}${file}`,c)) }
+    }
+
+
+    static async load(material, path='./', {albedo,normal,physic}={}) {
+        const loader = new T.TextureLoader().setPath(path)
+        const loadImage = f => new Promise((c,r) => loader.load(f,c))
+        if (albedo) material.map = await load(path,albedo)
+        if (normal) material.normalMap = await load(path,normal)
+        material.needsUpdate = true
+    }
 
     // static async load(material, path='../../data/', ...files) {
     //     loader.setPath(`${path}/`)
