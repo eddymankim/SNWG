@@ -14,7 +14,7 @@ author: Ben Scott
 /// 2017-10-18 Ben Scott @evan-erdos <bescott.org>
 ///
 import * as T from '../lib/module.js'
-import FancyRenderer from '../evan-erdos/FancyRenderer.js'
+import SimpleRenderer from '../workshop-1/SimpleRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
@@ -155,6 +155,11 @@ for (let theta of (function*() { yield 0; yield 180 })()) {
 }
 
 
+let renderer = new SimpleRenderer({
+    position: { x: 0, y: 10, z: 15 },
+    update: (t) => update(t),
+    path: '../evan-erdos/' })
+
 // this is the update function that we pass to the renderer,
 // who then calls us back before it renders the scene.
 function update(time) {
@@ -165,20 +170,44 @@ function update(time) {
     thing.rotateY(rate*time)
 }
 
+
 async function load() {
-    let lampMesh = await T.load('brass-lantern/lamp.gltf')
-    terrain.add(lampMesh)
+    console.log("I'm Here!") 
+    let lampMesh = await T.loadModel('../evan-erdos/models/brass-lantern/lamp.gltf')
+
+    console.log("I'm Here Now!")
+    
+    // let albedo = await T.load('planet-albedo.png')
+    // let normal = await T.load('planet-normal.png')
+
+    terrain.add(lampMesh.scene)
+
+    let wav = await T.loadSound('../evan-erdos/sounds/red-alert.wav')
+
+    let sound = new T.PositionalAudio(renderer.listener)
+    sound.setBuffer(wav)
+    sound.play()
+
+    terrain.add(sound)
+
+    let material = new T.MeshPhysicalMaterial({
+        color: 0xBBEEFF,
+        metalness: 0.1,
+        roughness: 0.1,
+        emissive: 1.0, 
+        // map: albedo,
+        // normalMap: normal, 
+    })
+
+    // myLoadingThing.load('asvdok', () => )
 }
 
 
 
-let renderer = new FancyRenderer({
-    position: { x: 0, y: 10, z: 15 },
-    update: (t) => update(t),
-    path: '../evan-erdos/' })
 
+load() // 1
 
-thing.position.set(0,2.5,0)
+thing.position.set(0,2.5,0) // 3
 
 
 // adds our terrain and the spinning thing to the renderer

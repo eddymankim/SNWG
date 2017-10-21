@@ -72,7 +72,7 @@ var ambient = new THREE.AmbientLight( 0x101030 );
 scene.add( ambient );
 var directionalLight = new THREE.DirectionalLight( 0xffeedd );
 directionalLight.position.set( 0, 0, 1 );
-scene.add( directionalLight );		
+scene.add( directionalLight );
 
 var manager = new THREE.LoadingManager();
 manager.onProgress = function ( item, loaded, total ) {
@@ -174,7 +174,7 @@ function drawTrees() {
 
 	for (i=0; i<10; i++) {
 		for (j=0; j<10; j++) {
-			var jeff = tree.clone(); 
+			var jeff = tree.clone();
 			jeff.position.set(500*(i-10),0,400*(j-4));
 			scene.add(jeff);
 		}
