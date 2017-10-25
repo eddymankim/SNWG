@@ -19,7 +19,7 @@ export { default as FancyRenderer } from './FancyRenderer.js'
 export { default as FancyImporter } from './FancyImporter.js'
 
 export { default as Camera } from './FancyCamera.js'
-export { default as Controls } from './OrbitControls.js'
+export { default as Controls } from './FancyControls.js'
 export { default as Composer } from './FancyComposer.js'
 export { default as Renderer } from './FancyRenderer.js'
 export { default as Importer } from './FancyImporter.js'
