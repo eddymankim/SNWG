@@ -26,7 +26,9 @@ class setupClass {
       }={})
       { //Start of Constructor function
 
-
+        let gui = new dat.GUI({ autoPlace: false });
+        let guiDiv = document.getElementById('my-gui-div');
+        guiDiv.appendChild(gui.domElement);
 
         let clock = new pkgLib.Clock()
 
@@ -51,11 +53,6 @@ class setupClass {
             scene.add(camera)
 
 
-				let hemiLight = new pkgLib.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
-				hemiLight.color.setHSL( 0.6, 1, 0.6 );
-				hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
-				hemiLight.position.set( 0, 500, 0 );
-				scene.add( hemiLight );
         //let sun = new pkgLib.HemisphereLight(light, ground, 0.5)
         //    sun.position.set(1,2,0)
         //    scene.add(sun)
@@ -74,9 +71,9 @@ class setupClass {
 
 
         const resize = () => {
-            c//amera.aspect = 500 / 500
-          //  camera.updateProjectionMatrix()
-            //renderer.setSize(500, 500)
+            camera.aspect = window.innerWidth / window.innerHeight
+            camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight)
         }
 
 
@@ -91,12 +88,6 @@ let rate = 3;
 let dt = 5;
 
 // a "terrain" and a "thing", our object containers
-
-let gui = new dat.GUI({ autoPlace: false, height : 40});
-let guiDiv = document.getElementById('my-gui-div');
-guiDiv.appendChild(gui.domElement);
-var RateOb = {rate:4};
-gui.add(RateOb, "rate");
 
 
 
@@ -159,7 +150,7 @@ function update(time) {
     dt += time
     lightsObj3d.rotateY(rate*time)
 
-    light1Obj3d.rotateX((RateOb.rate*1.5)*time)
+    light1Obj3d.rotateX((rate*1.5)*time)
     light1Obj3d.rotateY((rate*1.5)*time)
     light1Obj3d.rotateZ((rate*1.5)*time)
 
@@ -178,9 +169,9 @@ function update(time) {
     if (boxArray != null){
       for (let i = 0; i<boxArray.length; i++){
         let thisLight = boxArray[i];
-        thisLight.position.x = Math.sin( time *RateOb.rate) * (thisLight.StartPosition.x);
-        thisLight.position.y = Math.cos( time * RateOb.rate ) * (thisLight.StartPosition.y);
-        thisLight.position.z = Math.cos( time * RateOb.rate ) * (thisLight.StartPosition.z);
+        thisLight.position.x = Math.sin( time * 0.4 ) * (thisLight.StartPosition.x);
+        thisLight.position.y = Math.cos( time * 0.7 ) * (thisLight.StartPosition.y);
+        thisLight.position.z = Math.cos( time * 0.3 ) * (thisLight.StartPosition.z);
       }
     }
 }
@@ -236,12 +227,7 @@ function boxMaker(
     //let thisSphere = new pkgLib.SphereGeometry( sizeOfLights, 25, 1 );
     let thisCube = new pkgLib.CubeGeometry(1,1,1);
     let thisColor = colorName();
-    let thisCubeMaterial = new pkgLib.MeshStandardMaterial({color:thisColor});
-    //thisCubeMaterial.color = cubeColor;
-    thisCubeMaterial.roughness = .5;
-    thisCubeMaterial.metalness = .5;
-
-    let mesh = new pkgLib.Mesh( thisCube, thisCubeMaterial );
+    let mesh = new pkgLib.Mesh( thisCube, new pkgLib.MeshStandardMaterial({color:thisColor}) );
       thisCube.castShadow = true;
       thisCube.receiveShadow = true;
       //thisSphere.shadow.camera.far = 100;
@@ -259,7 +245,6 @@ function boxMaker(
   //return [Object3d, oA]
   return {obj3d:Object3d, LightArray:oA}
 }
-
 
 console.log(colorName());
 lightsObj3d.position.set(0,2.5,0);

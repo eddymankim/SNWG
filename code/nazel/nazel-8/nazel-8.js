@@ -6,6 +6,28 @@
 import * as pkgLib from '../../lib/module.js'
 //import * as colorName from '../nazel-snips/randomCssColors.js'
 import colorName from '../nazel-snips/randomColors.js'
+
+var modelsInfo = {
+    "modelNames": [
+        "Low_Poly_Grass_002",
+        "Low_Poly_Tree_001",
+        "Low_Poly_Tree_002",
+        "Low_Poly_Tree_003",
+        "Low_Poly_Tree_004",
+        "Low_Poly_Tree_005",
+        "Low_Poly_Tree_006",
+        "Low_Poly_Tree_Stump_001",
+        "Low_Poly_Tree_Stump_002",
+        "Low_Poly_Bush_001",
+        "Low_Poly_Bush_002"
+      ],
+      "endings":{
+        "model":".obj",
+        "material":".mtl"
+      }
+  }
+
+
 // you should rename this to match your own renderer
 //import setupClass from 'nazel-6-renderer.js'
 class setupClass {
@@ -47,7 +69,12 @@ class setupClass {
 
 
         let camera = new pkgLib.PerspectiveCamera(...Object.values(cam))
-            camera.position.set(...Object.values(position))
+            //camera.position.set(...Object.values(position))
+            camera.position.x = 0;
+            camera.position.y = 50;
+            camera.position.z = 0;
+            var lookAtVector = new THREE.Vector3(0,4,20);
+            //camera.lookAt(lookAtVector);
             scene.add(camera)
 
 
@@ -63,6 +90,7 @@ class setupClass {
         let controls = new pkgLib.OrbitControls(camera,renderer.domElement)
 
         this.ObjectsToScene = (...things) => things.forEach(o => scene.add(o))
+        //this.ThingyToScene = function(thingy){scene.add(...thingy);};
 
 
         const render = () => {
@@ -70,11 +98,21 @@ class setupClass {
             controls.update()
             update(clock.getDelta())
             renderer.render(scene, camera)
+            if (camera.position.z >-300){
+            camera.position.z-=.5
+            }
+            else{camera.position.z=0}
+            //var lookAtVector = new THREE.Vector3(0,4,camera.position.z);
+            //camera.lookAt(0,0,);
+            let x = camera.position.x
+            let y = camera.position.y
+            let z = camera.position.z
+            controls.target.set(x,y-40,z)
         }
 
 
         const resize = () => {
-            c//amera.aspect = 500 / 500
+            //amera.aspect = 500 / 500
           //  camera.updateProjectionMatrix()
             //renderer.setSize(500, 500)
         }
@@ -86,103 +124,27 @@ class setupClass {
         div.appendChild(renderer.domElement)
     }//end constructor
 }//end of class
+
+//let gui = new dat.GUI({ autoPlace: false, height : 40});
+//let guiDiv = document.getElementById('my-gui-div');
+//guiDiv.appendChild(gui.domElement);
+//var RateOb = {rate:4};
+//gui.add(RateOb, "rate");
+let clock = new pkgLib.Clock()
+
+
+// a "terrain" and a "thing", our object containers
+
+var objectArray = [];
+var objectUpdates = [];
 // a rate of rotation and delta time
 let rate = 3;
 let dt = 5;
 
-// a "terrain" and a "thing", our object containers
-
-let gui = new dat.GUI({ autoPlace: false, height : 40});
-let guiDiv = document.getElementById('my-gui-div');
-guiDiv.appendChild(gui.domElement);
-var RateOb = {rate:4};
-gui.add(RateOb, "rate");
-
-
-
-//mesh(obj, mat)
-let cubeColor = new pkgLib.Color(0x41ffa9)
-//let cubeMaterial = new pkgLib.MeshStandardMaterial({ color:cubeColor  })
-let cubeMaterial = new pkgLib.MeshStandardMaterial();
-cubeMaterial.color = cubeColor;
-cubeMaterial.roughness = .5;
-cubeMaterial.metalness = .5;
-
-console.log(cubeMaterial);
-let cube = new pkgLib.Mesh( new pkgLib.CubeGeometry(4,4,4), cubeMaterial );
-    cube.position.set(1,0,.5);
-    cube.receiveShadow = true;
-    cube.castShadow = true;
-let cubeObj3d = new pkgLib.Object3D();
-cubeObj3d.add(cube);
-
-
-//GREEN
-//SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength)
-let lightSphere = new pkgLib.SphereGeometry( 0.5, 16, 1 );
-////PointLight( color, intensity, distance, decay )
-let light = new pkgLib.PointLight(0x10e212, 1, 10, 1);
-light.add( new pkgLib.Mesh( lightSphere, new pkgLib.MeshBasicMaterial( { color: 0x10e212 } ) ) );
-    light.position.set(0,3,7);
-    light.castShadow = true;
-    light.shadow.camera.far = 100;
-let lightsObj3d = new pkgLib.Object3D();
-lightsObj3d.add(light);
-
-
-//RED
-let light1 = new pkgLib.PointLight( 0xff0040, 1, 10, 1);
-light1.add( new pkgLib.Mesh( lightSphere, new pkgLib.MeshBasicMaterial( { color: 0xff0040 } ) ) );
-light1.name = "littleLight"
-light1.castShadow = true;
-light1.receiveShadow = true;
-light1.shadow.camera.far = 100;
-let light1Obj3d = new pkgLib.Object3D()
-light1Obj3d.add(light1);
-light1Obj3d.name = "lightObj";
-
-//BLUE
-var light2 = new pkgLib.PointLight( 0x0040ff,  7, 10, 2  );
-light2.add( new pkgLib.Mesh( lightSphere, new pkgLib.MeshBasicMaterial( { color: 0x0040ff } ) ) );
-light2.castShadow = true;
-light2.receiveShadow = true;
-light2.shadow.camera.far = 100;
-let light2Obj3d = new pkgLib.Object3D()
-light2Obj3d.add(light2);
-
-let clock = new pkgLib.Clock()
-
-var objectArray = [];
-var objectUpdates = [];
-
 function update(time) {
     dt += time
-    lightsObj3d.rotateY(rate*time)
-
-    light1Obj3d.rotateX((RateOb.rate*1.5)*time)
-    light1Obj3d.rotateY((rate*1.5)*time)
-    light1Obj3d.rotateZ((rate*1.5)*time)
-
-    cubeObj3d.rotateY(.01)
     var time = Date.now() * 0.0005;
 
-    //**********************how are we using time here?
-
-    light1.position.x = Math.sin( time * 0.7 ) * 2;
-    light1.position.y = Math.cos( time * 0.5 ) * 1;
-    light1.position.z = Math.cos( time * 0.3 ) * 1.5;
-
-    light2.position.x = Math.sin( time * 0.7 ) * 5;
-    light2.position.y = Math.cos( time * 0.5 ) * 5;
-    light2.position.z = Math.cos( time * 0.3 ) * 5;
-    if (boxArray != null){
-      for (let i = 0; i<boxArray.length; i++){
-        let thisLight = boxArray[i];
-        thisLight.position.x = Math.sin( time *RateOb.rate) * (thisLight.StartPosition.x);
-        thisLight.position.y = Math.cos( time * RateOb.rate ) * (thisLight.StartPosition.y);
-        thisLight.position.z = Math.cos( time * RateOb.rate ) * (thisLight.StartPosition.z);
-      }
-    }
 }
 
 
@@ -192,82 +154,36 @@ var renderer = new setupClass(
     update: (thisTime) => update(thisTime),
   });
 
-
-function lightMaker(
-  {numberOfLights = 10,
-   sizeOfLights = .75,
-   oA = [],
-   Object3d = new pkgLib.Object3D()
- }={}){
-  console.log("lightmaker...")
-  for (var i= 0; i<numberOfLights; i++){
-
-    let thisLightSphere = new pkgLib.SphereGeometry( sizeOfLights, 25, 1 );
-    let thisColor = colorName();
-    let thisLight = new pkgLib.PointLight( thisColor,  2, 10, 2  );
-    thisLight.add( new pkgLib.Mesh( lightSphere, new pkgLib.MeshBasicMaterial({color:0xaac0d7}) ) );
-      thisLight.castShadow = true;
-      thisLight.receiveShadow = true;
-      thisLight.shadow.camera.far = 100;
-      thisLight.position.set( pkgLib.random(-5,5),pkgLib.random(-12,12),pkgLib.random(-3,7));
-      thisLight.StartPosition = ({x:thisLight.position.x, y:thisLight.position.y, z:thisLight.position.z})
-    oA.push(thisLight);
-  }
-
-  for (let i = 0; i<oA.length; i++){
-    let aLight = oA[i];
-    //console.log("thislight -->",aLight)
-    Object3d.add(aLight);
-  }
-  //return [Object3d, oA]
-  return {obj3d:Object3d, LightArray:oA}
-}
-
-
-function boxMaker(
-  {numberOfLights = 10,
-   sizeOfLights = .75,
-   oA = [],
-   Object3d = new pkgLib.Object3D()
- }={}){
-  console.log("lightmaker...")
-  for (var i= 0; i<numberOfLights; i++){
-
-    //let thisSphere = new pkgLib.SphereGeometry( sizeOfLights, 25, 1 );
-    let thisCube = new pkgLib.CubeGeometry(1,1,1);
-    let thisColor = colorName();
-    let thisCubeMaterial = new pkgLib.MeshStandardMaterial({color:thisColor});
-    //thisCubeMaterial.color = cubeColor;
-    thisCubeMaterial.roughness = .5;
-    thisCubeMaterial.metalness = .5;
-
-    let mesh = new pkgLib.Mesh( thisCube, thisCubeMaterial );
-      thisCube.castShadow = true;
-      thisCube.receiveShadow = true;
-      //thisSphere.shadow.camera.far = 100;
-      //console.log(thisCube);
-      mesh.position.set( pkgLib.random(-50,50),pkgLib.random(-50,50),pkgLib.random(-50,50));
-      mesh.StartPosition = ({x:mesh.position.x, y:mesh.position.y, z:mesh.position.z})
-    oA.push(mesh);
-  }
-
-  for (let i = 0; i<oA.length; i++){
-    let aSphere = oA[i];
-    //console.log("thislight -->",aSphere)
-    Object3d.add(aSphere);
-  }
-  //return [Object3d, oA]
-  return {obj3d:Object3d, LightArray:oA}
-}
-
-
-console.log(colorName());
-lightsObj3d.position.set(0,2.5,0);
-light1Obj3d.position.set(0,10,-2);
-var boxBundel = boxMaker({numberOfLights:300})
-var lotsOfboxObj = boxBundel.obj3d
-var boxArray = boxBundel.LightArray
-console.log(lotsOfboxObj)
 // adds our terrain and the spinning thing to the renderer
-renderer.ObjectsToScene(lotsOfboxObj,cubeObj3d, lightsObj3d, light1Obj3d, light2Obj3d);
+//renderer.ObjectsToScene();
 //renderer.ObjectsToScene(cubeObj3d, lightsObj3d, light1Obj3d, light2Obj3d);
+
+
+var modelPath = '../../../code/nazel/model/forestAssets/';
+var modelRefData = modelPath+'models.json';
+
+console.log(modelsInfo.modelNames[4]+modelsInfo.endings.model)
+var mtlLoader = new THREE.MTLLoader();
+mtlLoader.setTexturePath( modelPath );
+mtlLoader.setPath(  modelPath );
+//var url = "male02_dds.mtl";
+for (let j = 0; j<60;j++){
+  for(let i=0; i<10; i++){
+var url = modelsInfo.modelNames[i]+modelsInfo.endings.material
+mtlLoader.load( url, function( materials ) {
+
+    materials.preload();
+
+    var objLoader = new THREE.OBJLoader();
+    objLoader.setMaterials( materials );
+    objLoader.setPath( modelPath );
+    objLoader.load( modelsInfo.modelNames[i]+modelsInfo.endings.model, function ( object ) {
+
+      object.position.z = pkgLib.random(20,-300);
+      object.position.x = pkgLib.random(-20,20);
+        renderer.ObjectsToScene(object);
+
+    } );
+});
+}
+}
