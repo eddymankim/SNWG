@@ -17,6 +17,8 @@ export default class ShaderPass extends Pass {
                 fragmentShader: shader.fragmentShader })
         }
 
+        this.uniforms = uniforms // ick
+
         let camera = new THREE.OrthographicCamera(-1,1,1,-1,0,1)
         let scene = new THREE.Scene()
         let quad = new THREE.Mesh(new THREE.PlaneBufferGeometry(2,2), null)
