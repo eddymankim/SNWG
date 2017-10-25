@@ -41,17 +41,22 @@ function update() {
     mouseDown = 1;}
   document.body.onmouseup = function() {
     mouseDown = 0;}*/
-  for (var i=0; i<meshObjects.length; i++)[
-  /*const mousedown = (e) => {
+  for (var i=0; i<meshObjects.length; i++)[ ///*
+  const mousedown = (e) => {
       e.preventDefault()
       mouse.x = (e.clientX/window.innerWidth)*2+1
       mouse.y = -(e.clientY/window.innerHeight)*2+1
         }
   if (mousedown){
-    var meshPosition = meshObjects[i].position
-    var d = meshPosition.distanceTo(mouse.x, mouse.y, 0)
+    var dx = meshObjects[i].position.x - mouse.x;
+    var dy = meshObjects[i].position.y - mouse.y;
+    var angle = atan2(dy, dx); //Math.atan(dy,dx);
+    var xVel = cos(angle);
+    var yVel = sin(angle);
+    meshObjects[i].position.x += xVel;
+    meshObjects[i].position.y += yVel;
     }
-    else {*/
+    else { //*/
     meshObjects[i].position.x += .3
     meshObjects[i].position.y += .3
     meshOBjects[i].position.z += .1
