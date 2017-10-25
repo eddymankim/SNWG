@@ -1,7 +1,7 @@
 ///
-/// YourNameRenderer
+/// ShinRenderer
 ///
-/// 2017-10-11 Your Name @your-andrew-id
+/// 2017-10-11 Edward Shin @edwardsh
 ///
 /// your encapsulation of my typical render setup
 ///
@@ -46,7 +46,7 @@
 ///         there are specific syntaxes for importing things selectively,
 ///         but in this case you'll want to import everything at once.
 ///
-// import /* ??? */ as Null from '...somewhere?'
+import * as THREE from '../lib/module.js'
 
 
 ///
@@ -57,7 +57,7 @@
 ///     2b. While there are ways to `export` many things,
 ///         you just want to `export` this specific class *automatically*.
 ///
-/* ??? */ class YourNameRenderer {
+export default class ShinRenderer {
 
 
     ///
@@ -92,16 +92,28 @@
     ///     3i. If you get stuck you can look at `evan-erdos/SimpleRenderer.js`,
     ///         you don't have to completely understand how it works to use it.
     ///
-    constructor( /* ??? */ ) {
+    constructor( {
+                    height = window.innerHeight,
+                    width = window.innerWidth,
+                    webgl = {antialias: true, alpha: true},
+                    fog = {color: 0xD7FFFD, near: 1e2, far: 1e3},
+                    ambient = 0x005500,
+                    background = 0x5A7F8B,
+                    sunlight = 0x5533CC,
+                    groundlight = 0x44BBFF,
+                    intensity = .5,
+                    cam = {fov: 60, aspect: width/height, near: 1, far: 1e3},
+                    position = {x: 0, y: 20, z: 30},
+                    updateVar = time => {},
+                }={} ) {
 
 
         ///
         /// (4) You should pick a sensible import name instead of `YourImportedStuff`,
         ///     when you import *en masse*, you need a way to refer to everything.
         ///
-        let clock = new YourImportedStuff.Clock()
-        let listener = new YourImportedStuff.AudioListener()
-
+        let clock = new THREE.Clock()
+        let listener = new THREE.AudioListener()
 
         ///
         /// (5) The more conceptually mundane boilerplate has been added for you,
@@ -114,11 +126,11 @@
         ///
         ///     5c. You seem to have a lot of customizable colors to supply.
         ///
-        let renderer = new YourImportedStuff.WebGLRenderer(/* ??? */)
+        let renderer = new THREE.WebGLRenderer(webgl)
             renderer.setPixelRatio(window.devicePixelRatio)
-            renderer.setSize(null, null)
-            renderer.setClearColor(null, null)
-            renderer.shadowMap.type = YourImportedStuff.PCFSoftShadowMap
+            renderer.setSize(width, height)
+            renderer.setClearColor(background, 0)
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap
             renderer.shadowMap.enabled = true
 
 
@@ -126,22 +138,22 @@
         /// (6) The scene setup defines most of the dominant colors you'll see,
         ///     especially if your scene is sparse, so choose your colors wisely.
         ///
-        let scene = new YourImportedStuff.Scene()
+        let scene = new THREE.Scene()
 
 
             ///
             /// 6a. The fog constructor takes 3 arguments:
             ///     a color for the fog, and near and far distances for fading.
             ///
-            scene.fog = new YourImportedStuff.Fog(/* ??? */)
-            scene.background = new YourImportedStuff.Color(/* ??? */)
+            scene.fog = new THREE.Fog(...Object.values(fog))
+            scene.background = new THREE.Color(background)
 
 
             ///
             /// 6b. Anything that has an impact on rendering (lights, meshes, etc)
             ///     you need to add it to the scene for it to be updated and rendered.
             ///
-            scene.add(new YourImportedStuff.AmbientLight(/* ??? */))
+            scene.add(new THREE.AmbientLight(ambient))
 
 
         ///
@@ -151,27 +163,27 @@
         ///     While these don't usually need to change,
         ///     it's good to have them in the argument just in case.
         ///
-        let camera = new YourImportedStuff.PerspectiveCamera(/* ??? */)
+        let camera = new THREE.PerspectiveCamera(...Object.values(cam))
 
 
             ///
             /// 7a. The position of the camera is very important,
             ///     so being able to set it from the outside is beneficial.
             ///
-            camera.position = null
+            camera.position.set(...Object.values(position))
 
 
             ///
             /// 7b. Be sure to add the camera to the scene!
             ///
-            null.add(null)
+            scene.add(camera)
 
 
         ///
         /// 7c. The `OrbitControls` are not included with THREE.js by default,
         ///     but they are included in the library module so you can use them.
         ///
-        let controls = new YourImportedStuff.OrbitControls(camera,renderer.domElement)
+        let controls = new THREE.OrbitControls(camera,renderer.domElement)
 
 
         ///
@@ -179,7 +191,7 @@
         ///     using a HemisphereLight will result in a tasteful gradient,
         ///     based on two colors and an intensity value.
         ///
-        let sun = new YourImportedStuff.HemisphereLight(null, null, null)
+        let sun = new THREE.HemisphereLight(sunlight, groundlight, intensity)
             sun.position.set(1,2,0)
             scene.add(sun)
 
@@ -191,7 +203,7 @@
         ///         and we need to be able to do so from outside the script.
         ///
         ///     9b. This could be done in the scope of the main `class`, i.e.,
-        ///         outside the `constructor`, but to keep the `scene` "private",
+        ///         outside the `constructor`, but to keep the `scene` "private",
         ///         we can define the function in here and assign it to `this`.
         ///
         ///     9c. To access the `scene` from an aforementioned instance method,
@@ -208,8 +220,7 @@
         ///         Use the Spread operator (`...`) to allow this function to take
         ///         any number of arguments, or a whole array of objects.
         ///
-        this.add = () => { }
-
+        this.add = (...things) => { for (let thing of things) scene.add(thing) }
 
         ///
         /// (10) This will be a pretty ordinary render loop, but with a crucial difference:
@@ -230,12 +241,12 @@
             requestAnimationFrame(render.bind(this))
 
 
-
+            
             ///
             ///     10d. Update your camera controller, it has a method called `update`.
             ///
-            /* ??? */
-
+            controls.update()
+            updateVar(clock.getDelta())
 
             ///
             ///     10e. You should put a function in the constructor and call it here,
@@ -249,7 +260,7 @@
 
 
             ///     10f. At the end of the function, your should have the renderer `render`.
-            ///          (what fortuitous luck you're having, this too is already done!)
+            ///          (what fortuitous luck you're having, this too is already done!)
             ///
             renderer.render(scene, camera)
         }

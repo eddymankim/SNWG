@@ -1,0 +1,20 @@
+
+  models:{
+  "modelNames": [
+      "Low_Poly_Grass_002.obj",
+      "Low_Poly_Tree_001",
+      "Low_Poly_Tree_002",
+      "Low_Poly_Tree_003",
+      "Low_Poly_Tree_004",
+      "Low_Poly_Tree_005",
+      "Low_Poly_Tree_006",
+      "Low_Poly_Tree_Stump_001",
+      "Low_Poly_Tree_Stump_002",
+      "Low_Poly_Bush_001",
+      "Low_Poly_Bush_002"
+    ],
+    "endings":{
+      "model":".obj",
+      "material":".mtl"
+    }
+}
