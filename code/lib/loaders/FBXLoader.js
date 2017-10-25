@@ -16,16 +16,14 @@
 ///  NURBS (Open, Closed and Periodic forms)
 ///
 
-import * as THREE from './three.js'
+import * as THREE from '../three.js'
 
 ///
 /// Generates a loader for loading FBX files from URL and parsing into
 /// a THREE.Group.
 /// @param {THREE.LoadingManager} manager - Loading Manager for loader to use.
 ///
-export default FBXLoader = function (manager=THREE.DefaultLoadingManager) {
-    this.manager = manager
-}
+export default FBXLoader = function(manager=THREE.DefaultLoadingManager) { this.manager = manager }
 
 Object.assign(FBXLoader.prototype, {
 
