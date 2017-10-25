@@ -1,7 +1,7 @@
 import * as THREE from '../lib/module.js'
 
 var background = 0xFFFFFF
-var meshNumber = 200
+var meshNumber = 50
 var meshObjects = []
 
 ////////////////////////////////////////////////////////////////
