@@ -98,7 +98,7 @@ class setupClass {
             controls.update()
             update(clock.getDelta())
             renderer.render(scene, camera)
-            if (camera.position.z >-300){
+            if (camera.position.z >-250){
             camera.position.z-=.5
             }
             else{camera.position.z=0}
@@ -180,7 +180,7 @@ mtlLoader.load( url, function( materials ) {
     objLoader.load( modelsInfo.modelNames[i]+modelsInfo.endings.model, function ( object ) {
 
       object.position.z = pkgLib.random(20,-300);
-      object.position.x = pkgLib.random(-20,20);
+      object.position.x = pkgLib.random(-25,25);
         renderer.ObjectsToScene(object);
 
     } );

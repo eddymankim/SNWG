@@ -38,4 +38,4 @@ week-assignment: 8
         </div>
     </div>
 </div><!-- end grid container-->
-<script deferred type="module" src="../code/nazel/nazel-9/nazel-9.js">
+<script deferred type="module" src="../code/nazel/nazel-8/nazel-8.js">

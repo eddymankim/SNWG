@@ -1,7 +1,7 @@
 ---
 layout: post
 author: Nico
-title: Object Production In Mass
+title: Cube Vortex with Controler
 thumbnail: Nico-W7.png
 week-assignment: 7
 ---
@@ -35,4 +35,4 @@ week-assignment: 7
         </div>
     </div>
 </div><!-- end grid container-->
-<script deferred type="module" src="../code/nazel/nazel-8/nazel-8.js">
+<script deferred type="module" src="../code/nazel/nazel-7/nazel-7.js">
