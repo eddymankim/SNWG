@@ -12,8 +12,10 @@
   },
   "files": [
     "render-atmospheric.ts",
+    "render-technical.ts",
     "hw-6.ts",
-    "hw-7.ts"
+    "hw-7.ts",
+    "hw-8.ts"
   ],
   "exclude": [
     "render-toon.ts",

@@ -3,7 +3,7 @@ layout: code
 title: Bathtub Fractal
 code: atiwari1/render/dist/hw-7
 thumbnail: atiwari1-7-library.png
-week-assignment: 6
+week-assignment: 7
 author: aman
 ---
 
