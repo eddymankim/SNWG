@@ -23,7 +23,7 @@ import * as THREE from '../three.js'
 /// a THREE.Group.
 /// @param {THREE.LoadingManager} manager - Loading Manager for loader to use.
 ///
-export default FBXLoader = function(manager=THREE.DefaultLoadingManager) { this.manager = manager }
+const FBXLoader = function(manager=THREE.DefaultLoadingManager) { this.manager = manager }
 
 Object.assign(FBXLoader.prototype, {
 
@@ -5063,3 +5063,5 @@ function slice(a, b, from, to) {
     return a;
 
 }
+
+export default FBXLoader
