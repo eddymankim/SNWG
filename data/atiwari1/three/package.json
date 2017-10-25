@@ -1,0 +1,125 @@
+{
+  "_args": [
+    [
+      {
+        "name": "@types/three",
+        "raw": "@types/three",
+        "rawSpec": "",
+        "scope": "@types",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/a/play"
+    ]
+  ],
+  "_from": "@types/three@latest",
+  "_id": "@types/three@0.84.26",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/@types/three",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/three-0.84.26.tgz_1507124920278_0.8767452593892813"
+  },
+  "_npmUser": {
+    "email": "ts-npm-types@microsoft.com",
+    "name": "types"
+  },
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "@types/three",
+    "raw": "@types/three",
+    "rawSpec": "",
+    "scope": "@types",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/three/-/three-0.84.26.tgz",
+  "_shasum": "4d9ad1f92827ccec97a52a291941d771e89cc3c4",
+  "_shrinkwrap": null,
+  "_spec": "@types/three",
+  "_where": "/Users/a/play",
+  "contributors": [
+    {
+      "name": "Kon",
+      "url": "http://phyzkit.net/"
+    },
+    {
+      "name": "Satoru Kimura",
+      "url": "https://github.com/gyohk"
+    },
+    {
+      "name": "Florent Poujol",
+      "url": "https://github.com/florentpoujol"
+    },
+    {
+      "name": "SereznoKot",
+      "url": "https://github.com/SereznoKot"
+    },
+    {
+      "name": "HouChunlei",
+      "url": "https://github.com/omni360"
+    },
+    {
+      "name": "Ivo",
+      "url": "https://github.com/ivoisbelongtous"
+    },
+    {
+      "name": "David Asmuth",
+      "url": "https://github.com/piranha771"
+    },
+    {
+      "name": "Brandon Roberge, Qinsi ZHU",
+      "url": "https://github.com/qszhusightp"
+    },
+    {
+      "name": "Toshiya Nakakura",
+      "url": "https://github.com/nakakura"
+    },
+    {
+      "name": "Poul Kjeldager Sørensen",
+      "url": "https://github.com/s093294"
+    },
+    {
+      "name": "Stefan Profanter",
+      "url": "https://github.com/Pro"
+    },
+    {
+      "name": "Edmund Fokschaner",
+      "url": "https://github.com/efokschaner"
+    }
+  ],
+  "dependencies": {
+    "@types/webvr-api": "*"
+  },
+  "description": "TypeScript definitions for three.js",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-7fGrapSROiJGf8gwBMCUsFqeI79X8OlnpWfe4VaMhi+CAsh1tad3Ayyh/9FbqHvs53W6QzdA6NJUx45/YQb3mA==",
+    "shasum": "4d9ad1f92827ccec97a52a291941d771e89cc3c4",
+    "tarball": "https://registry.npmjs.org/@types/three/-/three-0.84.26.tgz"
+  },
+  "license": "MIT",
+  "main": "",
+  "maintainers": [
+    {
+      "email": "ts-npm-types@microsoft.com",
+      "name": "types"
+    }
+  ],
+  "name": "@types/three",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.0",
+  "typesPublisherContentHash": "198c185472e8d67ea6bdd6970959aa2a4a4afba2df6f22401412b00219daf42c",
+  "version": "0.84.26"
+}
