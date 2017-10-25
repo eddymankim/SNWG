@@ -8,7 +8,7 @@ export default {
     uniforms: {
         'tDiffuse': { value: null },
         'powRGB':   { value: new T.Vector3(1.5,1.5,1.5) },
-        'mulRGB':   { value: new T.Vector3(1.5,1.0,1.0) },
+        'mulRGB':   { value: new T.Vector3(1.1,1.1,1.1) },
         'addRGB':   { value: new T.Vector3(0.0,0.0,0.0) } },
 
     vertexShader: `

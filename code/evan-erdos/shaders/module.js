@@ -3,12 +3,14 @@
 ///
 /// a module full'o'shaders
 ///
+export { default as Shader } from './Shader.js'
 export { default as Basic } from './BasicShader.js'
 export { default as Bleach } from './BleachShader.js'
 export { default as Blend } from './BlendShader.js'
 export { default as Bokeh } from './BokehShader.js'
 // // export { default as Bokeh } from './Bokeh2Shader.js'
 // export { default as Brightness } from './BrightnessShader.js'
+// export { default as ColorShift } from './ColorCorrectionShader.js'
 export { default as Color } from './ColorCorrectionShader.js'
 export { default as Colorify } from './ColorifyShader.js'
 export { default as Convolution } from './ConvolutionShader.js'
@@ -47,3 +49,5 @@ export { default as ToneMap } from './ToneMapShader.js'
 // export { default as VerticalBlur } from './VerticalBlurShader.js'
 // export { default as VerticalTiltShift } from './VerticalTiltShiftShader.js'
 export { default as Vignette } from './VignetteShader.js'
+
+export { default as ColorShift } from './ColorShiftShader.js'
