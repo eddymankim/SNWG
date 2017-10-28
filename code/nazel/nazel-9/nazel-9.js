@@ -27,7 +27,7 @@ var modelsInfo = {
       }
   }
 
-
+var mixers = [];
 // you should rename this to match your own renderer
 //import setupClass from 'nazel-6-renderer.js'
 class setupClass {
@@ -84,18 +84,18 @@ class setupClass {
 				hemiLight.position.set( 0, 300, 0 );
         hemiLight.intensity = .8;
 
-				scene.add( hemiLight );
+				//scene.add( hemiLight );
 
-
-        var dirLight = new pkgLib.DirectionalLight( 0xffffff, .5 );
+//color intensity
+        var dirLight = new pkgLib.DirectionalLight( 0xffffff, .9 );
         dirLight.color.setHSL( 0.1, 1, 0.95 );
-        dirLight.position.set( -1, 1.75, 1 );
-        dirLight.position.multiplyScalar( 30 );
+        dirLight.position.set( -1, 1, 1 );
+        dirLight.position.multiplyScalar( 10 );
         scene.add( dirLight );
         dirLight.castShadow = true;
-        dirLight.shadow.mapSize.width = 2048;
-        dirLight.shadow.mapSize.height = 2048;
-        var d = 50;
+        dirLight.shadow.mapSize.width = 4048;
+        dirLight.shadow.mapSize.height = 4048;
+        var d = 5000;
         dirLight.shadow.camera.left = -d;
         dirLight.shadow.camera.right = d;
         dirLight.shadow.camera.top = d;
@@ -103,26 +103,24 @@ class setupClass {
         dirLight.shadow.camera.far = 3500;
         dirLight.shadow.bias = -0.0001;
         var dirLightHeper = new pkgLib.DirectionalLightHelper( dirLight, 10 )
-        scene.add( dirLightHeper );
+        //scene.add( dirLightHeper );
         //let sun = new pkgLib.HemisphereLight(light, ground, 0.5)
         //    sun.position.set(1,2,0)
         //    scene.add(sun)
 
         let controls = new pkgLib.OrbitControls(camera,renderer.domElement)
         //
-
+////////////////////////////////////////Plane Material
         var planegeometry = new THREE.PlaneGeometry( 1000, 1000, 32 );
-        var material = new THREE.MeshBasicMaterial( {color: 0x8fa3a6, side: THREE.DoubleSide} );
+        var material = new THREE.MeshLambertMaterial( {color: 0xe6c3dc} );
         var plane = new THREE.Mesh( planegeometry, material );
         plane.receiveShadow = true;
-        plane.castShadow = true;
-
+        plane.castShadow = false;
         plane.lookAt( camera.position );
         scene.add( plane );
 
         this.ObjectsToScene = (...things) => things.forEach(o => scene.add(o))
         //this.ThingyToScene = function(thingy){scene.add(...thingy);};
-
 
         const render = () => {
             requestAnimationFrame(render.bind(this))
@@ -130,7 +128,7 @@ class setupClass {
             update(clock.getDelta())
             renderer.render(scene, camera)
             if (camera.position.z >-250){
-            camera.position.z-=.5
+            //camera.position.z-=.5
             }
             else{camera.position.z=0}
             //var lookAtVector = new THREE.Vector3(0,4,camera.position.z);
@@ -138,18 +136,22 @@ class setupClass {
             let x = camera.position.x
             let y = camera.position.y
             let z = camera.position.z
-            controls.target.set(x,y-40,z)
+            //controls.target.set(x,y-40,z)
 
         }
 
-        const resize = () => {
-            //amera.aspect = 500 / 500
-          //  camera.updateProjectionMatrix()
-            //renderer.setSize(500, 500)
-        }
+        const animate = () => {
+      				requestAnimationFrame( animate );
+      				if ( mixers.length > 0 ) {
+      					for ( var i = 0; i < mixers.length; i ++ ) {
+      						mixers[ i ].update( clock.getDelta() );
+      					}
+      				}
+      				//stats.update();
+      				render();
+      			}
+        animate();
 
-
-        window.addEventListener('resize', resize, false);
         window.addEventListener('load', () => render(), false);
         let div = document.getElementById('3dDiv')
         div.appendChild(renderer.domElement)
@@ -165,7 +167,6 @@ let clock = new pkgLib.Clock()
 
 
 // a "terrain" and a "thing", our object containers
-
 var objectArray = [];
 var objectUpdates = [];
 // a rate of rotation and delta time
@@ -178,21 +179,15 @@ function update(time) {
 
 }
 
-
 var renderer = new setupClass(
   {
     position: { x: 0, y: 10, z: 15 },
     update: (thisTime) => update(thisTime),
   });
 
-// adds our terrain and the spinning thing to the renderer
-//renderer.ObjectsToScene();
-//renderer.ObjectsToScene(cubeObj3d, lightsObj3d, light1Obj3d, light2Obj3d);
-
-
 var modelPath = '../../../code/nazel/model/forestAssets/';
 var modelRefData = modelPath+'models.json';
-
+/*
 console.log(modelsInfo.modelNames[4]+modelsInfo.endings.model)
 var mtlLoader = new THREE.MTLLoader();
 mtlLoader.setTexturePath( modelPath );
@@ -200,24 +195,55 @@ mtlLoader.setPath(  modelPath );
 //var url = "male02_dds.mtl";
 for (let j = 0; j<60;j++){
   for(let i=0; i<10; i++){
-var url = modelsInfo.modelNames[i]+modelsInfo.endings.material
-mtlLoader.load( url, function( materials ) {
+    var url = modelsInfo.modelNames[i]+modelsInfo.endings.material
+    mtlLoader.load( url, function( materials ) {
 
-    materials.preload();
+        materials.preload();
 
-    var objLoader = new THREE.OBJLoader();
-    objLoader.setMaterials( materials );
-    objLoader.setPath( modelPath );
-    objLoader.load( modelsInfo.modelNames[i]+modelsInfo.endings.model, function ( object ) {
+        var objLoader = new THREE.OBJLoader();
+        objLoader.setMaterials( materials );
+        objLoader.setPath( modelPath );
+        objLoader.load( modelsInfo.modelNames[i]+modelsInfo.endings.model, function ( object ) {
 
-      object.position.z = pkgLib.random(20,-300);
-      object.position.x = pkgLib.random(-25,25);
-      object.receiveShadow = true;
-      object.castShadow = true;
+          object.position.z = pkgLib.random(20,-300);
+          object.position.x = pkgLib.random(-25,25);
+          object.receiveShadow = true;
+          object.castShadow = true;
+          object.children[0].castShadow = true;
+          object.children[0].receiveShadow = true;
+          //console.log(object);
+          renderer.ObjectsToScene(object);
 
+        } );
+    });
+  }
+}
+*/
+///////////////////////////////////////////////////
+var manager = new THREE.LoadingManager();
+manager.onProgress = function( item, loaded, total ) {
+  console.log( item, loaded, total );
+};
+var onProgress = function( xhr ) {
+  if ( xhr.lengthComputable ) {
+    var percentComplete = xhr.loaded / xhr.total * 100;
+    console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+  }
+};
+var onError = function( xhr ) {
+  console.error( xhr );
+};
+
+var loader = new THREE.FBXLoader( manager );
+
+loader.load( "../../../code/nazel/model/animatedCharacterFBX/low-poly-bird-animated/source/Bird_Asset.fbx", function( object ) {
+      object.mixer = new THREE.AnimationMixer( object );
+      object.position.set( 0, 1, 0 );
+      object.position.multiplyScalar( 10 );
+      console.log(object);
+      mixers.push( object.mixer );
+      var action = object.mixer.clipAction( object.animations[ 0 ] );
+      action.play();
+//      scene.add( object );
       renderer.ObjectsToScene(object);
-
-    } );
-});
-}
-}
+    }, onProgress, onError );

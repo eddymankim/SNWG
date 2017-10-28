@@ -1,13 +1,19 @@
 ---
 layout: post
 author: Nico
-title: Cube Vortex with Controler
-thumbnail: Nico-W7.png
-week-assignment: 7
+title: Object Production In Mass
+thumbnail: Nico-W8.png
+week-assignment: 8
 ---
 
 <!--<script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script> -->
 <script src="../code/nazel/nazel-snips/dat.gui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
+<script src="../code/nazel/nazel-snips/loaders/MTLLoader.js"></script>
+<script src="../code/nazel/nazel-snips/loaders/OBJLoader.js"></script>
+<script src="../code/nazel/nazel-snips/loaders/DDSLoader.js"></script>
+<script src="../code/nazel/nazel-snips/loaders/FBXLoader.js"></script>
+<script src="../code/nazel/nazel-snips/inflate.min.js"></script>
 <!--<script src="../code/nazel/nazel-snips/OrbitControls.js"></script>-->
 <div class="grid-container" >
       <div class="row" style = "padding: 1em;">
@@ -20,10 +26,8 @@ week-assignment: 7
       </div>
       <div class="row" style = "padding: 1em;">
         <div align="CENTER">
-          <h3> generating many objects with a function, and updating all of them! </h3>
-          <p> I would Really Like to introduce some controls to the left but still a little unsure about how that works.</p>
-          <p> I'm having a hard time with setting my matieral color for MeshStandardMaterial</p>
-          <p> If I try and add too many point lights the scene fails.</p>
+          <h3> Bird over the forest </h3>
+          <p> This is a test of loading in large amounts of different objects from a little object library. I downloaded the objects from <a href = "http://superpowers-html5.com/index.en.html"> Super Powers </a> gamed development and sharing platform. </p>
         </div>
     </div>
     <div class="row" style = "padding: 1em;">
@@ -35,4 +39,4 @@ week-assignment: 7
         </div>
     </div>
 </div><!-- end grid container-->
-<script deferred type="module" src="../code/nazel/nazel-7/nazel-7.js">
+<script deferred type="module" src="../code/nazel/nazel-9/nazel-9.js">
