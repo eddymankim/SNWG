@@ -49,6 +49,9 @@ class setupClass {
       { //Start of Constructor function
 
 
+        // stats
+        var stats = new Stats();
+
 
         let clock = new pkgLib.Clock()
 
@@ -71,8 +74,8 @@ class setupClass {
         let camera = new pkgLib.PerspectiveCamera(...Object.values(cam))
             //camera.position.set(...Object.values(position))
             camera.position.x = 0;
-            camera.position.y = 50;
-            camera.position.z = 0;
+            camera.position.y = 35;
+            camera.position.z = -25;
             console.log("Camera Position", camera.position)
 
             scene.add(camera)
@@ -89,13 +92,13 @@ class setupClass {
 //color intensity
         var dirLight = new pkgLib.DirectionalLight( 0xffffff, .9 );
         dirLight.color.setHSL( 0.1, 1, 0.95 );
-        dirLight.position.set( -1, 1, 1 );
-        dirLight.position.multiplyScalar( 10 );
+        dirLight.position.set( -1, 300, -300 );
+        //dirLight.position.multiplyScalar( 10 );
         scene.add( dirLight );
         dirLight.castShadow = true;
-        dirLight.shadow.mapSize.width = 4048;
-        dirLight.shadow.mapSize.height = 4048;
-        var d = 5000;
+        dirLight.shadow.mapSize.width = 2048;
+        dirLight.shadow.mapSize.height = 2048;
+        var d = 500;
         dirLight.shadow.camera.left = -d;
         dirLight.shadow.camera.right = d;
         dirLight.shadow.camera.top = d;
@@ -109,14 +112,16 @@ class setupClass {
         //    scene.add(sun)
 
         let controls = new pkgLib.OrbitControls(camera,renderer.domElement)
+
         //
 ////////////////////////////////////////Plane Material
         var planegeometry = new THREE.PlaneGeometry( 1000, 1000, 32 );
-        var material = new THREE.MeshLambertMaterial( {color: 0xe6c3dc} );
+        var material = new THREE.MeshLambertMaterial( {color: 0xffffff} );
         var plane = new THREE.Mesh( planegeometry, material );
         plane.receiveShadow = true;
         plane.castShadow = false;
-        plane.lookAt( camera.position );
+        //console.log(camera.position);
+        plane.lookAt(  new THREE.Vector3( 0, 1, 0 ));//{x:0,y:-1,z:0});//camera.position );
         scene.add( plane );
 
         this.ObjectsToScene = (...things) => things.forEach(o => scene.add(o))
@@ -127,30 +132,36 @@ class setupClass {
             controls.update()
             update(clock.getDelta())
             renderer.render(scene, camera)
-            if (camera.position.z >-250){
-            //camera.position.z-=.5
+            let theBird = scene.getObjectByName( "mybirdy" );
+
+            if (camera.position.z <250){
+            camera.position.z+=.5
+            controls.target.z+=.5
+            theBird.position.z+=.5
             }
-            else{camera.position.z=0}
-            //var lookAtVector = new THREE.Vector3(0,4,camera.position.z);
-            //camera.lookAt(0,0,);
+            else{
+              camera.position.z=0
+              controls.target.z=0
+              theBird.position.z =0
+            }
             let x = camera.position.x
             let y = camera.position.y
             let z = camera.position.z
-            //controls.target.set(x,y-40,z)
+
+            animate();
+
 
         }
 
-        const animate = () => {
+        function animate() {
       				requestAnimationFrame( animate );
       				if ( mixers.length > 0 ) {
       					for ( var i = 0; i < mixers.length; i ++ ) {
-      						mixers[ i ].update( clock.getDelta() );
+                  ////something about timeing I just dont understand
+      						mixers[ i ].update( clock.getDelta()+.0001 );
       					}
       				}
-      				//stats.update();
-      				render();
-      			}
-        animate();
+      	}
 
         window.addEventListener('load', () => render(), false);
         let div = document.getElementById('3dDiv')
@@ -187,13 +198,13 @@ var renderer = new setupClass(
 
 var modelPath = '../../../code/nazel/model/forestAssets/';
 var modelRefData = modelPath+'models.json';
-/*
+
 console.log(modelsInfo.modelNames[4]+modelsInfo.endings.model)
 var mtlLoader = new THREE.MTLLoader();
 mtlLoader.setTexturePath( modelPath );
 mtlLoader.setPath(  modelPath );
 //var url = "male02_dds.mtl";
-for (let j = 0; j<60;j++){
+for (let j = 0; j<40;j++){
   for(let i=0; i<10; i++){
     var url = modelsInfo.modelNames[i]+modelsInfo.endings.material
     mtlLoader.load( url, function( materials ) {
@@ -205,7 +216,7 @@ for (let j = 0; j<60;j++){
         objLoader.setPath( modelPath );
         objLoader.load( modelsInfo.modelNames[i]+modelsInfo.endings.model, function ( object ) {
 
-          object.position.z = pkgLib.random(20,-300);
+          object.position.z = pkgLib.random(-20,300);
           object.position.x = pkgLib.random(-25,25);
           object.receiveShadow = true;
           object.castShadow = true;
@@ -218,8 +229,11 @@ for (let j = 0; j<60;j++){
     });
   }
 }
-*/
+
 ///////////////////////////////////////////////////
+
+// stats
+//stats = new Stats();
 var manager = new THREE.LoadingManager();
 manager.onProgress = function( item, loaded, total ) {
   console.log( item, loaded, total );
@@ -237,11 +251,16 @@ var onError = function( xhr ) {
 var loader = new THREE.FBXLoader( manager );
 
 loader.load( "../../../code/nazel/model/animatedCharacterFBX/low-poly-bird-animated/source/Bird_Asset.fbx", function( object ) {
+      //object.animations[0].duration = 4
       object.mixer = new THREE.AnimationMixer( object );
+      object.name="mybirdy"
       object.position.set( 0, 1, 0 );
       object.position.multiplyScalar( 10 );
+      object.receiveShadow = true;
+      object.castShadow = true;
       console.log(object);
       mixers.push( object.mixer );
+      console.log(mixers[0]);
       var action = object.mixer.clipAction( object.animations[ 0 ] );
       action.play();
 //      scene.add( object );

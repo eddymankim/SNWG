@@ -8,6 +8,7 @@ week-assignment: 8
 
 <!--<script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script> -->
 <script src="../code/nazel/nazel-snips/dat.gui.min.js"></script>
+<script src="../code/nazel/nazel-snips/stats.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
 <script src="../code/nazel/nazel-snips/loaders/MTLLoader.js"></script>
 <script src="../code/nazel/nazel-snips/loaders/OBJLoader.js"></script>
