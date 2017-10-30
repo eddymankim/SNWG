@@ -76,7 +76,7 @@ let ground = createShape({
 // sure it's a rock, why not
 let rock = createShape({
     position: [-50,0,0],
-    geometry: [10,10,10],
+    geometry: [10,50,10],
     material: { roughness:0.5 }, })
 
 // even bigger!
@@ -194,6 +194,7 @@ async function onload(context, load) {
     let [lamp] = await load('brass-lantern.gltf')
         context.importEnv(lamp.scene)
         lamp.scene.position.set(0,6,0)
+        lamp.scene.scale.set(4, 4, 4)
         context.add(lamp.scene)
 
 }
@@ -232,7 +233,7 @@ window.renderer = new T.Renderer({
     position: { x:-7, y:7, z:2 },
 
     fog: {
-        color: 0x000B14,
+        color: 0x23AAEE,
         near: 1e1,
         far: 1e3,
     },
@@ -240,10 +241,10 @@ window.renderer = new T.Renderer({
     hdr: {
         exposure: 1.5,
         whitePoint: 1.0,
-        tonemapping: T.NoToneMapping,
+        // tonemapping: T.NoToneMapping,
         // tonemapping: T.LinearToneMapping,
         // tonemapping: T.ReinhardToneMapping,
-        // tonemapping: T.CineonToneMapping,
+         tonemapping: T.CineonToneMapping,
         // tonemapping: T.Uncharted2ToneMapping,
     },
 
@@ -255,33 +256,36 @@ window.renderer = new T.Renderer({
 
     effects: [
 
+/*
         new Effects.FilmPass({
             noise: 0.5,
             scan: 0.6,
             grayscale: 0,
         }),
+*/
+/*
+        new Effects.BloomPass({
+            power: 1.0,
+            kernel: 36,
+            sigma: 1,
+        }),
+*/
+/*
+        new Effects.ColorShiftPass({
+            pow: [2.1, 1.5, 1.6],
+            mul: [1.1, 0.8, 1.2],
+            add: [0.1, 0.2, 0.2],
+            noise: 0.1,
+            noir: true,
+        }),
+*/
 
-        // new Effects.BloomPass({
-        //     power: 1.0,
-        //     kernel: 36,
-        //     sigma: 1,
-        // }),
+        //new Effects.GlitchPass(),
 
-        // new Effects.ColorShiftPass({
-        //     pow: [2.1, 1.5, 1.6],
-        //     mul: [1.1, 0.8, 1.2],
-        //     add: [0.1, 0.2, 0.2],
-        //     noise: 0.1,
-        //     noir: true,
-        // }),
-
-
-        // new Effects.GlitchPass(),
-
-        // new Effects.ShaderPass(Shaders.Bleach),
+        new Effects.ShaderPass(Shaders.Bleach),
         // new Effects.ShaderPass(Shaders.Sepia),
         new Effects.ShaderPass(Shaders.Color),
-        // new Effects.ShaderPass(Shaders.Technicolor),
+        new Effects.ShaderPass(Shaders.Technicolor),
         new Effects.ShaderPass(Shaders.Vignette),
 
     ],
