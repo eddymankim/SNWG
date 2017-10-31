@@ -6,43 +6,6 @@ var meshNumber = 3
 const nicoCodeDir = "/nazel-modules";
 const nicoAssetDir = "../../data/nazel";
 
-///<<--Key Codes-->>//
-/////w////////87//////
-///a/s/d///65/83/68///
-//////////////////////
-
-var threeControler = document.getElementById("3dDiv");
-var threeControler = document.body;
-threeControler.onkeydown = function(e) {
-    //if (!e.metaKey) {
-    //    e.preventDefault();
-    //}
-    console.log(e.keyCode);
-    //if(masterKeyCodes[e.keyCode] == 'w'){}
-    if(e.keyCode == '87'){
-      scene.add(tetrahedronMesh);
-      //console.log(cent);
-    }
-    if(e.keyCode == '83'){
-      let theCube = scene.children[3].geometry;
-      let cent = theCube.boundingSphere.center;
-      theCube.translate(-.1, -.1, -.1);
-      console.log(cent);
-    }
-    if(e.keyCode == '68'){
-      let theCube = scene.children[3].geometry;
-      theCube.scale(1.1, 1.1, 1.1);
-    }
-    if(e.keyCode == '65'){
-      let theCube = scene.children[3].geometry;
-      theCube.scale(.9, .9, .9);
-    }
-    if (e.keyCode =="13"){
-      scene.children[3].geometry.center();
-    }
-};
-//manupulated from :  http://keycode.info/
-
 // create the basics and drop it into html
 var scene = new THREE.Scene();
 var gui = new dat.GUI();

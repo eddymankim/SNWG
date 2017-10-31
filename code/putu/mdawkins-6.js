@@ -61,37 +61,33 @@ function update() {
       meshObjects[i].position.y += yVel;
     }
     else {
-      meshObjects[i].position.x += 3
-      meshObjects[i].position.y += 3
-      meshOBjects[i].position.z += 1
+      meshObjects[i].position.x += .3
+      meshObjects[i].position.y += .3
+      meshOBjects[i].position.z += .1
     }
+  }
+  for (var i = 0;i<meshNumber;i++){
+      const geometry = new THREE.SphereGeometry(32,16,16)
+      const material = new THREE.MeshPhongMaterial({
+      color: 0xAAAAAA, shininess: 20 })
+      var mesh = new THREE.Mesh( geometry, material);
+      mesh.position.x = ( Math.random() - 0.5) * 4000 * Math.random();
+      mesh.position.y = ( Math.random() - 0.5) * 4000 * Math.random() ;
+      mesh.position.z = ( Math.random() - 0.5) * 4000 * Math.random() ;
+
+      mesh.rotation.x = Math.random();
+      mesh.rotation.y = Math.random();
+      mesh.rotation.z = Math.random();
+
+      scene.add(mesh);
+      meshObjects.push(mesh); //put them in an array to update their positions and have behaviors on click using update
+  }
 }
-
-////////////////////////////////////////////////////////////////
-
-for (var i = 0;i<meshNumber;i++){
-    const geometry = new THREE.SphereGeometry(32,16,16)
-    const material = new THREE.MeshPhongMaterial({
-    color: 0xAAAAAA, shininess: 20 })
-    var mesh = new THREE.Mesh( geometry, material);
-    mesh.position.x = ( Math.random() - 0.5) * 4000 * Math.random();
-    mesh.position.y = ( Math.random() - 0.5) * 4000 * Math.random() ;
-    mesh.position.z = ( Math.random() - 0.5) * 4000 * Math.random() ;
-
-    mesh.rotation.x = Math.random();
-    mesh.rotation.y = Math.random();
-    mesh.rotation.z = Math.random();
-
-    scene.add(mesh);
-    meshObjects.push(mesh); //put them in an array to update their positions and have behaviors on click using update
-    }
-}
-
 
   window.addEventListener('mouseup', mouseup, false)
   window.addEventListener('mousedown', mousedown, false)
   
 ////////////////////////////////////////////////////////////////
 
-update()
-render()
+update();
+render();
