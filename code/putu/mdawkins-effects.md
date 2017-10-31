@@ -105,7 +105,7 @@ let boulder = createShape({
 /// because unless you structure your files exactly like mine,
 /// your importer won't work and you'll cry.
 ///
-async function onload(context, load) {
+async function onload(context, load) { //context in this case is the renderer
 
     ///
     /// well what's all this then?

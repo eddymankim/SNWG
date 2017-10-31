@@ -7,9 +7,11 @@ var meshObjects = []
 ////////////////////////////////////////////////////////////////
 
 let id = '#RenderCanvas'
-const dir = '../../data/mdawkins'
+const dir = '../../data/evan-erdos'
 let clock = new THREE.Clock()
 const getAspect = () => [756, 512]
+let mouse = new THREE.Vector2()
+let mouseClicking = false
 
 let camera = new THREE.PerspectiveCamera(60, 1, 1, 2e5)
     camera.position.z = 100
@@ -30,37 +32,39 @@ window.onResize = () => {
     renderer.setSize(window.innerWidth,window.innerHeight)
 }
 
+const mousedown = (e) => {
+      e.preventDefault()
+      mouse.x = (e.clientX/window.innerWidth)*2+1
+      mouse.y = -(e.clientY/window.innerHeight)*2+1
+      mouseClicking = true
+  //raycaster.setFromCamera(mouse, camera) check fancyrenderer
+    }
+
+const mouseup = (e) => {
+  mouseClicking = false
+}
+
 function render(deltaTime=0.01) {
     renderer.render(scene, camera)
     requestAnimationFrame(() => render(clock.getDelta()))
 }
 
 function update() {
-  /*var mouseDown = 0; 
-  document.body.onmousedown = function() { 
-    mouseDown = 1;}
-  document.body.onmouseup = function() {
-    mouseDown = 0;}*/
-  for (var i=0; i<meshObjects.length; i++)[ ///*
-  const mousedown = (e) => {
-      e.preventDefault()
-      mouse.x = (e.clientX/window.innerWidth)*2+1
-      mouse.y = -(e.clientY/window.innerHeight)*2+1
-        }
-  if (mousedown){
-    var dx = meshObjects[i].position.x - mouse.x;
-    var dy = meshObjects[i].position.y - mouse.y;
-    var angle = atan2(dy, dx); //Math.atan(dy,dx);
-    var xVel = cos(angle);
-    var yVel = sin(angle);
-    meshObjects[i].position.x += xVel;
-    meshObjects[i].position.y += yVel;
+  for (var i=0; i<meshObjects.length; i++){ ///*
+    if (mouseClicking === true) {
+      var dx = meshObjects[i].position.x - mouse.x;
+      var dy = meshObjects[i].position.y - mouse.y;
+      var angle = atan2(dy, dx); //Math.atan(dy,dx);
+      var xVel = cos(angle);
+      var yVel = sin(angle);
+      meshObjects[i].position.x += xVel;
+      meshObjects[i].position.y += yVel;
     }
-    else { //*/
-    meshObjects[i].position.x += .3
-    meshObjects[i].position.y += .3
-    meshOBjects[i].position.z += .1
-  }
+    else {
+      meshObjects[i].position.x += 3
+      meshObjects[i].position.y += 3
+      meshOBjects[i].position.z += 1
+    }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -81,9 +85,13 @@ for (var i = 0;i<meshNumber;i++){
     scene.add(mesh);
     meshObjects.push(mesh); //put them in an array to update their positions and have behaviors on click using update
     }
+}
 
 
+  window.addEventListener('mouseup', mouseup, false)
+  window.addEventListener('mousedown', mousedown, false)
+  
 ////////////////////////////////////////////////////////////////
 
-render()
 update()
+render()
