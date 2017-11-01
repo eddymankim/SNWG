@@ -51,3 +51,4 @@ export { default as ToneMap } from './ToneMapShader.js'
 export { default as Vignette } from './VignetteShader.js'
 
 export { default as ColorShift } from './ColorShiftShader.js'
+export { default as Dream } from './DreamShader.js'
