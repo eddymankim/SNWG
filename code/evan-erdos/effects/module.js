@@ -22,5 +22,4 @@ export { default as GlitchPass } from './GlitchPass.js'
 // export { default as TexturePass } from './TexturePass.js'
 export { default as AliasPass } from './TXAAPass.js'
 
-export { default as ColorShiftPass } from './ColorShiftPass.js'
 export { default as DreamPass } from './DreamPass.js'
