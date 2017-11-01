@@ -3,7 +3,9 @@
 ///
 /// module for external scripts, effectively a bibliography
 ///
-export * from './helpers.js'
+export * from './Random.js'
+export * from './Colors.js'
+export * from './Space.js'
 export { default as TGALoader } from './TGALoader.js'
 export { default as GLTFLoader } from './GLTFLoader.js'
 export { default as FBXLoader } from './FBXLoader.js'

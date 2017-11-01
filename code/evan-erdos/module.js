@@ -5,5 +5,3 @@
 ///
 export * from './scripts/three.js'
 export * from './scripts/module.js'
-// export * from './effects/module.js'
-// export * from './shaders/module.js'

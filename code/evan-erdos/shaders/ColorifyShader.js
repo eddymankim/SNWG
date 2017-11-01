@@ -1,6 +1,8 @@
+///
 /// @author alteredq <http://alteredqualia.com>
 ///
 /// Colorify shader
+///
 import * as T from '../module.js'
 
 export default {
