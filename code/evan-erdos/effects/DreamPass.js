@@ -18,12 +18,12 @@ export default class DreamPass extends Pass {
                 [0XFFFFFF, 0XFFFFFF, 0XFFFFFF], ],
             color=0XFFFFFF, accent=0XFFFFFF,
             noise=0.5, scan=0.05, lines=2048,
-            noir=0.0, creep=1.0, darken=1.0,
-            bleach=0.5, techni=0.1, sepia=0.0,
-            hue=0.0, fill=0.5, time=0.0,
-            speed=0.02, gray=false }={}) { super()
+            noir=0.0, creep=1.0, darken=1.0, hue=0.0,
+            fill=0.5, bleach=0.5, techni=0.1, sepia=0.0,
+            time=0.0, speed=0.02, shift=0.001, gray=false }={}) { super()
         let shader = Dream
         this.speed = speed
+        this.shift = shift
         this.colors = [[
             new M.Color(colors[0][0]), new M.Color(colors[0][1]),
             new M.Color(colors[0][2]), new M.Color(colors[0][3])],[
@@ -74,6 +74,8 @@ export default class DreamPass extends Pass {
         this.uniforms.color1.value.lerp(colors[0][1],t*this.speed)
         this.uniforms.color2.value.lerp(colors[0][2],t*this.speed)
         this.uniforms.color3.value.lerp(colors[0][3],t*this.speed)
+        this.uniforms.hue.value += delta*this.shift
+        this.uniforms.hue.value %= 2
         this.quad.material = this.material
         if (this.renderToScreen) renderer.render(this.scene,this.camera)
         else renderer.render(this.scene,this.camera,write,this.clear)
