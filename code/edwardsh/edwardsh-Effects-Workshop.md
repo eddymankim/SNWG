@@ -176,7 +176,7 @@ async function onload(context, load) {
     /// You could do crazier things with it, assign different ones, etc.
     ///
     let table = new T.Mesh(
-        new T.CubeGeometry(9,1,4),
+        new T.CubeGeometry(29,1,24),
         new T.MeshStandardMaterial({
             color:0xBBEEFF, map:albedo,
             normalMap:normal, normalScale:new T.Vector2(1.0,1.0),
@@ -193,9 +193,54 @@ async function onload(context, load) {
     ///
     let [lamp] = await load('brass-lantern.gltf')
         context.importEnv(lamp.scene)
-        lamp.scene.position.set(0,6,0)
-        lamp.scene.scale.set(4, 4, 4)
+        lamp.scene.position.set(0,10,0)
+        lamp.scene.scale.set(6, 6, 6)
         context.add(lamp.scene)
+        
+    let myMaterial = new T.MeshToonMaterial({})
+        
+    let [lamp2] = await load('brass-lantern.gltf')
+        context.importEnv(lamp2.scene)
+        lamp2.scene.position.set(24, 14, 14)
+        lamp2.scene.scale.set(4, 4, 4)
+        lamp2.scene.traverse( o => {
+            if(o.material != undefined) {
+                o.material = myMaterial
+            }
+        })
+        context.add(lamp2.scene)
+        
+    let myMaterial2 = new T.MeshPhysicalMaterial({})
+        
+    let [lamp3] = await load('brass-lantern.gltf')
+        context.importEnv(lamp3.scene)
+        lamp3.scene.position.set(-48, 29, -2)
+        lamp3.scene.scale.set(4, 4, 4)
+        lamp3.scene.traverse( o => {
+            if(o.material != undefined) {
+                o.material = myMaterial2
+            }
+        })
+        context.add(lamp3.scene)
+        
+        
+    let myMaterial3 = new T.MeshStandardMaterial({
+        color: 0xFFFFFF, 
+        emissive: 0xFFAAAA, 
+        emissiveIntensity: 0.4,
+        roughness: 0.0})
+        
+    let [lamp4] = await load('brass-lantern.gltf')
+        context.importEnv(lamp4.scene)
+        lamp4.scene.position.set(-3, -1, 26)
+        lamp4.scene.rotation.set(Math.PI / 4, 0, Math.PI / 4)
+        lamp4.scene.scale.set(12, 12, 12)
+        lamp4.scene.traverse( o => {
+            if(o.material != undefined) {
+                o.material = myMaterial3
+            }
+        })
+        context.add(lamp4.scene)
 
 }
 
@@ -203,6 +248,7 @@ async function onload(context, load) {
 function update(deltaTime=0.01) {
     // torus.position.z = 10*Math.sin(1+dt)*deltaTime
     // torus.rotateY(-2*deltaTime)
+
 }
 
 /// called when clicking on an object
@@ -233,7 +279,7 @@ window.renderer = new T.Renderer({
     position: { x:-7, y:7, z:2 },
 
     fog: {
-        color: 0x23AAEE,
+        color: 0xFF00FF,
         near: 1e1,
         far: 1e3,
     },
@@ -244,8 +290,8 @@ window.renderer = new T.Renderer({
         // tonemapping: T.NoToneMapping,
         // tonemapping: T.LinearToneMapping,
         // tonemapping: T.ReinhardToneMapping,
-         tonemapping: T.CineonToneMapping,
-        // tonemapping: T.Uncharted2ToneMapping,
+        // tonemapping: T.CineonToneMapping,
+         tonemapping: T.Uncharted2ToneMapping,
     },
 
     objects: [
@@ -256,13 +302,13 @@ window.renderer = new T.Renderer({
 
     effects: [
 
-/*
+
         new Effects.FilmPass({
             noise: 0.5,
             scan: 0.6,
-            grayscale: 0,
+            grayscale: 0.7,
         }),
-*/
+
 /*
         new Effects.BloomPass({
             power: 1.0,
@@ -270,7 +316,7 @@ window.renderer = new T.Renderer({
             sigma: 1,
         }),
 */
-/*
+
         new Effects.ColorShiftPass({
             pow: [2.1, 1.5, 1.6],
             mul: [1.1, 0.8, 1.2],
@@ -278,9 +324,9 @@ window.renderer = new T.Renderer({
             noise: 0.1,
             noir: true,
         }),
-*/
 
-        //new Effects.GlitchPass(),
+
+        // new Effects.GlitchPass(),
 
         new Effects.ShaderPass(Shaders.Bleach),
         // new Effects.ShaderPass(Shaders.Sepia),
