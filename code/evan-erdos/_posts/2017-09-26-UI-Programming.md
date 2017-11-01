@@ -70,6 +70,10 @@ async function onload(context, load) {
         lamp.scene.position.set(0,6,0)
         context.add(lamp.scene)
 
+    let bulb = new T.PointLight(0xBBEEFF,1)
+        // bulb.castShadow = true
+        lamp.scene.add(bulb)
+
 }
 
 /// called before rendering the scene
@@ -95,20 +99,19 @@ window.renderer = new T.Renderer({
     light: 0xFEEBC1, ground: 0xF2E9CF,
     position: { x:-7, y:7, z:2 },
     fog: { color: 0x000B14, near: 1e1, far: 1e3, },
-    hdr: { tonemapping: T.CineonToneMapping, exposure: 0.7 },
+    hdr: { tonemapping: T.CineonToneMapping, exposure: 0.4 },
     objects: [ floor ],
-    effects: [new Effects.DreamPass({
+    effects: [new Effects.GlitchPass(), new Effects.DreamPass({
         pow:[1.0, 1.0, 1.0], mul:[1.0, 1.0, 1.0],
-        add:[0.1, 0.1, 0.1], mhu:[1.2, 1.0, 1.0],
+        add:[0.0, 0.0, 0.0], mhu:[1.0, 1.1, 1.0],
         colors: [
-            [...T.OdysseyDoors.SomnolentEnd],
-            [...T.OdysseyDoors.AbandonedIce],
             [...T.OdysseyDoors.RustedWounds],
+            [...T.OdysseyDoors.AbandonedIce],
+            [...T.OdysseyDoors.IllFireburst],
             [...T.OdysseyDoors.PiercingLove]],
-        noise:0.8, scan:0.05, lines:2048, noir:0.01,
-        hue:0.0, fill:0.96, creep:1.2, darken:1.5,
-        bleach:0.1, techni:0.001, sepia:0.001,
-        speed:0.01, shift:0.001, hue:0.001, })],
+        noise:1.0, scan:0.2, lines:2048, noir:0.001, darken:2.0,
+        fill:0.6, bleach:0.001, techni:0.001, sepia:0.001,
+        hue:0.0, speed:0.07, shift:0.01, })],
     onload, update, onclick,
     path: '../evan-erdos/' })
 
