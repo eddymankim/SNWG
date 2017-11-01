@@ -3,7 +3,7 @@
  */
 import * as THREE from '../three.js'
 
-export default const OBJLoader = ( function () {
+const OBJLoader = ( function () {
 
     // o object_name | g group_name
     var object_pattern           = /^[og]\s*(.+)?/;
@@ -669,3 +669,5 @@ export default const OBJLoader = ( function () {
     return OBJLoader;
 
 } )();
+
+export default OBJLoader
