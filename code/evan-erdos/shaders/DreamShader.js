@@ -21,6 +21,7 @@ export default {
         color:  { value: new M.Color(0XFFFFFF) },
         filter: { value: new M.Color(0XFFFFFF) },
         accent: { value: new M.Color(0XFFFFFF) },
+        bright: { value: new M.Color(0XFFFFFF) },
         mulHue: { value: new M.Vector3(0.9,0.9,0.9) },
         powRGB: { value: new M.Vector3(1.5,1.5,1.5) },
         mulRGB: { value: new M.Vector3(1.1,1.1,1.1) },
@@ -41,9 +42,10 @@ export default {
         uniform bool gray;
         uniform float time, scan, lines, noise, noir;
         uniform float hue, fill, creep, darken;
-        uniform vec3 color, filter, accent, mulHue;
-        uniform vec3 powRGB, mulRGB, addRGB;
+        uniform vec3 color, filter, accent, bright;
+        uniform vec3 mulHue, powRGB, mulRGB, addRGB;
         uniform sampler2D tex;
+
 
         vec4 ColorizeView(vec4 o, vec3 color, vec3 filter, float i) {
             return vec4(dot(o.xyz,filter*i)*color+o.xyz*i,o.a); }
@@ -70,7 +72,7 @@ export default {
             return vec4(o.rgb+dot(o.rgb,h)*sat, o.a); }
 
 
-        vec4 MakeVignette(vec4 o, float c, float d) {
+        vec4 MakeVignette(vec4 o, vec3 tone, float c, float d, float i) {
             vec2 v = (vUv-vec2(0.5))*vec2(c);
             return vec4(mix(o.rgb,vec3(1.0-d),dot(v,v)),o.a);
             // return vec4(o.rgb*smoothstep(0.8,c*0.799,distance(vUv,vec2(0.5))*(d+c)), o.a);
@@ -81,8 +83,8 @@ export default {
             gl_FragColor = texture2D(tex, vUv); // filter = vec3(0.299, 0.587, 0.114)
             gl_FragColor = ColorizeView(gl_FragColor, color, filter, fill);
             gl_FragColor = AdjustColors(gl_FragColor, powRGB, mulRGB, addRGB);
-            gl_FragColor = SaturateHues(gl_FragColor, mulHue, hue+0.05, 0.97-noir);
+            gl_FragColor = SaturateHues(gl_FragColor, mulHue, hue, 0.97-noir);
             gl_FragColor = UseFilmGrain(gl_FragColor, lines, scan, noise, gray);
-            gl_FragColor = MakeVignette(gl_FragColor, creep, darken);
+            gl_FragColor = MakeVignette(gl_FragColor, bright, creep, darken, 0.1);
         }`
 }

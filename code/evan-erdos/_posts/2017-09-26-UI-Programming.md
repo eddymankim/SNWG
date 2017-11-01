@@ -87,6 +87,17 @@ function onclick(object) {
 }
 
 
+// let colors = T.OdysseyDoors.SereneFright
+// let colors = T.OdysseyDoors.AbandonedIce
+// let colors = T.OdysseyDoors.RustedWounds
+// let colors = T.OdysseyDoors.BurnedMemory
+// let colors = T.OdysseyDoors.IllFireburst
+// let colors = T.OdysseyDoors.SomnolentEnd
+// let colors = T.OdysseyDoors.IncisionAils
+// let colors = T.OdysseyDoors.VeinEnergies
+let colors = T.OdysseyDoors.PiercingLove
+// let colors = T.OdysseyDoors.DoorsReality
+
 window.renderer = new T.Renderer({
     color: 0x5A7F8B, ambient: 0x14031B,
     light: 0xFEEBC1, ground: 0xF2E9CF,
@@ -94,7 +105,13 @@ window.renderer = new T.Renderer({
     fog: { color: 0x000B14, near: 1e1, far: 1e3, },
     hdr: { tonemapping: T.CineonToneMapping, exposure: 1.5 },
     objects: [ floor ],
-    effects: [new Effects.DreamPass()],
+    effects: [new Effects.DreamPass({
+        pow:[1.0, 1.0, 1.0], mul:[1.0, 1.0, 1.0],
+        add:[0.1, 0.1, 0.1], mhu:[1.2, 1.0, 1.0],
+        colors: [ ...colors ],
+        noise:0.5, scan:0.05, lines:2048, creep:1.0, darken:1.0,
+        noir:0.0, hue:0.0, fill:0.5, time:0.0,
+        gray:true, })],
     onload, update, onclick,
     path: '../evan-erdos/' })
 

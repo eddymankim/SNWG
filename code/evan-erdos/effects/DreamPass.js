@@ -9,15 +9,12 @@ import { Dream } from '../shaders/module.js'
 
 export default class DreamPass extends Pass {
     constructor({
-            pow=[1.0, 1.0, 1.0],
-            mul=[1.0, 1.0, 1.0],
-            add=[0.1, 0.1, 0.1],
-            mhu=[1.2, 1.0, 1.0],
-            color=0XFFFFFF, filter=0XFFFFFF,
-            accent=0XFFFFFF, other=0XFFFFFF,
+            pow=[1.0, 1.0, 1.0], mul=[1.0, 1.0, 1.0],
+            add=[0.1, 0.1, 0.1], mhu=[1.2, 1.0, 1.0],
+            colors=[0XFFFFFF, 0XFFFFFF, 0XFFFFFF],
             noise=0.5, scan=0.05, lines=2048,
             creep=1.0, darken=1.0, noir=0.0,
-            hue=0.0, fill=1.0, time=0.0,
+            hue=0.0, fill=0.5, time=0.0,
             gray=false, }={}) { super()
         let shader = Dream
         this.uniforms = M.UniformsUtils.clone(shader.uniforms)
@@ -25,14 +22,6 @@ export default class DreamPass extends Pass {
             uniforms: this.uniforms,
             vertexShader: shader.vertexShader,
             fragmentShader: shader.fragmentShader })
-        color = M.OdysseyDoors.AbandonedIce[0]
-        filter = M.OdysseyDoors.AbandonedIce[2]
-        accent = M.OdysseyDoors.AbandonedIce[3]
-        other = M.OdysseyDoors.AbandonedIce[1]
-
-        // SereneFright AbandonedIce RustedWounds BurnedMemory
-        // IllFireburst SomnolentEnd IncisionAils VeinEnergies
-        // PiercingLove DoorsReality
         this.uniforms.gray.value = gray
         this.uniforms.time.value = time
         this.uniforms.hue.value = hue
@@ -41,9 +30,10 @@ export default class DreamPass extends Pass {
         this.uniforms.lines.value = lines
         this.uniforms.noise.value = noise
         this.uniforms.fill.value = fill
-        this.uniforms.color.value = new M.Color(color)
-        this.uniforms.filter.value = new M.Color(filter)
-        this.uniforms.accent.value = new M.Color(accent)
+        this.uniforms.color.value = new M.Color(colors[0])
+        this.uniforms.filter.value = new M.Color(colors[1])
+        this.uniforms.accent.value = new M.Color(colors[2])
+        this.uniforms.bright.value = new M.Color(colors[3])
         this.uniforms.mulHue.value = new M.Vector3(...mhu)
         this.uniforms.powRGB.value = new M.Vector3(...pow)
         this.uniforms.mulRGB.value = new M.Vector3(...mul)
