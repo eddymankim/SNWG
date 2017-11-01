@@ -92,24 +92,9 @@ window.renderer = new T.Renderer({
     light: 0xFEEBC1, ground: 0xF2E9CF,
     position: { x:-7, y:7, z:2 },
     fog: { color: 0x000B14, near: 1e1, far: 1e3, },
-    hdr: {
-        tonemapping: T.LinearToneMapping, // T.CineonToneMapping,
-        exposure: 1.5, whitePoint: 1.0, },
+    hdr: { tonemapping: T.CineonToneMapping, exposure: 1.5 },
     objects: [ floor ],
-    effects: [
-        new Effects.DreamPass(),
-        // new Effects.FilmPass({ noise:0.6, scan:0.3, }),
-        // new Effects.BloomPass({ power:1.5, kernel:36 }),
-        // new Effects.ColorShiftPass({
-        //     pow: [2.1, 1.5, 1.6],
-        //     mul: [1.1, 0.8, 1.2],
-        //     add: [0.1, 0.2, 0.2],
-        //     noise: 0.5, noir: 0.0, }),
-        // new Effects.GlitchPass(),
-        // new Effects.ShaderPass(Shaders.Bleach),
-        // new Effects.ShaderPass(Shaders.Sepia),
-        // new Effects.ShaderPass(Shaders.Technicolor),
-        new Effects.ShaderPass(Shaders.Vignette), ],
+    effects: [new Effects.DreamPass()],
     onload, update, onclick,
     path: '../evan-erdos/' })
 

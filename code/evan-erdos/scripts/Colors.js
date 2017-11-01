@@ -3,7 +3,7 @@
 ///
 /// colors, ordered by ascending stream-of-consciousness
 ///
-export const gradients = {
+export const ColorGradients = {
     VibrantRetro: [0X988BA7, 0XBAC162, 0XD63B55, 0XFFFFFF],
     CandiedDemon: [0XC0D545, 0XC06388, 0XE62385, 0XFFFFFF],
     TaffyFlowers: [0XB45643, 0XBB84AB, 0XD2F943, 0XFFFFFF],

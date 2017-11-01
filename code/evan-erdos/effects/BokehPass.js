@@ -6,7 +6,7 @@ import { Pass } from './module.js'
 import { Bokeh } from '../shaders/module.js'
 
 export default class BokehPass extends Pass {
-    constructor(scene, camera, params) { super()
+    constructor(scene, camera, params={}) { super()
         const bokehShader = Bokeh
         this.scene = scene
         this.camera = camera
