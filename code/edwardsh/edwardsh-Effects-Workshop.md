@@ -326,11 +326,11 @@ window.renderer = new T.Renderer({
         }),
 
 
-        // new Effects.GlitchPass(),
+        new Effects.GlitchPass(),
 
         new Effects.ShaderPass(Shaders.Bleach),
         // new Effects.ShaderPass(Shaders.Sepia),
-        new Effects.ShaderPass(Shaders.Color),
+        // new Effects.ShaderPass(Shaders.Color),
         new Effects.ShaderPass(Shaders.Technicolor),
         new Effects.ShaderPass(Shaders.Vignette),
 

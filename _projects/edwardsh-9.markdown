@@ -2,7 +2,7 @@
 layout: post
 author: Edward Shin
 title: Shin - Effects Work
-thumbnail: shin-2.png
+thumbnail: shin_thumb_4.png
 week-assignment: 9
 ---
 <p>
@@ -17,3 +17,5 @@ In the end, I still have a while to go before I can master lighiting, but I gain
 </p>
 
 <a href="http://localhost:4000/code/edwardsh-effects-workshop/">Lab link</a>
+
+<p>http://localhost:4000/code/edwardsh-effects-workshop/</p>
