@@ -1,6 +1,6 @@
 /// @author alteredq <http://alteredqualia.com>
 ///
-/// Bleach bypass shader [http://en.wikipedia.org/wiki/Bleach_bypass]
+/// Bleach bypass shader http://en.wikipedia.org/wiki/Bleach_bypass
 ///
 export default {
 
