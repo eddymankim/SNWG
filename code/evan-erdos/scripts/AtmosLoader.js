@@ -1,5 +1,5 @@
 ///
-/// @author evan-erdos / http://bescott.org/
+/// 2017-10-24 Ben Scott @evan-erdos <bescott.org>
 ///
 import * as T from '../module.js'
 

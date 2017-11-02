@@ -1,8 +1,10 @@
 ///
-/// @author evan-erdos / http://bescott.org/
+/// 2017-10-11 Ben Scott @evan-erdos <bescott.org>
+///
+/// heavily modified effect composer
 ///
 import * as T from '../module.js'
-import { Pass, ShaderPass } from '../effects/module.js'
+import { ShaderPass } from '../effects/module.js'
 import { Copy } from '../shaders/module.js'
 
 export default class FancyComposer {

@@ -83,7 +83,7 @@ export default class DragControls extends M.EventDispatcher {
         }
 
 
-        const mousedown = (event) => { event.preventDefault()
+        const mousecancel = (event) => { event.preventDefault()
             domElement.style.cursor = 'auto'
             if (!selected) return
             scope.dispatchEvent({ type: 'dragend', object: selected })
@@ -127,6 +127,6 @@ export default class DragControls extends M.EventDispatcher {
             selected = null
         }
 
-        activate()
+        this.activate()
     }
 }

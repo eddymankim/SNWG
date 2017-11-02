@@ -48,6 +48,6 @@ export { default as ToneMap } from './ToneMapShader.js'
 // export { default as UnpackDepthRGBA } from './UnpackDepthRGBAShader.js'
 // export { default as VerticalBlur } from './VerticalBlurShader.js'
 // export { default as VerticalTiltShift } from './VerticalTiltShiftShader.js'
-export { default as Vignette } from './VignetteShader.js'
+// export { default as Vignette } from './VignetteShader.js'
 
-export { default as ColorShift } from './ColorShiftShader.js'
+export { default as Dream } from './DreamShader.js'

@@ -6,7 +6,7 @@ import { Pass } from './module.js'
 import { Bokeh } from '../shaders/module.js'
 
 export default class BokehPass extends Pass {
-    constructor(scene, camera, params) { super()
+    constructor(scene, camera, params={}) { super()
         const bokehShader = Bokeh
         this.scene = scene
         this.camera = camera
@@ -61,8 +61,7 @@ export default class BokehPass extends Pass {
         renderer.autoClear = false
         renderer.setClearColor(0xffffff)
         renderer.setClearAlpha(1.0)
-        renderer.render(this.scene, this.camera, this.renderTargetDepth, true)
-
+        renderer.render(this.scene,this.camera,this.renderTargetDepth,true)
         this.uniforms['tColor'].value = readBuffer.texture
         this.uniforms['nearClip'].value = this.camera.near
         this.uniforms['farClip'].value = this.camera.far
