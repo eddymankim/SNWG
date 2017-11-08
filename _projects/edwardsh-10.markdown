@@ -12,7 +12,9 @@ code: edwardsh/week_10
 <p>
     For my final project, I am thinking of extending from one of my previous assignments. It involved making a minature replica of Monument Valley 2's level, The Sunken City.<br /><br />
     
-    I want create a larger grid of the nodes that make up my previous assignment and add a "player" to my program. From there I will change the perspective from world orthographic to first-person perspective and populate the environment with computer generated elements
+    I want create a larger grid of the nodes that make up my previous assignment and add a "player" to my program. From there I will change the perspective from world orthographic to first-person perspective and populate the environment with computer generated elements. The demo above is a simplified version of what my final project would look like.
+    
+    Press x, y, and/or z to rotate the perspective in their respective axes.
 </p>
 
 <img src="img/edwardsh/nodes.gif" alt="Mini Sunken City" height="400" width="600">
