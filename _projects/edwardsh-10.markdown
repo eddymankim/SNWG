@@ -2,7 +2,7 @@
 layout: code
 author: Edward Shin
 title: Final Project Proposal
-thumbnail: shin-2.png
+thumbnail: shin_thumb_5.png
 week-assignment: 10
 code: edwardsh/week_10
 ---
