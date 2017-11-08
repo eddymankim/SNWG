@@ -21,8 +21,7 @@ export default class FancyRenderer {
             light=0xFEEBC1, ground=0xF2E9CF,
             position={x:0,y:10,z:10}, rotation={x:0,y:0,z:0},
             cam={fov:60,aspect:width()/height(),near:0.01,far:2e5},
-            hdr={ exposure:1.5, whitePoint:1.0,
-                tonemapping:M.LinearToneMapping, },
+            hdr={ exposure:1.5, tonemapping:M.LinearToneMapping, },
             gl={ antialias:true, logarithmicDepthBuffer:true,
                 alpha:false, gamma:false, physical:true,
                 shadowType:M.PCFSoftShadowMap,
@@ -77,7 +76,7 @@ export default class FancyRenderer {
             renderer.physicallyCorrectLights = gl.physical
             renderer.toneMapping = hdr.tonemapping
             renderer.toneMappingExposure = hdr.exposure
-            renderer.toneMappingWhitePoint = hdr.whitePoint
+            renderer.toneMappingWhitePoint = hdr.whitePoint || 1.0
 
         let controls = new M.Controls(camera,renderer.domElement)
 

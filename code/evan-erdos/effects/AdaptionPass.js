@@ -4,9 +4,6 @@
 /// adapted over time to simulate the optic nerve responding to light
 /// Based on a GDC2007 talk by Wolfgang Engel, "Post-Processing Pipeline"
 ///
-/// Full-screen tone-mapping shader
-/// http://www.graphics.cornell.edu/~jaf/publications/sig02_paper.pdf
-///
 import * as THREE from '../module.js'
 import { Pass } from './module.js'
 import { Copy, Luminosity, ToneMap } from '../shaders/module.js'
@@ -154,7 +151,7 @@ export default class AdaptionPass extends Pass {
         // renderer.render(this.scene, this.camera, this.currentLuminanceRT)
     }
 
-    setAdaptionRate() { this.materialAdaptiveLum.uniforms.tau.value = Math.abs(rate) }
+    setAdaptionRate(rate) { this.materialAdaptiveLum.uniforms.tau.value = Math.abs(rate) }
     setMaxLuminance(max) { this.materialToneMap.uniforms.maxLuminance.value = max }
     setAverageLuminance(avg) { this.materialToneMap.uniforms.averageLuminance.value = avg }
     setMiddleGrey(color) { this.materialToneMap.uniforms.middleGrey.value = color }
