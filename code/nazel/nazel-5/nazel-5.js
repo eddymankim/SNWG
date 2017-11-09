@@ -92,7 +92,7 @@ scene.add( cube );
 
 
 var loader = new THREE.ObjectLoader();
-loader.load("../../data/nazel/FUNNYMODEL.json", function ( obj ) {
+loader.load("../../data/nazel/model/FUNNYMODEL.json", function ( obj ) {
       obj.name = "guy";
      scene.add( obj );
      //scene.children[-1].name = "guy";
