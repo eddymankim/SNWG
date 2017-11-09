@@ -4,11 +4,18 @@
     "allowJs": true,
     "outDir": "dist",
     "sourceMap": true,
-    "lib": ["es2015", "es2015.iterable", "dom"]
-    },
+    "lib": [
+      "es2015",
+      "es2015.iterable",
+      "dom"
+    ]
+  },
   "files": [
     "render-atmospheric.ts",
-    "hw-7.ts"
+    "render-technical.ts",
+    "hw-6.ts",
+    "hw-7.ts",
+    "hw-8.ts"
   ],
   "exclude": [
     "render-toon.ts",

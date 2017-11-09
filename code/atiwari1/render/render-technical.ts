@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import OutlineEffect from './OutlineEffect.js'
 import { PointerLockControls } from './PointerLockControls.js'
 /* aman's dumb toon renderer
  * adapted from evan-erdos' boilerplate
@@ -23,28 +24,28 @@ const curvatureVertShader = `precision mediump float;
    gl_Position = projectionMatrix * mv_pos;
  }`
 
-export default class ToonRender {
+export default class TechnicalRender {
 
   private scene;
-
+  public camera: THREE.Camera;
   constructor({
     path = '../../data/',
     width = window.innerWidth,
     height = window.innerHeight,
-    background = 0xFF0000,
+    background = 0xffffff,
     worldCurvature = -0.3,
-    ambient = 0xFFBB00,
-    light = 0x0000FF,
+    ambient = 0x333333,
+    light = 0xff0000,
     ground = 0x000000,
     webgl = { antialias: true, shadowMapEnabled: true },
     position = { x: 0, y: 0, z: 0 },
     fog = { color: 0x0000FF, near: 1, far: 1e3 },
-    cam = { fov: 120, aspect: undefined, near: 0.1, far: 2e4 },
+    cam = { near: 0.1, far: 2e4 },
     elt = "body",
     update = (t) => { }
       } = {}) {
 
-    cam = { fov: 120, aspect: width / height, near: 0.1, far: 2e4, ...cam }
+    //cam = { fov: 120, aspect: width / height, near: 0.1, far: 2e4, ...cam }
 
     let clock = new THREE.Clock()
 
@@ -63,8 +64,8 @@ export default class ToonRender {
 
     scene.add(new THREE.AmbientLight(ambient)); //@ts-ignore
 
-    let camera = new THREE.PerspectiveCamera(cam.fov, cam.aspect, cam.near, cam.far);
-
+    //let camera = new THREE.PerspectiveCamera(cam.fov, cam.aspect, cam.near, cam.far);
+    let camera = new THREE.OrthographicCamera(width / - 2, width / 2, height / 2, height / - 2, cam.near, cam.far);
     camera.position.set(position.x, position.y, position.z);
 
     scene.add(camera);
@@ -76,15 +77,22 @@ export default class ToonRender {
     sun.position.set(1, 2, 0);
     scene.add(sun);
 
+    let effect: any = new OutlineEffect(renderer, {
+      defaultThickNess: 0.01,
+      defaultColor: new THREE.Color(0x888888),
+      defaultAlpha: 0.8,
+      defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
+    });
+
     const render = () => {
       requestAnimationFrame(render.bind(this));
       controls.update();
       update(clock.getDelta());
-      renderer.render(scene, camera);
+      //renderer.render(scene, camera);
+      effect.render(scene, camera);
     }
 
     const resize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
@@ -94,7 +102,7 @@ export default class ToonRender {
     window.addEventListener('load', () => render(), false);
 
     document.querySelector(elt).appendChild(renderer.domElement);
-
+    this.camera = camera;
   }
 
   public add(...args) {

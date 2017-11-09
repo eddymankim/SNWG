@@ -52,10 +52,11 @@ import * as THREE from '../../../lib/module.js';
 ///     2b. While there are ways to `export` many things,
 ///         you just want to `export` this specific class *automatically*.
 ///
-var AtmosRenderer = /** @class */ (function () {
+var AtmosRenderer = (function () {
     function AtmosRenderer(_a) {
-        var _b = _a === void 0 ? {} : _a, _c = _b.path, path = _c === void 0 ? '../../data/' : _c, _d = _b.width, width = _d === void 0 ? window.innerWidth : _d, _e = _b.height, height = _e === void 0 ? window.innerHeight : _e, _f = _b.background, background = _f === void 0 ? 0xFF0000 : _f, _g = _b.ambient, ambient = _g === void 0 ? 0xFFBB00 : _g, _h = _b.light, light = _h === void 0 ? 0x0000FF : _h, _j = _b.ground, ground = _j === void 0 ? 0x000000 : _j, _k = _b.webgl, webgl = _k === void 0 ? { antialias: true, shadowMapEnabled: true } : _k, _l = _b.position, position = _l === void 0 ? { x: 0, y: 0, z: 0 } : _l, _m = _b.fog, fog = _m === void 0 ? { color: 0x0000FF, near: 1, far: 1e3 } : _m, _o = _b.cam, cam = _o === void 0 ? { fov: 120, aspect: width / height, near: 0.1, far: 2e4 } : _o, _p = _b.update, update = _p === void 0 ? function (t) { } : _p;
+        var _b = _a === void 0 ? {} : _a, _c = _b.path, path = _c === void 0 ? '../../data/' : _c, _d = _b.width, width = _d === void 0 ? window.innerWidth : _d, _e = _b.height, height = _e === void 0 ? window.innerHeight : _e, _f = _b.background, background = _f === void 0 ? 0xFF0000 : _f, _g = _b.ambient, ambient = _g === void 0 ? 0xFFBB00 : _g, _h = _b.light, light = _h === void 0 ? 0x0000FF : _h, _j = _b.ground, ground = _j === void 0 ? 0x000000 : _j, _k = _b.webgl, webgl = _k === void 0 ? { antialias: true, shadowMapEnabled: true } : _k, _l = _b.position, position = _l === void 0 ? { x: 0, y: 0, z: 0 } : _l, _m = _b.fog, fog = _m === void 0 ? { color: 0x0000FF, near: 1, far: 1e3 } : _m, _o = _b.cam, cam = _o === void 0 ? undefined : _o, _p = _b.update, update = _p === void 0 ? function (t) { } : _p;
         var _this = this;
+        cam = cam || { fov: 120, aspect: width / height, near: 0.1, far: 2e4 };
         ///
         /// (4) You should pick a sensible import name instead of `THREE`,
         ///     when you import *en masse*, you need a way to refer to everything.
