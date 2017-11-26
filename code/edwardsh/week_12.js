@@ -139,9 +139,11 @@ function setScene() {
     
     goal = new Goal();
     scene.add(goal);
-    goal.position.x = otherSideNode.position.x;
+    goal.position.x = goalNode.position.x;
     goal.position.y = goalHeight;
-    goal.position.z = otherSideNode.position.z;
+    goal.position.z = goalNode.position.z;
+    goalNode.updateMatrixWorld();
+    THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
     
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
@@ -347,8 +349,61 @@ function reformBridge() {
     }
 }
 
+// reset goal's position 
 function resetGoal() {
+    var dx = Math.pow((camera.getWorldPosition().x - goal.getWorldPosition().x), 2);
+    var dy = Math.pow((camera.getWorldPosition().y - goal.getWorldPosition().y), 2);
+    var dz = Math.pow((camera.getWorldPosition().z - goal.getWorldPosition().z), 2);
+    var dist = Math.sqrt(dx + dy + dz);
     
+    // choose a random node aside from the current goal node to be the new goalNode
+    if(dist < goalSize) {
+        var rand = Math.round(Math.random() * (nodes.length - 1));
+        while(nodes[rand] !== otherSideNode){
+            rand = Math.round(Math.random() * nodes.length);
+        }
+        
+        goalNode.updateMatrixWorld();
+        THREE.SceneUtils.detach(goal, goalNode, scene);
+        
+        goalNode = nodes[rand];
+    }
+    
+    // choose position of goal relative to new goal node
+    var choice = Math.round(Math.random() * 5);
+    
+    switch(choice) {
+        case 0:
+            goal.position.set(goalNode.getWorldPosition().x + goalHeight, goal.getWorldPosition().y, goal.getWorldPosition().z);
+            break;
+            
+        case 1:
+            goal.position.set(goalNode.getWorldPosition().x - goalHeight, goal.getWorldPosition().y, goal.getWorldPosition().z);
+            break;
+            
+        case 2:
+            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y + goalHeight, goal.getWorldPosition().z);
+            break;
+            
+        case 3:
+            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y - goalHeight, goal.getWorldPosition().z);
+            break;
+            
+        case 4:
+            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y, goal.getWorldPosition().z + goalHeight);
+            break;
+            
+        case 5:
+            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y, goal.getWorldPosition().z - goalHeight);
+            break;
+            
+        default:
+            break;
+    }
+    
+    // parent goal Node to goal again
+    goalNode.updateMatrixWorld();
+    THREE.SceneUtils.attach(goal, scene, goalNode);
 }
 
 // reset the game when player reaches the goal;
