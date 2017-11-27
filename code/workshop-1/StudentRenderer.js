@@ -191,7 +191,7 @@
         ///         and we need to be able to do so from outside the script.
         ///
         ///     9b. This could be done in the scope of the main `class`, i.e.,
-        ///         outside the `constructor`, but to keep the `scene` "private",
+        ///         outside the `constructor`, but to keep the `scene` "private",
         ///         we can define the function in here and assign it to `this`.
         ///
         ///     9c. To access the `scene` from an aforementioned instance method,
@@ -249,7 +249,7 @@
 
 
             ///     10f. At the end of the function, your should have the renderer `render`.
-            ///          (what fortuitous luck you're having, this too is already done!)
+            ///          (what fortuitous luck you're having, this too is already done!)
             ///
             renderer.render(scene, camera)
         }

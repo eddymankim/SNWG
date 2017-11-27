@@ -25,8 +25,6 @@ export default class SimpleRenderer {
 
         let clock = new THREE.Clock()
 
-        let listener = new THREE.AudioListener()
-
         let renderer = new THREE.WebGLRenderer(webgl)
             renderer.setPixelRatio(window.devicePixelRatio)
             renderer.setSize(width, height)
@@ -51,6 +49,9 @@ export default class SimpleRenderer {
             scene.add(sun)
 
         let controls = new THREE.OrbitControls(camera,renderer.domElement)
+
+        this.listener = new THREE.AudioListener()
+        camera.add(this.listener)
 
         this.add = (...things) => things.forEach(o => scene.add(o))
 

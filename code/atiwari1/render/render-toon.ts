@@ -39,10 +39,12 @@ export default class ToonRender {
     webgl = { antialias: true, shadowMapEnabled: true },
     position = { x: 0, y: 0, z: 0 },
     fog = { color: 0x0000FF, near: 1, far: 1e3 },
-    cam = { fov: 120, aspect: width / height, near: 0.1, far: 2e4 },
+    cam = { fov: 120, aspect: undefined, near: 0.1, far: 2e4 },
     elt = "body",
     update = (t) => { }
       } = {}) {
+
+    cam = { fov: 120, aspect: width / height, near: 0.1, far: 2e4, ...cam }
 
     let clock = new THREE.Clock()
 
@@ -58,7 +60,7 @@ export default class ToonRender {
 
     scene.fog = new THREE.Fog(fog.color, fog.near, fog.far);
     scene.background = new THREE.Color(background);
-  
+
     scene.add(new THREE.AmbientLight(ambient)); //@ts-ignore
 
     let camera = new THREE.PerspectiveCamera(cam.fov, cam.aspect, cam.near, cam.far);
