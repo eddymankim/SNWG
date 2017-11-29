@@ -1,5 +1,5 @@
 // Edward Shin
-// Project Axis
+// Realms and Bridges
 // Phase 2
 // Start: 11-09-17
 // End: 11-29-17
@@ -13,7 +13,7 @@ var nodes, bridgePieces, numBPieces, bridgeSize, bridgeSpace,
 var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode;    // to be used for moving player and bridge
 var xIsRotating, yIsRotating, zIsRotating, cameraIsMoving;
 var rotInc, rotIncX, rotIncY, rotIncZ, rotXCount, rotYCount, rotZCount, stepInc, remainingRot, remainingSteps, xAxis, yAxis, zAxis;
-var nodelessOpacity, opacityInc, bridgeIsReforming;
+var nodelessOpacity, nodeOpacity, opacityInc, bridgeIsReforming;
 var cameraHeight;
 var goal, goalSize, goalRange, goalHeight, goalRot, goalNode;
 var mousePos, minMouseX, maxMouseX, minMouseY, maxMouseY;
@@ -95,7 +95,8 @@ xAxis = playerXAxis.getWorldDirection().normalize();      // x axis in player's 
 yAxis = playerYAxis.getWorldDirection().normalize();      // y axis in player's POV
 zAxis = player.getWorldDirection().normalize();           // z axis in player's POV
 
-nodelessOpacity = 0.5;   // opacity for bridge when the player does not have a node to move to
+nodeOpacity = 0.75;
+nodelessOpacity = 0.35;   // opacity for bridge when the player does not have a node to move to
 opacityInc = 0.005;
 bridgeIsReforming = false;
 
@@ -130,6 +131,7 @@ function setScene() {
     setActiveNode();
     resetOtherNode();
     goalNode = otherSideNode;
+    goalNode.material.color.setHex( Colors.red );
     
     scene.add(player);
     scene.add(playerXAxis);
@@ -139,11 +141,19 @@ function setScene() {
     
     goal = new Goal();
     scene.add(goal);
-    goal.position.x = goalNode.position.x;
-    goal.position.y = goalHeight;
-    goal.position.z = goalNode.position.z;
+    
+    goal.position.x = goalNode.getWorldPosition().x;
+    goal.position.y = goalNode.getWorldPosition().y + goalHeight;
+    goal.position.z = goalNode.getWorldPosition().z;
+    
+    // this line oddly needed, or the goal will not show
+    console.log(goal.getWorldPosition());
+    
     goalNode.updateMatrixWorld();
     THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
+    
+    // this line oddly needed, or the goal will not show
+    console.log(goal.getWorldPosition());
     
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
@@ -343,7 +353,7 @@ function reformBridge() {
         }
         
         else {
-            if(bridgePieces[0].material.opacity >= 1.0)
+            if(bridgePieces[0].material.opacity >= nodeOpacity)
                 bridgeIsReforming = false;
         }
     }
@@ -351,59 +361,87 @@ function reformBridge() {
 
 // reset goal's position 
 function resetGoal() {
-    var dx = Math.pow((camera.getWorldPosition().x - goal.getWorldPosition().x), 2);
-    var dy = Math.pow((camera.getWorldPosition().y - goal.getWorldPosition().y), 2);
-    var dz = Math.pow((camera.getWorldPosition().z - goal.getWorldPosition().z), 2);
-    var dist = Math.sqrt(dx + dy + dz);
-    
-    // choose a random node aside from the current goal node to be the new goalNode
-    if(dist < goalSize) {
-        var rand = Math.round(Math.random() * (nodes.length - 1));
-        while(nodes[rand] !== otherSideNode){
-            rand = Math.round(Math.random() * nodes.length);
+    if(remainingSteps <= 1) {
+        var dx = Math.pow((camera.getWorldPosition().x - goal.getWorldPosition().x), 2);
+        var dy = Math.pow((camera.getWorldPosition().y - goal.getWorldPosition().y), 2);
+        var dz = Math.pow((camera.getWorldPosition().z - goal.getWorldPosition().z), 2);
+        var dist = Math.sqrt(dx + dy + dz);
+
+        // choose a random node aside from the current goal node to be the new goalNode
+        if(dist < goalSize) {
+            var rand = Math.round(Math.random() * (nodes.length - 1));
+            while(nodes[rand] === otherSideNode){
+                rand = Math.round(Math.random() * (nodes.length - 1));
+            }
+
+            goalNode.updateMatrixWorld();
+            THREE.SceneUtils.detach(goal, goalNode, scene);
+            goalNode.material.color.setHex( Colors.brown );
+            goalNode = nodes[rand];
+            goalNode.material.color.setHex( Colors.red );
+            
+            
+            console.log(goalNode.getWorldPosition());
+
+            // choose position of goal relative to new goal node
+            var choice = Math.round(Math.random() * 5);
+
+            switch(choice) {
+                case 0:
+                    goal.position.x = goalNode.getWorldPosition().x + goalHeight;
+                    goal.position.y = goalNode.getWorldPosition().y;
+                    goal.position.z = goalNode.getWorldPosition().z;
+                    break;
+
+                case 1:
+                    goal.position.x = goalNode.getWorldPosition().x - goalHeight;
+                    goal.position.y = goalNode.getWorldPosition().y;
+                    goal.position.z = goalNode.getWorldPosition().z;
+                    break;
+
+                case 2:
+                    goal.position.x = goalNode.getWorldPosition().x;
+                    goal.position.y = goalNode.getWorldPosition().y + goalHeight;
+                    goal.position.z = goalNode.getWorldPosition().z;
+                    break;
+
+                case 3:
+                    goal.position.x = goalNode.getWorldPosition().x;
+                    goal.position.y = goalNode.getWorldPosition().y - goalHeight;
+                    goal.position.z = goalNode.getWorldPosition().z;
+                    break;
+
+                case 4:
+                    goal.position.x = goalNode.getWorldPosition().x;
+                    goal.position.y = goalNode.getWorldPosition().y;
+                    goal.position.z = goalNode.getWorldPosition().z + goalHeight;
+                    break;
+
+                case 5:
+                    goal.position.x = goalNode.getWorldPosition().x;
+                    goal.position.y = goalNode.getWorldPosition().y;
+                    goal.position.z = goalNode.getWorldPosition().z - goalHeight;
+                    break;
+
+                default:
+                    goal.position.x = goalNode.getWorldPosition().x;
+                    goal.position.y = goalNode.getWorldPosition().y;
+                    goal.position.z = goalNode.getWorldPosition().z - goalHeight;
+                    break;
+            }
+            
+            // this line oddly needed, or the goal will not show
+            console.log(goal.getWorldPosition());
+            
+            // parent goal Node to goal again
+            goalNode.updateMatrixWorld();
+            THREE.SceneUtils.attach(goal, scene, goalNode);
+            
+            // this line oddly needed, or the goal will not show
+            console.log(goal.getWorldPosition());
         }
         
-        goalNode.updateMatrixWorld();
-        THREE.SceneUtils.detach(goal, goalNode, scene);
-        
-        goalNode = nodes[rand];
     }
-    
-    // choose position of goal relative to new goal node
-    var choice = Math.round(Math.random() * 5);
-    
-    switch(choice) {
-        case 0:
-            goal.position.set(goalNode.getWorldPosition().x + goalHeight, goal.getWorldPosition().y, goal.getWorldPosition().z);
-            break;
-            
-        case 1:
-            goal.position.set(goalNode.getWorldPosition().x - goalHeight, goal.getWorldPosition().y, goal.getWorldPosition().z);
-            break;
-            
-        case 2:
-            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y + goalHeight, goal.getWorldPosition().z);
-            break;
-            
-        case 3:
-            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y - goalHeight, goal.getWorldPosition().z);
-            break;
-            
-        case 4:
-            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y, goal.getWorldPosition().z + goalHeight);
-            break;
-            
-        case 5:
-            goal.position.set(goalNode.getWorldPosition().x, goal.getWorldPosition().y, goal.getWorldPosition().z - goalHeight);
-            break;
-            
-        default:
-            break;
-    }
-    
-    // parent goal Node to goal again
-    goalNode.updateMatrixWorld();
-    THREE.SceneUtils.attach(goal, scene, goalNode);
 }
 
 // reset the game when player reaches the goal;
@@ -446,7 +484,7 @@ function resetOtherNode() {
         // set the new other node if found near the end of the bridge
         if(dist < nodeRange) {
             otherSideNode = nodes[i];
-            setBridgeOpacity(1.0);
+            setBridgeOpacity(nodeOpacity);
             return;
         }
     }
@@ -485,7 +523,7 @@ function normalize(v,vmin,vmax,tmin, tmax){
 // rotation nodes for player
 function Node() {
     var nodeGeo = new THREE.BoxGeometry(nodeSize, nodeSize, nodeSize);
-    var nodeMat = new THREE.MeshLambertMaterial( { color: Colors.brown } );
+    var nodeMat = new THREE.MeshLambertMaterial( { color: Colors.brown, transparent: true, opacity: 0.85 } );
     var node = new THREE.Mesh(nodeGeo, nodeMat);
 
     return node;
@@ -494,7 +532,7 @@ function Node() {
 // pieces of the moving bridge
 function BridgePiece() {
     var pieceGeo = new THREE.BoxGeometry((nodeSize * 0.85), nodeSize, nodeSize);
-    var pieceMat = new THREE.MeshLambertMaterial( { color: Colors.white, transparent: true, opacity: 1 } );
+    var pieceMat = new THREE.MeshLambertMaterial( { color: Colors.white, transparent: true, opacity: nodeOpacity } );
     var piece = new THREE.Mesh(pieceGeo, pieceMat);
 
     return piece;
@@ -570,14 +608,14 @@ function onKeyPress( event ) {
             zIsRotating = true;
         }
     }
-    
-    // press m to move only when player and/or nodes are not moving 
-    // and only if there is a node on the other side of the bridge
-    else if(k === 'm' || k === 'M') {
-        if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving && (otherSideNode !== null)) {
-            player.updateMatrixWorld();
-            cameraIsMoving = true;
-        }
+}
+
+// click mouse to move player only when player and/or nodes are not moving 
+// and only if there is a node on the other side of the bridge
+function onMouseClick( event ) {
+    if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving && (otherSideNode !== null)) {
+        player.updateMatrixWorld();
+        cameraIsMoving = true;
     }
 }
 
@@ -599,6 +637,8 @@ function loop() {
     moveCamera();
     updateCamera();
     
+    resetGoal();
+    
     reformBridge();
     animateGoal();
     
@@ -611,6 +651,7 @@ function init() {
     
     document.querySelector("#RenderCanvas").appendChild(renderer.domElement);
     document.addEventListener("keypress", onKeyPress, false);
+    document.addEventListener("click", onMouseClick, false);
     document.addEventListener("mousemove", onMouseMove, false);
     loop();
 }
