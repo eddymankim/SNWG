@@ -2,7 +2,7 @@
 layout: post
 author: Andrew Viny
 title: Tweet mountain
-thumbnail: w2_aviny_thumbnail.png
+thumbnail: tweet.png
 week-assignment: 13
 ---
 <html>
@@ -14,9 +14,10 @@ week-assignment: 13
 </head>
 
 <body>
-	<div style="font-family:'arial'; font-size: 24px"> Cube builder! </div> 
+	<div style="font-family:'arial'; font-size: 24px"> Tweet Mountain </div> 
 	<br>
-	<div style="font-family:'arial'; font-size: 18px"> Move the cube usind the arrow keys (use 'U' for up and 'D' for down in the z axis).  To place a cube press the 's' key and another cube will appear at the origin.  The current cube is the tranlucent yellow one. </div> 
+	<div style="font-family:'arial'; font-size: 12px"> Tweet Mountain is a virtual environment, constructed from lines and shaped by tweets.  When you load Tweet Mountain, this site pulls the last 900 tweets @realDonaldTrump, and pulls out the most common words (a little bit of filtering is done to remove boring words like "it's", "and", "or", etc).  These words deform the surface of lines and create a landscape.  This project presented a number of challenges.  I had to learn how to grab live data from Twitter, filter, sort, and create meaningful information from it.  I also had to devise a way to construct a seamless environment which would visualize this information. </div> 
+	<br>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../code/aviny/oauth-1.0a.js"></script>
 	<script src="http://threejs.org/build/three.js"></script>
@@ -24,5 +25,14 @@ week-assignment: 13
 	<script src="../code/aviny/OrbitControls2.js"></script>
 	<script src="../code/aviny/blacklist.js"></script>
 	<script src="../code/aviny/get_data.js"></script>
+	<br>
+	<div style="font-family:'arial'; font-size: 18px"> Data</div> 
+	<div style="font-family:'arial'; font-size: 12px"> Getting this data from Twitter was more complicated than I anticipated.  The API limits you to 100 Tweets for each request.  To get a large enough sample to make the most common words representative of the current conversation, I needed to make multiple calls collecting the data 100 tweets at a time.  The next issue came with OAuth.  To get around these limitations I utilized a service called oauth.io. </div>
+	<br>
+	<div style="font-family:'arial'; font-size: 18px"> Landscape</div> 
+	<div style="font-family:'arial'; font-size: 12px"> I chose to place mounds (meshes placed then scaled in place based on the number of the words they represent appear in the sample tweets).  After placing the mounds I drape a cloth of lines over top of them using raycasters and splines.  Once the landscape is constructed and the lines are draped over it, I then place the words above the mounds. </div> 
+	<br>
+	<div style="font-family:'arial'; font-size: 18px"> Controls and motion </div> 
+	<div style="font-family:'arial'; font-size: 12px"> Early in the developement of this project I flipped the orientation of the camera so that the z axis was oriented vertically.  This allowed me to more easly understand where things like my mounds, my cameras and my lines where being places or moved in space while I was building the project.  Unfortunately when I went to add motion at the end I found that the pointer-lock cnotrols I had intended to use didn't support this orientation.  Unfortunately I had to shift to using Orbital controls for this reason.  Even these controls required a great deal of adjustment to work in thr correct orientation. </div> 
 </body>
 </html>
