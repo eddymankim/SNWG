@@ -64,8 +64,8 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
     // How far you can orbit vertically, upper and lower limits.
     // Range is 0 to Math.PI radians.
-    this.minPolarAngle = 0; // radians
-    this.maxPolarAngle = Math.PI; // radians
+    this.minPolarAngle = -30/180*Math.PI; // radians
+    this.maxPolarAngle = 70/180*Math.PI; // radians
 
     // Set to true to disable use of the keys
     this.noKeys = false;
@@ -220,11 +220,11 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
 
         // angle from z-axis around y-axis
 
-        var theta = Math.atan2( offset.x, offset.z );
+        var theta = Math.atan2( offset.x, offset.y );
 
         // angle from y-axis
 
-        var phi = Math.atan2( Math.sqrt( offset.x * offset.x + offset.z * offset.z ), offset.y );
+        var phi = Math.atan2( Math.sqrt( offset.x * offset.x + offset.y * offset.y ), offset.z );
 
         if ( this.autoRotate ) {
 
@@ -244,14 +244,14 @@ THREE.OrbitControls = function ( object, domElement, localElement ) {
         var radius = offset.length() * scale;
 
         // restrict radius to be between desired limits
-        radius = Math.max( this.minDistance, Math.min( this.maxDistance, radius ) );
+        //radius = Math.max( this.minDistance, Math.min( this.maxDistance, radius ) );
         
         // move target to panned location
         this.target.add( pan );
 
         offset.x = radius * Math.sin( phi ) * Math.sin( theta );
-        offset.y = radius * Math.cos( phi );
-        offset.z = radius * Math.sin( phi ) * Math.cos( theta );
+        offset.z = radius * Math.cos( phi );
+        offset.y = radius * Math.sin( phi ) * Math.cos( theta );
 
         position.copy( this.target ).add( offset );
 
