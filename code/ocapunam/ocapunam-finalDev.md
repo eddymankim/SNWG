@@ -20,9 +20,9 @@ import BoidsRenderer from '../ocapunam/BoidsRenderer.js'
 let rate = 3, dt = 0
 
 // a "terrain" and a "thing", our object containers
-let terrain = new T.Object3D(), thing = new T.Object3D()
+let terrain = new T.Object3D(), lights = new T.Object3D()
 
-let subDiv = 256
+let subDiv = 512
 
 let ground = new T.Mesh(
     new T.PlaneGeometry(1e4,1e4,subDiv,subDiv),
@@ -32,13 +32,38 @@ let ground = new T.Mesh(
     ground.receiveShadow = true
     terrain.add(ground)
 
+let hemiLight = new T.HemisphereLight( 0xffffff, 0xffffff, 0.3 );
+    hemiLight.color.setHSL( 0.6, 1, 0.6 );
+    hemiLight.position.set( 0, 50, 0 );
+    lights.add( hemiLight );
+let hemiLightHelper = new T.HemisphereLightHelper( hemiLight, 10 );
+    //lights.add( hemiLightHelper );
+                
+let dirLight = new T.DirectionalLight( 0xffffff, .5 );
+    dirLight.color.setHSL( 0.1, 1, 0.95 );
+    dirLight.position.set( -1, 1.75, 1 );
+    dirLight.position.multiplyScalar( 30 );
+    lights.add( dirLight );
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+var d = 50;
+    dirLight.shadow.camera.left = -d;
+    dirLight.shadow.camera.right = d;
+    dirLight.shadow.camera.top = d;
+    dirLight.shadow.camera.bottom = -d;
+    dirLight.shadow.camera.far = 3500;
+    dirLight.shadow.bias = -0.0001;
+let dirLightHeper = new T.DirectionalLightHelper( dirLight, 10 ) 
+    //lights.add( dirLightHeper );
+
 function update(time) {
     dt += time
     let curBoids = boids.boidsList
     if(curBoids != undefined){
         for (var i = 0; i < curBoids.length; i++) {
             let tempVert = Math.floor(curBoids[i].x)*subDiv + Math.floor(curBoids[i].y)
-            ground.geometry.vertices[tempVert].z += 1
+            ground.geometry.vertices[tempVert].z += 5
         }
     }
     // ground.geometry.vertices[100].z += 1*time
@@ -62,9 +87,8 @@ let renderer = new OzRenderer({
     path: '../../data/evan-erdos/' })
 
 
-thing.position.set(0,2.5,0)
 
-renderer.add(terrain, thing)
+renderer.add(terrain, lights)
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
