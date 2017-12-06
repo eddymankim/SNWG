@@ -22,26 +22,37 @@ let rate = 3, dt = 0
 // a "terrain" and a "thing", our object containers
 let terrain = new T.Object3D(), thing = new T.Object3D()
 
-let subDiv = 20
-
-// let boids = new BoidsRenderer()
+let subDiv = 256
 
 let ground = new T.Mesh(
-    new T.PlaneGeometry(1e2,1e2,subDiv,subDiv),
+    new T.PlaneGeometry(1e4,1e4,subDiv,subDiv),
     new T.MeshPhongMaterial({ color: 0xAAAAAA }))
     ground.rotation.set(-Math.PI/2,0,0)
     ground.castShadow = true
     ground.receiveShadow = true
     terrain.add(ground)
 
-
-// this is the update function that we pass to the renderer,
-// who then calls us back before it renders the scene.
 function update(time) {
     dt += time
-    ground.geometry.vertices[11].z += 1*time
+    let curBoids = boids.boidsList
+    if(curBoids != undefined){
+        for (var i = 0; i < curBoids.length; i++) {
+            let tempVert = Math.floor(curBoids[i].x)*subDiv + Math.floor(curBoids[i].y)
+            ground.geometry.vertices[tempVert].z += 1
+        }
+    }
+    // ground.geometry.vertices[100].z += 1*time
     ground.geometry.verticesNeedUpdate = true
 }
+
+let boids = new BoidsRenderer({
+    boidCount: 10,
+    width: subDiv,
+    height: subDiv,
+    update: (dt) => update(dt),
+})
+
+boids.init()
 
 
 
@@ -53,8 +64,6 @@ let renderer = new OzRenderer({
 
 thing.position.set(0,2.5,0)
 
-
-// adds our terrain and the spinning thing to the renderer
 renderer.add(terrain, thing)
 
 function getRandomInt(min, max) {

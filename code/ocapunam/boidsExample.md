@@ -11,14 +11,19 @@ import BoidsRenderer from '../ocapunam/BoidsRenderer.js'
 
 let time = 0
 
-function update(dt) {
-     time += dt
-}
-
 let boids = new BoidsRenderer({
 	boidCount: 100,
 	update: (dt) => update(dt),
 })
+
+function update(dt) {
+     time += dt
+     console.log(boids.boidsList)
+}
+
+
+
+
 
 boids.init()
 

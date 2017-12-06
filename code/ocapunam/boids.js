@@ -13,8 +13,8 @@ export function Boid(swarm) {
     this.mesh.position.set(this.x, this.y)
 }
 
-Boid.prototype.radius = 6;
-Boid.prototype.speed = 2;
+Boid.prototype.radius = 2;
+Boid.prototype.speed = 1;
 Boid.prototype.radialSpeed = Math.PI / 60;
 Boid.prototype.vision = 50;
 
@@ -127,7 +127,10 @@ export function Swarm(w,h) {
     this.boids = [];
     var swarm = this;
     this.animate = function() { Swarm.step(swarm) }
-    this.padding = 8;
+
+// wrap padding
+
+    this.padding = 0;
 }
 
 Swarm.prototype.createBoids = function(scene, n=1) {
