@@ -1,8 +1,8 @@
 // Edward Shin
 // Realms and Bridges
-// Phase 2
+// Phase 3
 // Start: 11-09-17
-// End: 11-29-17
+// End: 12-06-17
 
 import * as THREE from '../lib/module.js'
 
@@ -10,9 +10,9 @@ var scene, skybox, camera, raycaster, renderer;    // three.js elements
 var nodes, bridgePieces, numBPieces, bridgeSize, bridgeSpace, 
     gridLength, nodeSize, nodeSpace, end1, end2, nodeRange;  // parts for node and bridge
 
-var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode;    // to be used for moving player and bridge
+var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode, blackScreen;    // to be used for moving player and bridge
 var xIsRotating, yIsRotating, zIsRotating, cameraIsMoving;
-var rotInc, rotIncX, rotIncY, rotIncZ, rotXCount, rotYCount, rotZCount, stepInc, remainingRot, remainingSteps, xAxis, yAxis, zAxis;
+var rotInc, rotIncX, rotIncY, rotIncZ, rotXCount, rotYCount, rotZCount, stepInc, remainingRot, originalRot, remainingSteps, xAxis, yAxis, zAxis;
 var nodelessOpacity, nodeOpacity, opacityInc, bridgeIsReforming;
 var cameraHeight;
 var goal, goalSize, goalRange, goalHeight, goalRot, goalNode;
@@ -27,7 +27,8 @@ var Colors = {
 	brown: 0x59332e,
 	pink: 0xF5986E,
 	brownDark: 0x23190f,
-	blue: 0x68c3c0
+	blue: 0x68c3c0,
+    black: 0x000000
 };
 
 
@@ -36,7 +37,7 @@ var Colors = {
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var raycaster = new THREE.Raycaster();
-var renderer = new THREE.WebGLRenderer({ antialias:true, });
+var renderer = new THREE.WebGLRenderer( {antialias: true, } );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 
@@ -80,6 +81,7 @@ playerYAxis = new THREE.Object3D(); // reference for player y aixs
 playerXAxis.rotation.y = Math.PI / 2;
 playerYAxis.rotation.x = Math.PI / 2;
 bridge = new THREE.Object3D();  // bridge Object by combining bridge and end pieces
+blackScreen = new BlackScreen();
 
 xIsRotating = false;
 yIsRotating = false;
@@ -90,6 +92,7 @@ rotInc = rotIncX = rotIncY = rotIncZ = Math.PI / 1000;
 rotXCount = rotYCount = rotZCount = 0;
 stepInc = 0.01;
 remainingRot = Math.PI / 2;
+originalRot = remainingRot;
 remainingSteps = nodeSpace;
 xAxis = playerXAxis.getWorldDirection().normalize();      // x axis in player's POV
 yAxis = playerYAxis.getWorldDirection().normalize();      // y axis in player's POV
@@ -109,7 +112,7 @@ goalRot = 0.01;
 
 mousePos = {x: 0, y: 0};
 minMouseX = -Math.PI / 8;
-maxMouseX = Math.PI / 4;
+maxMouseX = Math.PI / 8;
 minMouseY = -Math.PI / 8;
 maxMouseY = Math.PI / 8;
 
@@ -136,6 +139,7 @@ function setScene() {
     scene.add(player);
     scene.add(playerXAxis);
     scene.add(playerYAxis);
+    
     player.add(playerXAxis);
     player.add(playerYAxis);
     
@@ -152,12 +156,21 @@ function setScene() {
     goalNode.updateMatrixWorld();
     THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
     
-    // this line oddly needed, or the goal will not show
-    //console.log(goal.getWorldPosition());
-    
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
     camera.position.y = cameraHeight;
+    
+    
+    scene.add(blackScreen);
+    blackScreen.position.y = cameraHeight;
+    blackScreen.position.z = -0.1;
+    blackScreen.scale.y = 0.01;
+    
+    // this line oddly needed, or the black screen will not show
+    console.log(blackScreen.getWorldPosition());
+    
+    camera.updateMatrixWorld();
+    THREE.SceneUtils.attach(blackScreen, scene, camera);
 }
 
 function makeNodeGrid() {
@@ -238,7 +251,7 @@ function rotateCamera() {
         remainingRot -= rotInc;
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
@@ -257,7 +270,7 @@ function rotateCamera() {
         remainingRot -= rotInc;
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
@@ -276,7 +289,7 @@ function rotateCamera() {
         remainingRot -= rotInc;
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
@@ -558,6 +571,16 @@ function Goal() {
     return goalMesh;
 }
 
+// blackout screen used in during transitions of x and z rotations
+// used so that players will not experience motion and/or mental sickness
+function BlackScreen() {
+    var blackGeo = new THREE.BoxGeometry(1.5, 1, 0);
+    var blackMat = new THREE.MeshBasicMaterial( { color: Colors.black, transparent: true, opacity: 0  } );
+    var black = new THREE.Mesh(blackGeo, blackMat);
+
+    return black;
+}
+
 // different envrionment objects/algorithms
 
 // test
@@ -567,6 +590,17 @@ function NatureNode() {
     var node = new THREE.Mesh(nodeGeo, nodeMat);
 
     return node;
+}
+
+function Branch() {
+    var root = new THREE.Object3D();
+    
+    var branchGeo = new THREE.BoxGeometry(nodeSize * 2, nodeSize * 2, nodeSize * 2);
+}
+
+// tree-like environment element
+function Tree() {
+    
 }
 
 ////////////
@@ -646,21 +680,18 @@ function loop() {
     requestAnimationFrame( loop );
 }
 
-async function init() {
+function init() {
     setScene();
-    await 0
-    loop()
-    //document.addEventListener("load", setScene, false);
+    
     document.querySelector("#RenderCanvas").appendChild(renderer.domElement);
     document.addEventListener("keypress", onKeyPress, false);
     document.addEventListener("click", onMouseClick, false);
     document.addEventListener("mousemove", onMouseMove, false);
-//    document.addEventListener("load", loop, false);
-    //loop();
+    loop();
 }
 
 init();
-//loop();
+loop();
     
     
     

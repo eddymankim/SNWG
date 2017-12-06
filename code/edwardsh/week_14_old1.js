@@ -1,8 +1,8 @@
 // Edward Shin
 // Realms and Bridges
-// Phase 2
+// Phase 3
 // Start: 11-09-17
-// End: 11-29-17
+// End: 12-06-17
 
 import * as THREE from '../lib/module.js'
 
@@ -36,7 +36,7 @@ var Colors = {
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var raycaster = new THREE.Raycaster();
-var renderer = new THREE.WebGLRenderer({ antialias:true, });
+var renderer = new THREE.WebGLRenderer( {antialias: true, } );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 
@@ -153,7 +153,7 @@ function setScene() {
     THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
     
     // this line oddly needed, or the goal will not show
-    //console.log(goal.getWorldPosition());
+    console.log(goal.getWorldPosition());
     
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
@@ -646,21 +646,18 @@ function loop() {
     requestAnimationFrame( loop );
 }
 
-async function init() {
+function init() {
     setScene();
-    await 0
-    loop()
-    //document.addEventListener("load", setScene, false);
+    
     document.querySelector("#RenderCanvas").appendChild(renderer.domElement);
     document.addEventListener("keypress", onKeyPress, false);
     document.addEventListener("click", onMouseClick, false);
     document.addEventListener("mousemove", onMouseMove, false);
-//    document.addEventListener("load", loop, false);
-    //loop();
+    loop();
 }
 
 init();
-//loop();
+loop();
     
     
     

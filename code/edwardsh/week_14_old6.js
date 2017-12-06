@@ -1,8 +1,8 @@
 // Edward Shin
 // Realms and Bridges
-// Phase 2
+// Phase 3
 // Start: 11-09-17
-// End: 11-29-17
+// End: 12-06-17
 
 import * as THREE from '../lib/module.js'
 
@@ -10,9 +10,9 @@ var scene, skybox, camera, raycaster, renderer;    // three.js elements
 var nodes, bridgePieces, numBPieces, bridgeSize, bridgeSpace, 
     gridLength, nodeSize, nodeSpace, end1, end2, nodeRange;  // parts for node and bridge
 
-var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode;    // to be used for moving player and bridge
+var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode, blackScreen;    // to be used for moving player and bridge
 var xIsRotating, yIsRotating, zIsRotating, cameraIsMoving;
-var rotInc, rotIncX, rotIncY, rotIncZ, rotXCount, rotYCount, rotZCount, stepInc, remainingRot, remainingSteps, xAxis, yAxis, zAxis;
+var originalRotInc, rotInc, rotIncX, rotIncY, rotIncZ, rotXCount, rotYCount, rotZCount, stepInc, remainingRot, originalRot, remainingSteps, xAxis, yAxis, zAxis, blackProgress;
 var nodelessOpacity, nodeOpacity, opacityInc, bridgeIsReforming;
 var cameraHeight;
 var goal, goalSize, goalRange, goalHeight, goalRot, goalNode;
@@ -27,7 +27,8 @@ var Colors = {
 	brown: 0x59332e,
 	pink: 0xF5986E,
 	brownDark: 0x23190f,
-	blue: 0x68c3c0
+	blue: 0x68c3c0,
+    black: 0x000000
 };
 
 
@@ -36,7 +37,7 @@ var Colors = {
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var raycaster = new THREE.Raycaster();
-var renderer = new THREE.WebGLRenderer({ antialias:true, });
+var renderer = new THREE.WebGLRenderer( {antialias: true, } );
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
 
@@ -69,7 +70,7 @@ bridgePieces = [];    // list of bridge pieces
 numBPieces = 5;       // number of bridge pieces
 bridgeSize = 1;       
 bridgeSpace = 0.125;    // spacing between bridge pieces
-gridLength = 5;         
+gridLength = 4;         
 nodeSize = 1;
 nodeSpace = ((numBPieces + 1) * bridgeSize) + ((numBPieces + 2) * bridgeSpace);     // spacing between nodes
 nodeRange = 0.5;
@@ -80,20 +81,23 @@ playerYAxis = new THREE.Object3D(); // reference for player y aixs
 playerXAxis.rotation.y = Math.PI / 2;
 playerYAxis.rotation.x = Math.PI / 2;
 bridge = new THREE.Object3D();  // bridge Object by combining bridge and end pieces
+blackScreen = new BlackScreen();   // a plane used to fade the screen in or out
 
 xIsRotating = false;
 yIsRotating = false;
 zIsRotating = false;
 cameraIsMoving = false;
 
-rotInc = rotIncX = rotIncY = rotIncZ = Math.PI / 1000;
+originalRotInc = rotInc = rotIncX = rotIncY = rotIncZ = Math.PI / 1000;
 rotXCount = rotYCount = rotZCount = 0;
 stepInc = 0.01;
 remainingRot = Math.PI / 2;
+originalRot = remainingRot;
 remainingSteps = nodeSpace;
 xAxis = playerXAxis.getWorldDirection().normalize();      // x axis in player's POV
 yAxis = playerYAxis.getWorldDirection().normalize();      // y axis in player's POV
 zAxis = player.getWorldDirection().normalize();           // z axis in player's POV
+blackProgress = 0;   // progression in fading the screen in and out
 
 nodeOpacity = 0.75;
 nodelessOpacity = 0.35;   // opacity for bridge when the player does not have a node to move to
@@ -110,8 +114,8 @@ goalRot = 0.01;
 mousePos = {x: 0, y: 0};
 minMouseX = -Math.PI / 8;
 maxMouseX = Math.PI / 4;
-minMouseY = -Math.PI / 8;
-maxMouseY = Math.PI / 8;
+minMouseY = -Math.PI / 4;
+maxMouseY = Math.PI / 4;
 
 natureSources = [];
 natureLength = gridLength + 1;
@@ -136,6 +140,7 @@ function setScene() {
     scene.add(player);
     scene.add(playerXAxis);
     scene.add(playerYAxis);
+    
     player.add(playerXAxis);
     player.add(playerYAxis);
     
@@ -152,16 +157,25 @@ function setScene() {
     goalNode.updateMatrixWorld();
     THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
     
-    // this line oddly needed, or the goal will not show
-    //console.log(goal.getWorldPosition());
-    
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
     camera.position.y = cameraHeight;
+    
+    
+    scene.add(blackScreen);
+    blackScreen.position.y = cameraHeight;
+    blackScreen.position.z = -0.1;
+    blackScreen.scale.y = 0.01;
+    
+    // this line oddly needed, or the black screen will not show
+    console.log(blackScreen.getWorldPosition());
+    
+    camera.updateMatrixWorld();
+    THREE.SceneUtils.attach(blackScreen, scene, camera);
 }
 
 function makeNodeGrid() {
-    var start = -(gridLength - 1) / 2;
+    var start = -(gridLength) / 2;
     
     for (var i = start; i < start + gridLength; i++) {
         var x = i * nodeSpace;
@@ -206,7 +220,7 @@ function makeBridge() {
 }
 
 function makeNatureGrid() {
-    var start = (-natureLength / 2) + 0.5;
+    var start = (-(natureLength + 1) / 2) + 0.5;
     
     for (var i = start; i < start + natureLength; i++) {
         var x = i * nodeSpace;
@@ -232,17 +246,28 @@ function makeNatureGrid() {
 
 function rotateCamera() {
     if(xIsRotating) {
+        if(blackScreen.material.opacity === 1)
+            rotIncX = originalRotInc * 4;
+        
+        else
+            rotIncX = originalRotInc;
+        
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(xAxis.normalize(), rotIncX);
         player.applyQuaternion(q);
-        remainingRot -= rotInc;
+        remainingRot -= rotIncX;
+        
+        blacking();
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
             THREE.SceneUtils.detach(activeNode, player, scene);
+            
+            blackScreen.scale.y = 0.01;
+            blackScreen.material.opacity = 0;
             
             updateAxis();
             resetOtherNode();
@@ -254,10 +279,10 @@ function rotateCamera() {
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(yAxis.normalize(), rotIncY);
         player.applyQuaternion(q);
-        remainingRot -= rotInc;
+        remainingRot -= (rotIncY);
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
@@ -270,17 +295,29 @@ function rotateCamera() {
     }
     
     else if(zIsRotating) {
+        if(blackScreen.material.opacity === 1)
+            rotIncZ = originalRotInc * 4;
+        
+        else
+            rotIncZ = originalRotInc;
+        
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(zAxis.normalize(), rotIncZ);
         player.applyQuaternion(q);
-        remainingRot -= rotInc;
+        remainingRot -= rotIncZ;
+        
+        blacking();
+        
         
         if(remainingRot <= 0) {
-            remainingRot = Math.PI / 2;
+            remainingRot = originalRot;
             
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
             THREE.SceneUtils.detach(activeNode, player, scene);
+            
+            blackScreen.scale.y = 0.01;
+            blackScreen.material.opacity = 0;
             
             updateAxis();
             resetOtherNode();
@@ -448,7 +485,9 @@ function resetGoal() {
 // the game should create a new environment and
 // set the goal to a random node at a random orientation
 function resetWorld() {
+    // remove previous nature elements
     
+    // generate new ones
 }
 
 function animateGoal() {
@@ -514,6 +553,32 @@ function normalize(v,vmin,vmax,tmin, tmax){
 	return tv;
 }
 
+// fading the screen in and out
+function blacking() {
+    // "de-blackening" screen
+    if(remainingRot < (Math.PI / 16)) {
+        blackProgress -= rotInc;
+        blackScreen.material.opacity = blackProgress / (Math.PI / 16);
+    }
+    
+    // "blackening" screen
+    else if(remainingRot > (7 * Math.PI / 16) && remainingRot < (Math.PI / 2)) {
+        blackProgress += rotInc;
+        blackScreen.material.opacity = blackProgress / (Math.PI / 16);
+    }
+    
+    else {
+        blackScreen.material.opacity = 1;
+    }
+    
+    
+}
+
+// animating the appearance of a new environment 
+function animateWorld() {
+    
+}
+
 ////////////
 
 
@@ -558,16 +623,59 @@ function Goal() {
     return goalMesh;
 }
 
-// different envrionment objects/algorithms
+// blackout screen used in during transitions of x and z rotations
+// used so that players will not experience motion and/or mental sickness
+function BlackScreen() {
+    var blackGeo = new THREE.BoxGeometry(1.5, 1, 0);
+    var blackMat = new THREE.MeshBasicMaterial( { color: Colors.black, transparent: true, opacity: 0 } );
+    var black = new THREE.Mesh(blackGeo, blackMat);
 
-// test
+    return black;
+}
+
+
+// core of the nature nodes with braces that move to change the experience
 function NatureNode() {
-    var nodeGeo = new THREE.BoxGeometry(nodeSize * 2, nodeSize * 2, nodeSize * 2);
-    var nodeMat = new THREE.MeshLambertMaterial( { color: Colors.blue } );
-    var node = new THREE.Mesh(nodeGeo, nodeMat);
+    var node = new THREE.Object3D();
+    
+    var coreGeo = new THREE.BoxGeometry(nodeSize * 0.5, nodeSize * 0.5, nodeSize * 0.5);
+    var coreMat = new THREE.MeshLambertMaterial( { color: Colors.blue, transparent: true, opacity: 1 } );
+    var core = new THREE.Mesh(coreGeo, coreMat);    
+    
+    var braceGeo = new THREE.BoxGeometry(0.2, nodeSpace * 1.45, 0.2);
+    var braceMat = new THREE.MeshLambertMaterial( { color: Colors.blue, transparent: true, opacity: 1  } );
+    var brace1 = new THREE.Mesh(braceGeo, braceMat);
+    var brace2 = new THREE.Mesh(braceGeo, braceMat);
+    var brace3 = new THREE.Mesh(braceGeo, braceMat);
+    var brace4 = new THREE.Mesh(braceGeo, braceMat);
+    
+    node.add(core);
+    node.add(brace1);
+    node.add(brace2);
+    node.add(brace3);
+    node.add(brace4);
+    
+    brace1.rotation.x = Math.PI / 4;
+    brace2.rotation.z = -Math.PI / 4;
+    brace3.rotation.x = -Math.PI / 4;
+    brace4.rotation.z = Math.PI / 4;
+    
+    /*
+    brace2.rotation.z = -Math.PI / 2;
+    brace3.rotation.x = -Math.PI / 2;
+    */
 
     return node;
 }
+
+
+// braces that move to change the experience
+function Brace() {
+    var base = new THREE.Object3D();
+    
+    
+}
+
 
 ////////////
 
@@ -581,6 +689,9 @@ function onKeyPress( event ) {
     
     if(k === 'x' || k === 'X') {
         if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving) {
+            // prepare black screen objetc for fading transition
+            blackScreen.scale.y = 1;
+            
             player.updateMatrixWorld();
             THREE.SceneUtils.attach(bridge, scene, player);
             THREE.SceneUtils.attach(activeNode, scene, player);
@@ -601,6 +712,9 @@ function onKeyPress( event ) {
     
     else if(k === 'z' || k === 'Z') {
         if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving) {
+            // prepare black screen objetc for fading transition
+            blackScreen.scale.y = 1;
+            
             player.updateMatrixWorld();
             THREE.SceneUtils.attach(bridge, scene, player);
             THREE.SceneUtils.attach(activeNode, scene, player);
@@ -646,21 +760,18 @@ function loop() {
     requestAnimationFrame( loop );
 }
 
-async function init() {
+function init() {
     setScene();
-    await 0
-    loop()
-    //document.addEventListener("load", setScene, false);
+    
     document.querySelector("#RenderCanvas").appendChild(renderer.domElement);
     document.addEventListener("keypress", onKeyPress, false);
     document.addEventListener("click", onMouseClick, false);
     document.addEventListener("mousemove", onMouseMove, false);
-//    document.addEventListener("load", loop, false);
-    //loop();
+    loop();
 }
 
 init();
-//loop();
+loop();
     
     
     
