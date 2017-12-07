@@ -127,7 +127,7 @@ export default class ozRenderer {
         ///
         ///     5c. You seem to have a lot of customizable colors to supply.
         ///
-        let renderer = new THREE.WebGLRenderer({ antialias: true, shadowMapEnabled: true })
+        let renderer = new THREE.WebGLRenderer({ antialias:true, shadowMapEnabled:true })
             renderer.setPixelRatio(window.devicePixelRatio)
             renderer.setSize(width, height)
             renderer.setClearColor(ambient, 0)
@@ -146,6 +146,7 @@ export default class ozRenderer {
             /// 6a. The fog constructor takes 3 arguments:
             ///     a color for the fog, and near and far distances for fading.
             ///
+
             scene.fog = new THREE.Fog(...Object.values(fog))
             scene.background = new THREE.Color(background)
 
@@ -156,6 +157,7 @@ export default class ozRenderer {
             ///     you need to add it to the scene for it to be updated and rendered.
             ///
             scene.add(new THREE.AmbientLight(ambient))
+            scene.add(new THREE.HemisphereLight(light, ground, 0.5))
 
         ///
         /// (7) The `camera` represents the viewport to be rendered,
@@ -192,9 +194,11 @@ export default class ozRenderer {
         ///     using a HemisphereLight will result in a tasteful gradient,
         ///     based on two colors and an intensity value.
         ///
-        let sun = new THREE.HemisphereLight(light, ground, 0.5)
+        let sun = new THREE.DirectionalLight(light, 0.5)
             sun.position.set(1,2,0)
+            sun.castShadow = true
             scene.add(sun)
+
 
 
         ///
@@ -247,7 +251,7 @@ export default class ozRenderer {
             ///
             ///     10d. Update your camera controller, it has a method called `update`.
             ///
-            controls.update()
+            controls.update(clock.getDelta())
 
 
             ///

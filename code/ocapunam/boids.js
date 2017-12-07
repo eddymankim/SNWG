@@ -7,10 +7,10 @@ export function Boid(swarm) {
     this.x = Math.random() * swarm.width;
     this.y = Math.random() * swarm.height;
     this.heading = Math.random() * 2 * Math.PI - Math.PI;
-    this.mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(100, 6, 6),
-        new THREE.MeshPhongMaterial({ color: 0xAAAAAA }))
-    this.mesh.position.set(this.x, this.y)
+    // this.mesh = new THREE.Mesh(
+    //     new THREE.SphereGeometry(100, 6, 6),
+    //     new THREE.MeshPhongMaterial({ color: 0xAAAAAA }))
+    // this.mesh.position.set(this.x, this.y)
 }
 
 Boid.prototype.radius = 2;
@@ -115,7 +115,7 @@ Boid.prototype.move = function(swarm) {
     this.y = Boid.wrap(this.y + Math.sin(this.heading) * this.speed,
                        -padding, height + padding * 2);
 
-    this.mesh.position.set(this.x, this.y, 0)
+    // this.mesh.position.set(this.x, this.y, 0)
 
 }
 
@@ -130,14 +130,14 @@ export function Swarm(w,h) {
 
 // wrap padding
 
-    this.padding = 0;
+    this.padding = -2;
 }
 
 Swarm.prototype.createBoids = function(scene, n=1) {
     for (var i=0; i<n; ++i) {   
         var curBoid = new Boid(this)
         this.boids.push(curBoid)
-        scene.add(curBoid.mesh)
+        // scene.add(curBoid.mesh)
     }
 }
 
