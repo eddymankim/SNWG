@@ -1,7 +1,7 @@
 /**
  * @author mrdoob / http://mrdoob.com/
  */
-import * as THREE from '../acassel/three.js'
+import * as THREE from './three.js'
 
 export default ( function () {
 

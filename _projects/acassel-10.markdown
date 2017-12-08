@@ -5,66 +5,107 @@ permalink: /code/acassel-10/
 author: adrienne
 ---
 
-This is a primary sketchup of figuring out how to attach sound parameters from Pizzicato.js to shape parameters in THREE.js. I used distortion, a low pass filter, tremolo, a ring modulator, and a stero panner to generate some sounds and made some primitives that I could change accordingly. The key functions are J and K to start, lowercase j and k to stop. 
+This is a primary sketchup of figuring out how to attach sound parameters from Pizzicato.js to shape parameters in T.js. I used distortion, a low pass filter, tremolo, a ring modulator, and a stero panner to generate some sounds and made some primitives that I could change accordingly. The key functions are J and K to start, lowercase j and k to stop. 
 
 <script deferred type="module">
 
-
-import * as THREE from '../lib/module.js'
 import * as T from '../acassel/module.js'
 
-var scene = new THREE.Scene();
-var clock = new THREE.Clock();
-var aspect = window.innerWidth / window.innerHeight;
-scene.background = new THREE.Color(0xFBD2D7);
-scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
+var uniforms = {
+    amplitude: { value: 1.0 },
+    color:     { value: new T.Color( 0xff2200 ) },
+    texture:   { value: new T.TextureLoader().load( "textures/water.jpg" ) }
+  };
+  uniforms.texture.value.wrapS = uniforms.texture.value.wrapT = T.RepeatWrapping;
+  var shaderMaterial = new T.ShaderMaterial( {
+    uniforms: uniforms,
+    vertexShader:document.getElementById( 'vertexshader' ).textContent,
+    fragmentShader: document.getElementById( 'fragmentshader' ).textContent
+  });
 
-
-//set up camera
-var camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 0.1, 1000);
- camera.position.z = 500;
- camera.position.y = 50;
-
-
-//set up the renderer
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-//orbit controls
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.addEventListener('change', render); 
-controls.enableZoom = false;
-
-//add the lights
-var ambientLight = new THREE.AmbientLight(0x111111);
-scene.add(ambientLight);
+var renderer = new T.Renderer({       
+    color: 0xFBD2D7, ground: 0x1F11FF,
+    ambient: 0x111111, light: 0xFBD2D7,
+    position: { x:0, y:200, z:500 },
+    rotation: { x:0, y:0, z:0 },
+    fov:50, near:0.001, far:100000,
+    fog: { color:0xccccee, near:1, far:10000 },
+    gl: { logarithmicDepthBuffer:true, antialias:true },
+    update: (time=0.01) => { },
+    onload: (manager, load=()=>{}) => { },
+    onclick: (object={}) => { }, })
 
 // //make the shapes
 // var shapes = [];
-// var geometry = new THREE.CubeGeometry(20, 20, 20);
-// var material = new THREE.MeshNormalMaterial();
+// var geometry = new T.CubeGeometry(20, 20, 20);
+// var material = new T.MeshNormalMaterial();
 //positions the shapes randomly
 // for (var i = 0; i < 400; i ++) {
-// var mesh = new THREE.Mesh(geometry, material);
+// var mesh = new T.Mesh(geometry, material);
 // mesh.position.x = Math.random() * 400 - 200
 // mesh.position.y = Math.random() * 400 - 200
 // mesh.position.z = Math.random() * 400 - 200
 
 //shapes.push(mesh);
 
+
 // }
-
-var sound = new T.Pizzicato.Sound({ 
-    source: 'wave',
-    options: { type: 'sawtooth', frequency: 146.83 }
+var clay = new Pizzicato.Sound('../acassel/TRAX/clay.wav', function() {
+    // Sound loaded!
+    clay.play();
 });
 
-var sound2 = new T.Pizzicato.Sound({
-    source: 'wave',
-    options: { type: 'sine', frequency: 246.94 }
+var sharps1 = new Pizzicato.Sound('../acassel/TRAX/sharps1.wav', function() {
+    // Sound loaded!
+    sharps1.play();
+});
+
+var sharps2 = new Pizzicato.Sound('../acassel/TRAX/sharps2.wav', function() {
+    // Sound loaded!
+    sharps2.play();
+});
+
+var squiggle = new Pizzicato.Sound('../acassel/TRAX/squiggle.wav', function() {
+    // Sound loaded!
+    squiggle.play();
+});
+
+var chimes = new Pizzicato.Sound('../acassel/TRAX/chimes.wav', function() {
+    // Sound loaded!
+    chimes.play();
+});
+
+var airways = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
+    // Sound loaded!
+    airways.play();
+});
+
+var dust = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
+    // Sound loaded!
+    dust.play();
+});
+
+function stopSound () {
+    clay.stop();
+    sharps1.stop();
+    sharps2.stop();
+    squiggle.stop();
+    chimes.stop();
+    dust.stop();
+
+}
+
+
+// var sound = new T.Pizzicato.({ 
+//     source: 'wave',
+//     options: { type: 'sawtooth', frequency: 146.83 }
+// });
+
+// var sound2 = new T.Pizzicato.Sound({
+//     source: 'wave',
+//     options: { type: 'sine', frequency: 246.94 }
     
-});
+// });
 
 //animations
 function changeFrequency(n) {  
@@ -84,56 +125,63 @@ function changeFrequencyD(n){
 }
 
 //sound modulation
-var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
-    frequency: 400,
-    peak: 10
-  });
-var distortion = new Pizzicato.Effects.Distortion({
-    gain: 1
-});
-var tremolo = new Pizzicato.Effects.Tremolo({
-    speed: 10,
-    depth: 0.8,
-    mix: 0.8
-});
-var ringModulator = new Pizzicato.Effects.RingModulator({
-    speed: 30,
-    distortion: 1,
-    mix: 0.5
-});
+// var lowPassFilter = new Pizzicato.Effects.LowPassFilter({
+//     frequency: 400,
+//     peak: 10
+//   });
+// var distortion = new Pizzicato.Effects.Distortion({
+//     gain: 1
+// });
+// var tremolo = new Pizzicato.Effects.Tremolo({
+//     speed: 10,
+//     depth: 0.8,
+//     mix: 0.8
+// });
+// var ringModulator = new Pizzicato.Effects.RingModulator({
+//     speed: 30,
+//     distortion: 1,
+//     mix: 0.5
+// });
 
-var stereoPanner = new Pizzicato.Effects.StereoPanner({
-    pan: 0
-});
+// var stereoPanner = new Pizzicato.Effects.StereoPanner({
+//     pan: 0
+// });
 
-sound.addEffect(lowPassFilter);
-sound.addEffect(distortion);
-sound.addEffect(tremolo);
-sound.addEffect(ringModulator);
-sound.play();
+// sound.addEffect(lowPassFilter);
+// sound.addEffect(distortion);
+// sound.addEffect(tremolo);
+// sound.addEffect(ringModulator);
+//sound.play();
 
-sound2.addEffect(stereoPanner);
+// sound2.addEffect(stereoPanner);
 //sound2.play();
 
 let t = -0.5
 
 //primitives 
-var geometry = new THREE.CubeGeometry(50, 50, 50);
-var material = new THREE.MeshNormalMaterial();
-var mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+var geometry = new T.CubeGeometry(50, 50, 50);
+var material = new T.MeshPhongMaterial();
+var mesh = new T.Mesh(geometry, material);
+//scene.add(mesh);
 
-var geometry2 = new THREE.SphereGeometry(20, 20, 20);
-var material2 = new THREE.MeshBasicMaterial();
-var sphere = new THREE.Mesh(geometry2, material2);
+var geometry2 = new T.SphereGeometry(20, 20, 20);
+var material2 = new T.MeshBasicMaterial();
+var sphere = new T.Mesh(geometry2, material2);
 //scene.add(sphere);
 
-var geometry3 = new THREE.SphereGeometry(60, 60, 60);
-var material3 = new THREE.MeshBasicMaterial();
-var blob = new THREE.Mesh(geometry3, material3);
+var geometry3 = new T.SphereGeometry(60, 60, 60);
+var material3 = new T.MeshBasicMaterial();
+var blob = new T.Mesh(geometry3, material3);
 blob.position.set(0, 0, 0)
 
-scene.add(blob);
+renderer.scene.add(blob);
+
+var geometry4 = new T.PlaneGeometry(2000, 2000, worldWidth - 1, worldDepth - 1);
+geometry.rotateX( - Math.PI / 2);
+
+for (var i = 0, l = geometry.vertices.length; i < l; i ++) {
+  geometry.vertices[i].y = 35 * Math.sin (i / 2);
+}
 
 function render() {
   changeFrequency(t);
@@ -142,24 +190,27 @@ function render() {
   sphere.scale.set (changeFrequencyC(t*50), changeFrequencyC(t*50), changeFrequencyC(t*50))
   sphere.position.set(changeFrequencyC(t)*400,0,changeFrequencyD(t)*200);
   sphere.material.color.setHex(0xFFFF00)
+  
   requestAnimationFrame(render);
+  // controls.update(1);
+  // controls.movementSpeed = 20;
 
-  lowPassFilter.frequency = changeFrequency(t)
-  distortion.gain = changeFrequency(t)*0.0005
-  tremolo.speed = changeFrequency(t)
-  ringModulator.speed = changeFrequency(t)
-  stereoPanner.pan = changeFrequencyC(t)
+  // lowPassFilter.frequency = changeFrequency(t)
+  // distortion.gain = changeFrequency(t)*0.0005
+  // tremolo.speed = changeFrequencyC(t)*10
+  // ringModulator.speed = changeFrequency(t)
+  // stereoPanner.pan = changeFrequencyC(t)
 
   geometry.change = changeFrequency(t)*0.05
-  sound2.frequency = changeFrequency(t*50)
+  //sound2.frequency = changeFrequency(t*50)
 
 //shape rotation
-  for (var i = 0; i <400; i++){
-    mesh.rotation.x += changeFrequencyB(t)*0.000001;
-    mesh.rotation.y += 0.00001;
-    mesh.rotation.z += 0.00001;
-  }
-
+  // for (var i = 0; i <400; i++){
+  //   mesh.rotation.x += changeFrequencyB(t)*0.000001;
+  //   mesh.rotation.y += 0.00001;
+  //   mesh.rotation.z += 0.00001;
+  // }
+  
   renderer.render(scene, camera);
 };
 
@@ -178,17 +229,14 @@ render();
 
 function keyListener(event) { 
     switch (event.keyCode) {
-
     	//spacebar
-    	case 32: sound2.stop(), scene.remove(sphere); break
-      //J
-      case 74: sound2.play(), scene.add(sphere); break
-      //j
-      case 74 + 32: sound2.stop(), scene.remove(sphere); break
-      //K
-      case 75:  sound.play(), scene.add(mesh); break
-      //k
-      case 75 + 32: sound.stop(), scene.remove(mesh); break
+    	case 32: stopSound(); break
+     //  //J
+      case 74 + 32: clay.play(), renderer.scene.add(sphere); break
+     //  //K
+      case 75:  sound.play(), renderer.scene.add(mesh); break
+     //  //k
+      case 75 + 32: sound.stop(), renderer.scene.remove(mesh); break
 
     }
   }
@@ -224,3 +272,24 @@ document.addEventListener ('keypress', keyListener);
 //   	console.log(`sphere: ${sphere}, position: ${context.camera.position.y}`)
 //   	context.scene.add(sphere)
 // }
+
+
+
+
+
+
+async function onload(context, load) {
+    
+    // let files = ['planet-albedo.png', 'planet-normal.jpg' ]
+    // let [albedo,normal] = await load(...files)
+    
+    var path = '../acassel/Models'
+    var loader = new T.ModelLoader();
+    var model = await loader.load(path + '/spikes/scene.gltf')
+    var object = model.scene.children[0]
+        console.log(object)
+        object.scale.set(0.5, 0.5, 0.5)
+        renderer.scene.add(object)
+}
+
+onload();
