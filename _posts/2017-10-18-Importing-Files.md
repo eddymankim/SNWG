@@ -1,5 +1,5 @@
 ---
-layout: full
+layout: null
 title: Importing Files
 permalink: /code/importing-files/
 author: Ben Scott

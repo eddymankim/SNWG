@@ -1,11 +1,11 @@
 ---
-layout: full
+# layout: null
 title: sound
-permalink: /code/acassel-10/
+# permalink: /code/acassel-10/
 author: adrienne
 ---
 
-This is a primary sketchup of figuring out how to attach sound parameters from Pizzicato.js to shape parameters in T.js. I used distortion, a low pass filter, tremolo, a ring modulator, and a stero panner to generate some sounds and made some primitives that I could change accordingly. The key functions are J and K to start, lowercase j and k to stop. 
+This is a primary sketchup of figuring out how to attach sound parameters from Pizzicato.js to shape parameters in T.js. I used distortion, a low pass filter, tremolo, a ring modulator, and a stero panner to generate some sounds and made some primitives that I could change accordingly. The key functions are J and K to start, lowercase j and k to stop.
 
 <script deferred type="module">
 
@@ -23,7 +23,7 @@ var uniforms = {
     fragmentShader: document.getElementById( 'fragmentshader' ).textContent
   });
 
-var renderer = new T.Renderer({       
+var renderer = new T.Renderer({
     color: 0xFBD2D7, ground: 0x1F11FF,
     ambient: 0x111111, light: 0xFBD2D7,
     position: { x:0, y:200, z:500 },
@@ -96,7 +96,7 @@ function stopSound () {
 }
 
 
-// var sound = new T.Pizzicato.({ 
+// var sound = new T.Pizzicato.({
 //     source: 'wave',
 //     options: { type: 'sawtooth', frequency: 146.83 }
 // });
@@ -104,11 +104,11 @@ function stopSound () {
 // var sound2 = new T.Pizzicato.Sound({
 //     source: 'wave',
 //     options: { type: 'sine', frequency: 246.94 }
-    
+
 // });
 
 //animations
-function changeFrequency(n) {  
+function changeFrequency(n) {
  return Math.sin(n)*700 + 800;
 }
 
@@ -158,7 +158,7 @@ function changeFrequencyD(n){
 
 let t = -0.5
 
-//primitives 
+//primitives
 var geometry = new T.CubeGeometry(50, 50, 50);
 var material = new T.MeshPhongMaterial();
 var mesh = new T.Mesh(geometry, material);
@@ -190,7 +190,7 @@ function render() {
   sphere.scale.set (changeFrequencyC(t*50), changeFrequencyC(t*50), changeFrequencyC(t*50))
   sphere.position.set(changeFrequencyC(t)*400,0,changeFrequencyD(t)*200);
   sphere.material.color.setHex(0xFFFF00)
-  
+
   requestAnimationFrame(render);
   // controls.update(1);
   // controls.movementSpeed = 20;
@@ -210,7 +210,7 @@ function render() {
   //   mesh.rotation.y += 0.00001;
   //   mesh.rotation.z += 0.00001;
   // }
-  
+
   renderer.render(scene, camera);
 };
 
@@ -227,7 +227,7 @@ render();
 // }
 
 
-function keyListener(event) { 
+function keyListener(event) {
     switch (event.keyCode) {
     	//spacebar
     	case 32: stopSound(); break
@@ -279,10 +279,10 @@ document.addEventListener ('keypress', keyListener);
 
 
 async function onload(context, load) {
-    
+
     // let files = ['planet-albedo.png', 'planet-normal.jpg' ]
     // let [albedo,normal] = await load(...files)
-    
+
     var path = '../acassel/Models'
     var loader = new T.ModelLoader();
     var model = await loader.load(path + '/spikes/scene.gltf')

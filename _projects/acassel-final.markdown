@@ -1,7 +1,8 @@
 ---
 layout: full
-title: sound
+title: roomscape
 permalink: /code/acassel-final/
+thumbnail: acassel-thumbnail.png
 author: adrienne
 ---
 
@@ -25,9 +26,9 @@ let t = 0
 //     fragmentShader: document.getElementById( 'fragmentshader' ).textContent
 // });
 
-var renderer = new T.Renderer({       
+var renderer = new T.Renderer({
     color: 0xFBD2D7, ground: 0x1F11FF,
-    ambient: 0xDDCEE5, light: 0xFBD2D7, 
+    ambient: 0xDDCEE5, light: 0xFBD2D7,
     scattering: 0.4, brightness: 0.6,
     position: { x:0, y:200, z:9000 },
     rotation: { x:0, y:0, z:0 },
@@ -60,10 +61,10 @@ var worldDepth = 1000
 //     clay.play();
 // });
 
-// var sharps1 = new Pizzicato.Sound('../acassel/TRAX/sharps1.wav', 
+// var sharps1 = new Pizzicato.Sound('../acassel/TRAX/sharps1.wav',
 //   () => sharps1.play())
 
-// var sharps2 = new Pizzicato.Sound('../acassel/TRAX/sharps2.wav', 
+// var sharps2 = new Pizzicato.Sound('../acassel/TRAX/sharps2.wav',
 //   () => sharps2.play())
 
 // var squiggle = new Pizzicato.Sound('../acassel/TRAX/squiggle.wav',
@@ -92,7 +93,7 @@ function stopSound () {
 }
 
 
-// var sound = new T.Pizzicato.({ 
+// var sound = new T.Pizzicato.({
 //     source: 'wave',
 //     options: { type: 'sawtooth', frequency: 146.83 }
 // });
@@ -100,11 +101,11 @@ function stopSound () {
 // var sound2 = new T.Pizzicato.Sound({
 //     source: 'wave',
 //     options: { type: 'sine', frequency: 246.94 }
-    
+
 // });
 
 //animations
-function changeFrequency(n) {  
+function changeFrequency(n) {
  return Math.sin(n)*700 + 800;
 }
 
@@ -153,7 +154,7 @@ function changeFrequencyD(n){
 //sound2.play();
 
 
-//primitives 
+//primitives
 
 function createShape(geometry, material) {
 
@@ -167,7 +168,7 @@ let cube = createShape(
   new T.MeshPhongMaterial())
 
 let sphere = createShape(
-  new T.SphereGeometry(10, 10, 10), 
+  new T.SphereGeometry(10, 10, 10),
   new T.MeshBasicMaterial())
 
 
@@ -188,7 +189,7 @@ let blob = createShape(
 // var materialShader
 // var material = new T.MeshNormalMaterial({flatShading: true})
 var shader = {
-    uniforms: { 
+    uniforms: {
       time: {value:0},
       speed: {value:4},
       tDiffuse: {value:null} },
@@ -253,8 +254,8 @@ var shader = {
         vec3 color = rgb2hsv(packNormalToRGB(vNormal));
         // color.r += cos(time*speed*0.1);
         color = vec3(
-          mix(color.r,1.0,hue), 
-          mix(color.g,1.0,saturation), 
+          mix(color.r,1.0,hue),
+          mix(color.g,1.0,saturation),
           mix(color.b,1.0,brightness));
         color = hsv2rgb(color);
         float avg = mix(color.r, color.g, 0.5);
@@ -299,7 +300,7 @@ function update(dt) { t += dt
     v.set(x,y,z)
     // v.z += Math.cos(v.x)*Math.cos(v.y)+Math.sin(v.x)*Math.sin(v.y)*Math.cos(t+q)
     // v.x += Math.cos(t+q)
-    // v.y += Math.sin(t+q)   
+    // v.y += Math.sin(t+q)
     shader.uniforms.time.value = performance.now() / 1000
     shader.uniforms.speed.value = 3
   }
@@ -347,9 +348,9 @@ async function onload(context, load) {
       wildNonsense.material = material
       wildNonsense.renderOrder = 0
       context.scene.add(wildNonsense)
-      T.applyMaterial(wildNonsense, (thing) => { 
+      T.applyMaterial(wildNonsense, (thing) => {
       //T.applyMaterial(wildNonsense, ({material}) => {
-          if (thing.material===undefined) return 
+          if (thing.material===undefined) return
           thing.material = material
           thing.material.needsUpdate = true })
 
@@ -359,9 +360,9 @@ async function onload(context, load) {
   //     wildNonsense2.material = material
   //     wildNonsense2.renderOrder = 0
   //     context.scene.add(wildNonsense2)
-  //     T.applyMaterial(wildNonsense2, (thing) => { 
+  //     T.applyMaterial(wildNonsense2, (thing) => {
   //     //T.applyMaterial(wildNonsense2, ({material}) => {
-  //         if (thing.material===undefined) return 
+  //         if (thing.material===undefined) return
           // thing.material = material
   //         thing.material.needsUpdate = true })
 
@@ -370,8 +371,8 @@ async function onload(context, load) {
       object.scale.set(1, 1, 1)
       object.material = material
       //context.scene.add(object)
-      // T.applyMaterial(object, (thing) => { 
-      //     if (thing.material===undefined) return 
+      // T.applyMaterial(object, (thing) => {
+      //     if (thing.material===undefined) return
       //     // thing.material = new T.MeshPhongMaterial({})
       //     thing.material.needsUpdate = true })
 
@@ -379,7 +380,7 @@ async function onload(context, load) {
     var object1 = model1.scene.children[0]
         object1.scale.set(1, 1, 1)
         object.material = material
-        renderer.scene.add(object1)  
+        renderer.scene.add(object1)
 
     var model2 = await loader.load(path + '/group2/scene.gltf')
     var object2 = model2.scene.children[0]
@@ -390,13 +391,13 @@ async function onload(context, load) {
     var object3 = title.scene.children[0]
         object3.scale.set(1, 1, 1)
         object3.position.set(-30,200, 7000)
-        renderer.scene.add(object3)    
+        renderer.scene.add(object3)
 
     // var scroll = await loader.load(path + '/scroll/scene.gltf')
     // var words = title.scene.children[0]
     //     words.scale.set(1, 1, 1)
     //     words.position.set(0, 300, 7000)
-    //     renderer.scene.add(words) 
+    //     renderer.scene.add(words)
 
   context.scene.add(cube)
   context.scene.add(sphere)
@@ -404,7 +405,7 @@ async function onload(context, load) {
 
   let clayFile = await soundLoader.load('clay.wav')
   let clay = new T.PositionalAudio(context.listener)
-      clay.setBuffer(clayFile) 
+      clay.setBuffer(clayFile)
       clay.setRefDistance(20)
       clay.setLoop(true)
       clay.play()
@@ -415,7 +416,7 @@ async function onload(context, load) {
 
   let chimesFile = await soundLoader.load('chimes.wav')
   let chimes = new T.PositionalAudio(context.listener)
-      chimes.setBuffer(chimesFile) 
+      chimes.setBuffer(chimesFile)
       chimes.setRefDistance(100)
       chimes.setLoop(true)
       chimes.play()
@@ -423,15 +424,15 @@ async function onload(context, load) {
 
   let squiggleFile = await soundLoader.load('squiggle.wav')
   let squiggle = new T.PositionalAudio(context.listener)
-      squiggle.setBuffer(squiggleFile) 
+      squiggle.setBuffer(squiggleFile)
       squiggle.setRefDistance(100)
       squiggle.setLoop(true)
       //squiggle.play()
       context.add(squiggle)
-  
+
   let dustFile = await soundLoader.load('dust.wav')
   let dust = new T.PositionalAudio(context.listener)
-      dust.setBuffer(dustFile) 
+      dust.setBuffer(dustFile)
       dust.setRefDistance(100)
       dust.setLoop(true)
       //dust.play()
@@ -446,7 +447,7 @@ async function onload(context, load) {
 //   sound.play();
 // }
 
-function keyListener(event) { 
+function keyListener(event) {
   switch (event.keyCode) {
     case 32: stopSound(); break // spacebar
     case 74 + 32: clay.play(), renderer.scene.add(sphere); break // J

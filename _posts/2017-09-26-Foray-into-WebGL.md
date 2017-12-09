@@ -1,5 +1,5 @@
 ---
-layout: code
+layout: null
 title: A Foray into WebGL
 permalink: /code/foray-into-webgl/
 ---
