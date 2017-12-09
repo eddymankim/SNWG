@@ -1,7 +1,7 @@
 ---
 layout: full
 title: Final Development
-permalink: /code/ocapunam-finalDev/
+permalink: /code/ocapunam-final/
 author: Ozguc
 ---
 <body>
