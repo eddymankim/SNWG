@@ -29,7 +29,7 @@ var renderer = new T.Renderer({
     color: 0xFBD2D7, ground: 0x1F11FF,
     ambient: 0xDDCEE5, light: 0xFBD2D7, 
     scattering: 0.4, brightness: 0.6,
-    position: { x:0, y:200, z:500 },
+    position: { x:0, y:200, z:9000 },
     rotation: { x:0, y:0, z:0 },
     fov:50, near:0.001, far:100000,
     fog: { color:0xFBD2D7, near:1, far:1e4 },
@@ -156,6 +156,7 @@ function changeFrequencyD(n){
 //primitives 
 
 function createShape(geometry, material) {
+
   let mesh = new T.Mesh(geometry, material)
   mesh.receiveShadows = mesh.castShadows = true
   return mesh
@@ -166,7 +167,7 @@ let cube = createShape(
   new T.MeshPhongMaterial())
 
 let sphere = createShape(
-  new T.SphereGeometry(20, 20, 20), 
+  new T.SphereGeometry(10, 10, 10), 
   new T.MeshBasicMaterial())
 
 
@@ -200,7 +201,7 @@ var shader = {
       void main() {
           vUv = uv;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          float theta = sin(time*speed+position.y)/2.0;
+          float theta = sin(time*speed+position.y)/20.0;
           float c = cos(theta);
           float s = sin(theta);
           mat3 m = mat3(c, 0, s, 0, 1, 0, -s, 0, c);
@@ -282,7 +283,7 @@ function update(dt) { t += dt
   // tremolo.speed = changeFrequencyC(t)*10
   // ringModulator.speed = changeFrequency(t)
   // stereoPanner.pan = changeFrequencyC(t)
-  cube.geometry.change = changeFrequency(t)*0.05
+  // cube.geometry.change = changeFrequency(t)*0.05
   //sound2.frequency = changeFrequency(t*50)
   var fixDrift = 1
   if (blob.geometry.vertices[0].y > 60) fixDrift = 1
@@ -310,10 +311,21 @@ function update(dt) { t += dt
   blob.material.needsUpdate = true
 
   for (var i = 0; i <400; i++){
+    let mesh = []
     cube.rotation.x += changeFrequencyB(t)*0.000001;
     cube.rotation.y += 0.00001;
     cube.rotation.z += 0.00001;
+    cube.position.x = Math.random() * 400 - 200
+    cube.position.y = Math.random() * 400 - 200
+    cube.position.z = Math.random() * 400 - 200
+    sphere.position.x = Math.random() * 400 - 200
+    sphere.position.y = Math.random() * 400 - 200
+    sphere.position.z = Math.random() * 400 - 200
+
+    mesh.push(cube)
+
   }
+
 
 
   //ballCloth.update(dt)
@@ -329,11 +341,11 @@ async function onload(context, load) {
   var path = '../acassel/Models'
   var loader = new T.ModelLoader()
   var soundLoader = new T.SoundsLoader('../acassel/TRAX/')
-  var background = await loader.load(`${path}/spikes-1/scene.gltf`)
+  var background = await loader.load(`${path}/group2/scene.gltf`, `${path}/room1/scene.gltf`)
   var wildNonsense = background.scene.children[0]
       wildNonsense.scale.set(0.5, 0.5, 0.5)
       wildNonsense.material = material
-      //wildNonsense.renderOrder = 900
+      wildNonsense.renderOrder = 0
       context.scene.add(wildNonsense)
       T.applyMaterial(wildNonsense, (thing) => { 
       //T.applyMaterial(wildNonsense, ({material}) => {
@@ -341,9 +353,21 @@ async function onload(context, load) {
           thing.material = material
           thing.material.needsUpdate = true })
 
-  var model = await loader.load(path + '/spikes/scene.gltf')
+  // var background2 = await loader.load(`${path}/spikes-1/scene.gltf`)
+  // var wildNonsense2 = background2.scene.children[0]
+  //     wildNonsense2.scale.set(0.5, 0.5, 0.5)
+  //     wildNonsense2.material = material
+  //     wildNonsense2.renderOrder = 0
+  //     context.scene.add(wildNonsense2)
+  //     T.applyMaterial(wildNonsense2, (thing) => { 
+  //     //T.applyMaterial(wildNonsense2, ({material}) => {
+  //         if (thing.material===undefined) return 
+          // thing.material = material
+  //         thing.material.needsUpdate = true })
+
+  var model = await loader.load(path + '/group2/scene.gltf')
   var object = model.scene.children[0]
-      object.scale.set(0.5, 0.5, 0.5)
+      object.scale.set(1, 1, 1)
       object.material = material
       //context.scene.add(object)
       // T.applyMaterial(object, (thing) => { 
@@ -351,12 +375,30 @@ async function onload(context, load) {
       //     // thing.material = new T.MeshPhongMaterial({})
       //     thing.material.needsUpdate = true })
 
-    var model1 = await loader.load(path + '/room/scene.gltf')
+    var model1 = await loader.load(path + '/room1/scene.gltf')
     var object1 = model1.scene.children[0]
         object1.scale.set(1, 1, 1)
-        renderer.scene.add(object1)
+        object.material = material
+        renderer.scene.add(object1)  
 
-  //context.scene.add(cube)
+    var model2 = await loader.load(path + '/group2/scene.gltf')
+    var object2 = model2.scene.children[0]
+        object2.scale.set(1, 1, 1)
+        renderer.scene.add(object2)
+
+    var title = await loader.load(path + '/words/scene.gltf')
+    var object3 = title.scene.children[0]
+        object3.scale.set(1, 1, 1)
+        object3.position.set(-30,200, 7000)
+        renderer.scene.add(object3)    
+
+    // var scroll = await loader.load(path + '/scroll/scene.gltf')
+    // var words = title.scene.children[0]
+    //     words.scale.set(1, 1, 1)
+    //     words.position.set(0, 300, 7000)
+    //     renderer.scene.add(words) 
+
+  context.scene.add(cube)
   context.scene.add(sphere)
   context.scene.add(blob)
 
@@ -444,5 +486,12 @@ document.addEventListener ('keypress', keyListener);
 //   	console.log(`sphere: ${sphere}, position: ${context.camera.position.y}`)
 //   	context.scene.add(sphere)
 // }
+
+///////ADD SYNCHOPATED HIGH HATS
+
+  </script>
+  </body>
+</html>
+
 
 
