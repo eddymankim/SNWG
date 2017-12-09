@@ -1,21 +1,21 @@
 /* Boid prototype */
 
-import * as THREE from '../lib/module.js'
+import * as THREE from '../ocapunam/module.js'
 
 
 export function Boid(swarm) {
     this.x = Math.random() * swarm.width;
     this.y = Math.random() * swarm.height;
     this.heading = Math.random() * 2 * Math.PI - Math.PI;
+    this.radius = 3
     // this.mesh = new THREE.Mesh(
-    //     new THREE.SphereGeometry(100, 6, 6),
-    //     new THREE.MeshPhongMaterial({ color: 0xAAAAAA }))
+    //     new THREE.SphereGeometry(this.radius, 6, 6),
+    //     new THREE.MeshBasicMaterial({ transparent: true, color: 0xFFFFFF, opacity:.1}))
     // this.mesh.position.set(this.x, this.y)
 }
 
-Boid.prototype.radius = 2;
-Boid.prototype.speed = 1;
-Boid.prototype.radialSpeed = Math.PI / 60;
+Boid.prototype.speed = .5;
+Boid.prototype.radialSpeed = Math.PI / 100;
 Boid.prototype.vision = 50;
 
 Boid.prototype.distance = function(boid, width, height) {
@@ -71,7 +71,9 @@ Boid.prototype.step = function(swarm) {
     if (neighbors.length > 0) {
         var meanhx = 0, meanhy = 0;
         var meanx = 0, meany = 0;
-        var mindist = this.radius * 2, min = null;
+
+        // mindist between boids
+        var mindist = this.radius * 3, min = null;
         for (var i = 0; i < neighbors.length; i++) {
             var boid = neighbors[i];
             meanhx += Math.cos(boid.heading);

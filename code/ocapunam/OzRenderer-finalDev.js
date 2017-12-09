@@ -46,7 +46,9 @@
 ///         there are specific syntaxes for importing things selectively,
 ///         but in this case you'll want to import everything at once.
 ///
- import * as THREE from '../lib/module.js'
+
+
+import * as THREE from '../ocapunam/module.js'
 
 
 ///
@@ -101,10 +103,15 @@ export default class ozRenderer {
             light = 0xFEEBC1,
             ground = 0xF2E9CF,
             webgl = { antialias: true, shadowMapEnabled: true },
-            position = { x:0, y:0, z:0 },
-            fog = { color: 0xD7FFFD, near: 1e2, far: 1e3 },
+            position = { x:0, y:10, z:0 },
+            fog = { color: 0x87889c, near: 1e1, far: 1e2 },
             cam = { fov: 60, aspect: width/height, near: 0.1, far: 2e4 },
             update = (time) => { },
+            hdr={ exposure:1.5, tonemapping:THREE.LinearToneMapping, },
+            gl={ antialias:true, logarithmicDepthBuffer:true,
+                alpha:false, gamma:false, physical:true,
+                shadowType:THREE.PCFSoftShadowMap,
+                pixelRatio:window.devicePixelRatio, }
             }={}) {
 
 
@@ -127,12 +134,16 @@ export default class ozRenderer {
         ///
         ///     5c. You seem to have a lot of customizable colors to supply.
         ///
-        let renderer = new THREE.WebGLRenderer({ antialias:true, shadowMapEnabled:true })
+        let renderer = new THREE.WebGLRenderer(gl,{ antialias: true, shadowMapEnabled: true })
             renderer.setPixelRatio(window.devicePixelRatio)
             renderer.setSize(width, height)
             renderer.setClearColor(ambient, 0)
             renderer.shadowMap.type = THREE.PCFSoftShadowMap
             renderer.shadowMap.enabled = true
+            renderer.physicallyCorrectLights = gl.physical
+            renderer.toneMapping = hdr.tonemapping
+            renderer.toneMappingExposure = hdr.exposure
+            renderer.toneMappingWhitePoint = hdr.whitePoint || 1.0
 
 
         ///
@@ -146,8 +157,7 @@ export default class ozRenderer {
             /// 6a. The fog constructor takes 3 arguments:
             ///     a color for the fog, and near and far distances for fading.
             ///
-
-            scene.fog = new THREE.Fog(...Object.values(fog))
+            // scene.fog = new THREE.Fog(...Object.values(fog))
             scene.background = new THREE.Color(background)
 
 
@@ -156,8 +166,7 @@ export default class ozRenderer {
             /// 6b. Anything that has an impact on rendering (lights, meshes, etc)
             ///     you need to add it to the scene for it to be updated and rendered.
             ///
-            scene.add(new THREE.AmbientLight(ambient))
-            scene.add(new THREE.HemisphereLight(light, ground, 0.5))
+            scene.add(new THREE.AmbientLight(ambient, .25))
 
         ///
         /// (7) The `camera` represents the viewport to be rendered,
@@ -166,7 +175,8 @@ export default class ozRenderer {
         ///     While these don't usually need to change,
         ///     it's good to have them in the argument just in case.
         ///
-        let camera = new THREE.PerspectiveCamera(...Object.values(cam))
+
+        let camera = this.camera =  new THREE.PerspectiveCamera(...Object.values(cam))
 
 
             ///
@@ -174,7 +184,6 @@ export default class ozRenderer {
             ///     so being able to set it from the outside is beneficial.
             ///
             camera.position.set(...Object.values(position))
-
 
             ///
             /// 7b. Be sure to add the camera to the scene!
@@ -186,19 +195,31 @@ export default class ozRenderer {
         /// 7c. The `OrbitControls` are not included with THREE.js by default,
         ///     but they are included in the library module so you can use them.
         ///
-        let controls = new THREE.OrbitControls(camera,renderer.domElement)
-
+        var controls = new THREE.FirstPersonControls(camera);
+        controls.lookSpeed = 0.3;
+        controls.movementSpeed = 20;
+        controls.noFly = true;
+        controls.lookVertical = true;
+        controls.constrainVertical = true;
+        controls.verticalMin = 1.25;
+        controls.verticalMax = 1.75;
+        controls.lon = -150;
+        controls.lat = 120;
+            
 
         ///
         /// (8) Whereas the ambient light will give a flat look,
         ///     using a HemisphereLight will result in a tasteful gradient,
         ///     based on two colors and an intensity value.
         ///
-        let sun = new THREE.DirectionalLight(light, 0.5)
+        let sun = new THREE.HemisphereLight(light, ground, 0.5)
             sun.position.set(1,2,0)
-            sun.castShadow = true
             scene.add(sun)
 
+        let dir  = new THREE.DirectionalLight(light, 0.5)
+            dir.position.set(1,2,0)
+            dir.castShadow = true
+            scene.add(dir)
 
 
         ///
