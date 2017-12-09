@@ -1,0 +1,30 @@
+{
+  "name": "three-fly-controls",
+  "version": "1.1.0",
+  "description": "three.js fly controls module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mathisonian/three-fly-controls"
+  },
+  "keywords": [
+    "threejs",
+    "first",
+    "person",
+    "fly",
+    "controls",
+    "keyboard",
+    "mouse",
+    "three.js",
+    "three"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mathisonian/three-fly-controls/issues"
+  },
+  "homepage": "https://github.com/mathisonian/three-fly-controls-controls"
+}
