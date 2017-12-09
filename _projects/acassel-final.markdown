@@ -5,6 +5,8 @@ permalink: /code/acassel-final/
 author: adrienne
 ---
 
+<script src="../acassel/ammo.js"></script>
+<!-- <script src="../acassel/ClothMesh.js"></script> -->
 <script deferred type="module">
 
 import * as T from '../acassel/module.js'
@@ -53,31 +55,31 @@ var renderer = new T.Renderer({
 // }
 var worldDepth = 1000
 
-var clay = new Pizzicato.Sound('../acassel/TRAX/clay.wav', function() {
-    // Sound loaded!
-    clay.play();
-});
+// var clay = new Pizzicato.Sound('../acassel/TRAX/clay.wav', function() {
+//     // Sound loaded!
+//     clay.play();
+// });
 
-var sharps1 = new Pizzicato.Sound('../acassel/TRAX/sharps1.wav', 
-  () => sharps1.play())
+// var sharps1 = new Pizzicato.Sound('../acassel/TRAX/sharps1.wav', 
+//   () => sharps1.play())
 
-var sharps2 = new Pizzicato.Sound('../acassel/TRAX/sharps2.wav', 
-  () => sharps2.play())
+// var sharps2 = new Pizzicato.Sound('../acassel/TRAX/sharps2.wav', 
+//   () => sharps2.play())
 
-var squiggle = new Pizzicato.Sound('../acassel/TRAX/squiggle.wav',
-  () => squiggle.play())
+// var squiggle = new Pizzicato.Sound('../acassel/TRAX/squiggle.wav',
+//   () => squiggle.play())
 
-var chimes = new Pizzicato.Sound('../acassel/TRAX/chimes.wav', function() {
-    chimes.play();
-});
+// var chimes = new Pizzicato.Sound('../acassel/TRAX/chimes.wav', function() {
+//     chimes.play();
+// });
 
-var airways = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
-    airways.play();
-});
+// var airways = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
+//     airways.play();
+// });
 
-var dust = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
-    dust.play();
-});
+// var dust = new Pizzicato.Sound('../acassel/TRAX/airways.wav', function() {
+//     dust.play();
+// });
 
 function stopSound () {
     clay.stop();
@@ -168,8 +170,6 @@ let sphere = createShape(
   new T.MeshBasicMaterial())
 
 
-
-
 let blob = createShape(
   new T.SphereGeometry(60, 60, 60),
   //new T.MeshStandardMaterial({ color:0xFFFFFF, emission: 0xFF00AA }))
@@ -179,8 +179,7 @@ let blob = createShape(
 //mesh.geometry.rotateX(-Math.PI/2)
 
 
-// for (var i=0, l=blob.geometry.vertices.length; i<l; ++i) {
-//   let v = blob.geometry.vertices[i]
+// for (var i=0, l=blob.geometry.vertices.length; i<l; ++i) //   let v = blob.geometry.vertices[i]
 //   v.x += Math.sin(i*0.5)
 //   v.y += Math.cos(i*0.5)
 //   v.z += Math.sin(i*0.5)
@@ -208,29 +207,69 @@ var shader = {
           vec3 transformed = vec3(position)*m;
           mat4 modelView = viewMatrix * modelMatrix;
           mat4 modelViewProjection = projectionMatrix * modelView;
-          vNormal = (modelView * vec4(normal.xyz, 0.0)).xyz;
-          vec3 vNormal = (modelViewMatrix * vec4(normal.xyz, 0.0)).xyz*m;
+          vNormal = (modelView * vec4(normal.xyz, 0.0)).xyz*m;
+          // vec3 vNormal = (modelViewMatrix * vec4(normal.xyz, 0.0)).xyz*m;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xyz, 1.0);
           // gl_Position.xyz = vNormal*m; // HERE BE DRAGONS
           gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
       }`,
 
-      fragmentShader: new T.MeshNormalMaterial().fragmentShader
-    // fragmentShader: `
-    //   varying vec2 vUv;
-    //   varying vec3 vNormal;
-    //   uniform sampler2D tDiffuse;
+    fragmentShader: `
+      varying vec2 vUv;
+      varying vec3 vNormal;
+      uniform sampler2D tDiffuse;
+      uniform float time, speed;
 
-    //   void main() {
-    //     vec3 light = vec3(0.5, 0.2, 1.0);
-    //     light = normalize(light);
-    //     float dProd = max(0.0, dot(vNormal, light));
-    //     gl_FragColor = texture2D(tDiffuse,vUv);
-    //     // gl_FragColor = vec4(dProd*0.5, dProd, dProd*0.2, 1.0);
-    //   }`
+      vec3 rgb2hsv(vec3 c) {
+          vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+          vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+          vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+          float d = q.x - min(q.w, q.y);
+          float e = 1.0e-10;
+          return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+      }
+
+      vec3 hsv2rgb(vec3 c) {
+          vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+          vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+          return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+      }
+
+
+      vec3 packNormalToRGB(const in vec3 normal) {
+        return normalize(normal) * 0.5 + 0.5; }
+
+      void main() {
+        float opacity = 0.2;
+        float saturation = 0.05, hue = 20.6, brightness =0.9;
+        float yellowAmount = 0.9;
+        vec3 tint = vec3(0.9, 0.5, 0.9);
+        vec3 light = vec3(0.5, 0.2, 1.0);
+        light = normalize(light);
+        float dProd = max(0.0, dot(vNormal, light));
+        gl_FragColor = texture2D(tDiffuse,vUv);
+        //gl_FragColor = vec4(vNormal,0.25);
+        vec3 color = rgb2hsv(packNormalToRGB(vNormal));
+        // color.r += cos(time*speed*0.1);
+        color = vec3(
+          mix(color.r,1.0,hue), 
+          mix(color.g,1.0,saturation), 
+          mix(color.b,1.0,brightness));
+        color = hsv2rgb(color);
+        float avg = mix(color.r, color.g, 0.5);
+        float distillR = mix(avg, color.r, yellowAmount);
+        float distillG = mix(avg, color.g, yellowAmount);
+        float tintAmount = 0.8;
+        color.rgb = vec3(distillR, distillG, color.b);
+        // color.rgb *= dProd;
+        gl_FragColor = vec4(mix(color, tint, tintAmount), opacity);
+        // gl_FragColor = vec4(dProd*0.5, dProd, dProd*0.2, 1.0);
+      }`
 }
 
 var material = new T.ShaderMaterial(shader)
+
+const lawOfCos = (t,a,b) => Math.cos(a)*Math.cos(b)+Math.sin(a)*Math.sin(b)*Math.cos(t)
 
 function update(dt) { t += dt
   changeFrequency(t)
@@ -245,12 +284,17 @@ function update(dt) { t += dt
   // stereoPanner.pan = changeFrequencyC(t)
   cube.geometry.change = changeFrequency(t)*0.05
   //sound2.frequency = changeFrequency(t*50)
+  var fixDrift = 1
+  if (blob.geometry.vertices[0].y > 60) fixDrift = 1
+  else fixDrift = 0
+  // if (T.Vector3.Subtract(blob.geometry.vertices[i],blob.position)>200) fixDrift = -fixDrift
 
   for (var i=0, l=blob.geometry.vertices.length; i<l; ++i) {
     let v = blob.geometry.vertices[i], q = i/l;
-    let z = v.z + Math.cos(v.x)*Math.cos(v.y)+Math.sin(v.x)*Math.sin(v.y)*Math.cos(t+q)
-    let y = v.y + Math.cos(v.z)*Math.cos(v.x)+Math.sin(v.z)*Math.sin(v.x)*Math.cos(t+q)
-    let x = v.x + Math.cos(v.y)*Math.cos(v.z)+Math.sin(v.y)*Math.sin(v.z)*Math.cos(t+q)
+    let z = v.z + lawOfCos(t+q, v.x, v.y) - 0.5 * fixDrift
+    let y = v.y + lawOfCos(t+q, v.y, v.z) - 0.5 * fixDrift
+    let x = v.x + lawOfCos(t+q, v.z, v.x) - 0.5 * fixDrift
+
     v.set(x,y,z)
     // v.z += Math.cos(v.x)*Math.cos(v.y)+Math.sin(v.x)*Math.sin(v.y)*Math.cos(t+q)
     // v.x += Math.cos(t+q)
@@ -270,19 +314,26 @@ function update(dt) { t += dt
     cube.rotation.y += 0.00001;
     cube.rotation.z += 0.00001;
   }
+
+
+  //ballCloth.update(dt)
 }
+
+// var ballCloth = new T.ClothMesh({})
+//     ballCloth.cloth.position.set(100,0,0)
+//     renderer.scene.add(ballCloth.cloth)
+
 
 
 async function onload(context, load) {
   var path = '../acassel/Models'
-  var loader = new T.ModelLoader();
-
-
-  var background = await loader.load(`${path}/spikes/scene.gltf`)
+  var loader = new T.ModelLoader()
+  var soundLoader = new T.SoundsLoader('../acassel/TRAX/')
+  var background = await loader.load(`${path}/spikes-1/scene.gltf`)
   var wildNonsense = background.scene.children[0]
       wildNonsense.scale.set(0.5, 0.5, 0.5)
       wildNonsense.material = material
-      wildNonsense.renderOrder = 900
+      //wildNonsense.renderOrder = 900
       context.scene.add(wildNonsense)
       T.applyMaterial(wildNonsense, (thing) => { 
       //T.applyMaterial(wildNonsense, ({material}) => {
@@ -294,15 +345,56 @@ async function onload(context, load) {
   var object = model.scene.children[0]
       object.scale.set(0.5, 0.5, 0.5)
       object.material = material
-      context.scene.add(object)
+      //context.scene.add(object)
       // T.applyMaterial(object, (thing) => { 
       //     if (thing.material===undefined) return 
       //     // thing.material = new T.MeshPhongMaterial({})
       //     thing.material.needsUpdate = true })
 
+    var model1 = await loader.load(path + '/room/scene.gltf')
+    var object1 = model1.scene.children[0]
+        object1.scale.set(1, 1, 1)
+        renderer.scene.add(object1)
+
   //context.scene.add(cube)
   context.scene.add(sphere)
   context.scene.add(blob)
+
+  let clayFile = await soundLoader.load('clay.wav')
+  let clay = new T.PositionalAudio(context.listener)
+      clay.setBuffer(clayFile) 
+      clay.setRefDistance(20)
+      clay.setLoop(true)
+      clay.play()
+      context.listener.add(clay)
+      context.add(clay)
+      clay.position.set(0, 0, 0)
+
+
+  let chimesFile = await soundLoader.load('chimes.wav')
+  let chimes = new T.PositionalAudio(context.listener)
+      chimes.setBuffer(chimesFile) 
+      chimes.setRefDistance(100)
+      chimes.setLoop(true)
+      chimes.play()
+      context.add(chimes)
+
+  let squiggleFile = await soundLoader.load('squiggle.wav')
+  let squiggle = new T.PositionalAudio(context.listener)
+      squiggle.setBuffer(squiggleFile) 
+      squiggle.setRefDistance(100)
+      squiggle.setLoop(true)
+      //squiggle.play()
+      context.add(squiggle)
+  
+  let dustFile = await soundLoader.load('dust.wav')
+  let dust = new T.PositionalAudio(context.listener)
+      dust.setBuffer(dustFile) 
+      dust.setRefDistance(100)
+      dust.setLoop(true)
+      //dust.play()
+      context.add(dust)
+
 }
 
 //sawtoothWave.play();
