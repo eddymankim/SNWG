@@ -14,7 +14,7 @@ author: adrienne
 /// Copy this file to your own folder to get started,
 /// but this time, leave the import statements alone.
 ///
-import { default as ModelLoader } from '../acassel/ModelLoader.js'
+// import { default as ModelLoader } from '../acassel/ModelLoader.js'
 import * as T from '../evan-erdos/module.js'
 import * as Effects from '../evan-erdos/effects/module.js'
 import * as Shaders from '../evan-erdos/shaders/module.js'
@@ -185,7 +185,7 @@ async function onload(context, load) {
     //     table.position.set(0,4.5,0)
     //     context.add(table)
 
-    const modelLoader = new ModelLoader()
+    const modelLoader = new T.ModelLoader()
     const loadModel = (f,e) => new Promise((c,r) => modelLoader.load(f,c))
     ///
     /// for large trees of objects,

@@ -17,7 +17,7 @@ var TechnicalRender = (function () {
         renderer.shadowMap.enabled = true;
         var scene = new THREE.Scene();
         this.scene = scene;
-        scene.fog = new THREE.Fog(fog.color, fog.near, fog.far);
+        scene.fog = new THREE.Fog(fog.color, 100, 100000);
         scene.background = new THREE.Color(background);
         scene.add(new THREE.AmbientLight(ambient)); //@ts-ignore
         //let camera = new THREE.PerspectiveCamera(cam.fov, cam.aspect, cam.near, cam.far);

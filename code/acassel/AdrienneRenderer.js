@@ -46,7 +46,7 @@
 ///         there are specific syntaxes for importing things selectively,
 ///         but in this case you'll want to import everything at once.
 ///
-import * as T from '../lib/module.js'   
+import * as T from '../lib/module.js'
 // import * as MyThings from '...somewhere?'
 ///
 /// (2) Name your `class` and `export` it to other scripts: *********
@@ -93,11 +93,11 @@ export default class AdrienneRenderer {
     ///     3i. If you get stuck you can look at `evan-erdos/SimpleRenderer.js`,
     ///         you don't have to completely understand how it works to use it.
     ///
-    
+
     constructor({
         path = '../../data/',
-        width = window.innerWidth   
-        height = window.innerHeight
+        width = window.innerWidth,
+        height = window.innerHeight,
         ambient = 0x14031B,
         light = 0xFEEBC1,
         ground = 0xF2E9CF,
@@ -144,7 +144,7 @@ export default class AdrienneRenderer {
             ///     a color for the fog, and near and far distances for fading.
             ///
             scene.fog = new T.Fog(...Object.values(fog))
-            scene.background = new T.Color(background)
+            // scene.background = new T.Color(color)
 
 
             ///
@@ -174,7 +174,7 @@ export default class AdrienneRenderer {
             ///
             /// 7b. Be sure to add the camera to the scene!
             ///
-            scene.add(camera) 
+            scene.add(camera)
 
 
         ///
@@ -218,9 +218,9 @@ export default class AdrienneRenderer {
         ///         Use the Spread operator (`...`) to allow this function to take
         ///         any number of arguments, or a whole array of objects.
         ///
-        this.add = (...cats) => { 
+        this.add = (...cats) => {
             for (let thing of cats) {
-                scene.add(thing),
+                scene.add(thing)
             }
         }
 
@@ -248,7 +248,7 @@ export default class AdrienneRenderer {
             ///
             ///     10d. Update your camera controller, it has a method called `update`.
             ///
-            controller.update()
+            controls.update()
 
 
             ///
@@ -264,8 +264,8 @@ export default class AdrienneRenderer {
             ///     10f. At the end of the function, your should have the renderer `render`.
             ///          (what fortuitous luck you're having, this too is already done!)
             ///
-            renderer.render(scene, camera) 
-            
+            renderer.render(scene, camera)
+
         }
 
 

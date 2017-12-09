@@ -17,7 +17,7 @@ author: Edward Shin
 import * as T from '../lib/module.js'
 
 // you should rename this to match your own renderer
-import ShinRenderer from '../shin-workshop-1/ShinRenderer.js'
+import ShinRenderer from './ShinRenderer.js'
 
 // a rate of rotation and delta time
 let rate = 3, dt = 0
@@ -34,7 +34,7 @@ let building1 = new T.Mesh(
     building1.receiveShadow = true
     building1.castShadow = true
     city.add(building1)
-    
+
 let building2 = new T.Mesh(
     new T.CubeGeometry(15,70,10),
     new T.MeshStandardMaterial({ color: 0xFFFFFF }))
@@ -50,7 +50,7 @@ let building3 = new T.Mesh(
     building3.receiveShadow = true
     building3.castShadow = true
     city.add(building3)
-    
+
 let building4 = new T.Mesh(
     new T.CubeGeometry(7, 40, 46),
     new T.MeshStandardMaterial({ color: 0xFFFFFF }))
@@ -66,8 +66,8 @@ let building5 = new T.Mesh(
     building5.receiveShadow = true
     building5.castShadow = true
     city.add(building5)
-    
-    
+
+
 let building6 = new T.Mesh(
     new T.CubeGeometry(35, 12, 14),
     new T.MeshStandardMaterial({ color: 0xDDA0D0 }))
@@ -75,8 +75,8 @@ let building6 = new T.Mesh(
     building6.receiveShadow = true
     building6.castShadow = true
     city.add(building6)
-    
-    
+
+
 let building7 = new T.Mesh(
     new T.CubeGeometry(14, 43, 14),
     new T.MeshStandardMaterial({ color: 0xDDA0D0 }))
@@ -92,12 +92,12 @@ for (var i = 0; i < 15; i++) {
     let bottomRad = (Math.random() + 0.2) * 10
     let height = (Math.random() * 30) + 10
     let radSeg = (Math.random() * 10) + 3
-    
+
     let d = (Math.random() * 35) + 90
     let stoneX = d * Math.cos(2 * (Math.PI / 15) * i)
     let stoneZ = d * Math.sin(2 * (Math.PI / 15) * i)
     let stoneY = (Math.random() * 20) - 10;
-    
+
     let stone = new T.Mesh(
         new T.CylinderGeometry(topRad, bottomRad, height, radSeg),
         new T.MeshStandardMaterial({ color: 0xD04444 }))
