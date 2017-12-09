@@ -6,7 +6,7 @@ author: Ozguc
 ---
 <body>
 <div id="info"><center>Welcome to Wanderland!<br/>
-        Press <b>R</b> to reset the world.</center>
+        Press <b>R</b> to Reset, <b>WASD</b> to Move.</center>
         </div>
 <script deferred type="module">
 
