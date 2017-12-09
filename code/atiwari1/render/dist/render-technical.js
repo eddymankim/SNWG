@@ -1,5 +1,4 @@
 import * as THREE from '../../../lib/module.js';
-import OutlineEffect from './OutlineEffect.js';
 /* aman's dumb toon renderer
  * adapted from evan-erdos' boilerplate
  */
@@ -31,18 +30,18 @@ var TechnicalRender = (function () {
         var sun = new THREE.HemisphereLight(ambient, ground, 1.0);
         sun.position.set(1, 2, 0);
         scene.add(sun);
-        var effect = new OutlineEffect(renderer, {
-            defaultThickNess: 0.01,
-            defaultColor: new THREE.Color(0x888888),
-            defaultAlpha: 0.8,
-            defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
-        });
+        /*let effect: any = new OutlineEffect(renderer, {
+          defaultThickNess: 0.01,
+          defaultColor: new THREE.Color(0x888888),
+          defaultAlpha: 0.8,
+          defaultKeepAlive: true // keeps outline material in cache even if material is removed from scene
+        });*/
         var render = function () {
             requestAnimationFrame(render.bind(_this));
             controls.update();
             update(clock.getDelta());
-            //renderer.render(scene, camera);
-            effect.render(scene, camera);
+            renderer.render(scene, camera);
+            //effect.render(scene, camera);
         };
         var resize = function () {
             camera.updateProjectionMatrix();
