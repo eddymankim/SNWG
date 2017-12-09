@@ -1,0 +1,31 @@
+// Initialize
+const oauth = OAuth({
+  consumer: {
+    key: 'xvz1evFS4wEEPTGEFPHBog',
+    secret: 'kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw'
+  },
+  signature_method: 'HMAC-SHA1',
+  hash_function(base_string, key) {
+    return CryptoJS.HmacSHA1(base_string, key).toString(CryptoJS.enc.Base64);
+  }
+});
+
+const request_data = {
+  url: 'https://api.twitter.com/1/statuses/update.json?include_entities=true',
+  method: 'POST',
+  data: { status: 'Hello Ladies + Gentlemen, a signed OAuth request!' }
+};
+
+// Note: The token is optional for some requests
+const token = {
+  key: '370773112-GmHxMAgYyLbNEtIKZeRNFsMKPR9EyMZeS9weJAEb',
+  secret: 'LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE'
+};
+
+$.ajax({
+  url: request_data.url,
+  type: request_data.method,
+  data: oauth.authorize(request_data, token)
+}).done(function(data) {
+  // Process your data here
+});
