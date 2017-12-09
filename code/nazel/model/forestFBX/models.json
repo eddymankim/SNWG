@@ -1,0 +1,45 @@
+
+  models:{
+  "modelNames": [
+      "Bush_1",
+      "Bush_2",
+      "Bush_3",
+      "Grass_1",
+      "Grass_2",
+      "Log_1",
+      "Log_2",
+      "Plant_1",
+      "Plant_2",
+      "Plant_3",
+      "Plant_4",
+      "Plant_5",
+      "Plant_6",
+      "Plant_7",
+      "Rock_1",
+      "Rock_2",
+      "Rock_3",
+      "Rock_4",
+      "Rock_5",
+      "Rock_6",
+      "Stone_1",
+      "Tree_1",
+      "Tree_2",
+      "Tree_3"
+    ],
+    "endings":{
+      "model":".fbx"
+    }
+}
+ground:{
+  "modelNames":[
+    "Environment_1",
+    "Terrain_1",
+    "Terrain_2",
+    "Mounting_1",
+    "Mounting_2",
+    "Mounting_3"
+  ],
+  "endings":{
+    "model":".fbx"
+  }
+}

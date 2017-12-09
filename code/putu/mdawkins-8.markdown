@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: full
 author: Nico
 title: Three Box Trail
 thumbnail: Nico-W5.png

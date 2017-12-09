@@ -1,5 +1,5 @@
 ---
-layout: full
+layout: null
 title: The Third Dimension
 permalink: /code/outer-space/
 author: Ben Scott

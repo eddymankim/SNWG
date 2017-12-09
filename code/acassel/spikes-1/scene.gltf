@@ -1,0 +1,481 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        5.5218505859375,
+        5.9752917289733887,
+        2.237994909286499
+      ],
+      "min": [
+        -5.270359992980957,
+        -6.3679237365722656,
+        -1.1607099771499634
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 786384,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.89993095397949219,
+        0.92755758762359619,
+        1
+      ],
+      "min": [
+        -0.92675584554672241,
+        -0.90090078115463257,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 389091,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1572768,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        7.0813655853271484,
+        5.6096706390380859,
+        2.3796544075012207
+      ],
+      "min": [
+        -5.9316983222961426,
+        -6.0185937881469727,
+        -1.4527231454849243
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2359152,
+      "componentType": 5126,
+      "count": 65532,
+      "max": [
+        0.92479127645492554,
+        0.93723350763320923,
+        0.99392163753509521
+      ],
+      "min": [
+        -0.92662858963012695,
+        -0.91224169731140137,
+        -0.99392163753509521
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1556364,
+      "componentType": 5125,
+      "count": 388983,
+      "max": [
+        65531
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3145536,
+      "componentType": 5126,
+      "count": 28280,
+      "max": [
+        6.4085836410522461,
+        7.5093793869018555,
+        2.2330949306488037
+      ],
+      "min": [
+        -3.2143421173095703,
+        -5.6555652618408203,
+        -1.5667766332626343
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 3484896,
+      "componentType": 5126,
+      "count": 28280,
+      "max": [
+        0.92480075359344482,
+        0.93723350763320923,
+        0.99187391996383667
+      ],
+      "min": [
+        -0.90017670392990112,
+        -0.91174149513244629,
+        -0.99187391996383667
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 3112296,
+      "componentType": 5125,
+      "count": 166926,
+      "max": [
+        28279
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 171,
+      "max": [
+        3.2916667461395264
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 171,
+      "max": [
+        1.1605910913203843e-05,
+        337.00051879882812,
+        34.233783721923828
+      ],
+      "min": [
+        1.1605910913203843e-05,
+        337.00051879882812,
+        -338.92623901367188
+      ],
+      "type": "VEC3"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 10,
+            "path": "translation"
+          }
+        }
+      ],
+      "name": "Cone|ConeAction",
+      "samplers": [
+        {
+          "input": 9,
+          "interpolation": "LINEAR",
+          "output": 10
+        }
+      ]
+    }
+  ],
+  "asset": {
+    "generator": "Sketchfab (OSG glTF plugin)",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 3780000,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3824256,
+      "byteOffset": 3780000,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 684,
+      "byteOffset": 7604256,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2052,
+      "byteOffset": 7604940,
+      "byteStride": 12,
+      "name": "floatBufferViews"
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 7606992,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Scene - Root",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.59999999999999998
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cone__0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cone__0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 4,
+            "POSITION": 3
+          },
+          "indices": 5,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cone__0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6
+          },
+          "indices": 8,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "c8bb448b805b4f90b66a8b4a538da81b.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": ""
+    },
+    {
+      "children": [
+        5,
+        8,
+        10
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        6
+      ],
+      "name": "Lamp",
+      "rotation": [
+        0.16907571256160736,
+        0.75588035583496094,
+        -0.27217131853103638,
+        0.57094746828079224
+      ],
+      "scale": [
+        100.00000762939453,
+        100,
+        100
+      ],
+      "translation": [
+        407.62454223632812,
+        590.38623046875,
+        -100.54539489746094
+      ]
+    },
+    {
+      "children": [
+        7
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": ""
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        9
+      ],
+      "name": "Camera",
+      "rotation": [
+        -0.21255728602409363,
+        0.9047970175743103,
+        -0.084389366209506989,
+        0.35922172665596008
+      ],
+      "scale": [
+        100,
+        100.00000762939453,
+        99.999992370605469
+      ],
+      "translation": [
+        748.1131591796875,
+        534.36651611328125,
+        650.76397705078125
+      ]
+    },
+    {
+      "name": ""
+    },
+    {
+      "children": [
+        14
+      ],
+      "name": "Cone",
+      "rotation": [
+        -2.443810274144198e-07,
+        1.1102231569740545e-16,
+        -1.1102231569740545e-16,
+        1
+      ],
+      "scale": [
+        100,
+        100,
+        100
+      ],
+      "translation": [
+        1.1605910913203843e-05,
+        337.00051879882812,
+        -338.92623901367188
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Cone__0"
+    },
+    {
+      "mesh": 1,
+      "name": "Cone__0"
+    },
+    {
+      "mesh": 2,
+      "name": "Cone__0"
+    },
+    {
+      "children": [
+        11,
+        12,
+        13
+      ],
+      "name": "Geode"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+
