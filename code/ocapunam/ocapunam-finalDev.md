@@ -17,7 +17,7 @@ import BoidsRenderer from '../ocapunam/BoidsRenderer.js'
 
 let dt = 0, dn = 0, iBoid = 0
 
-let ground, starsGeometry
+let ground, starsGeometry, objects = []
 let terrain = new T.Object3D(), sky = new T.Object3D()
 let raycaster
 let subDiv = 256
@@ -31,6 +31,8 @@ let rtMaterial = new T.MeshPhongMaterial({ color: 0xbea9de})
     ground.castShadow = true
     ground.receiveShadow = true
     terrain.add(ground)
+    objects.push(ground)
+
 
 starsGeometry = new T.Geometry();
 
@@ -59,6 +61,7 @@ function ResetGround(){
     ground.castShadow = true
     ground.receiveShadow = true
     terrain.add(ground)
+    objects.push(ground)
 }
 
 
@@ -92,17 +95,22 @@ boids.init()
 
 let curBoids = boids.swarm.boids || []
 
+raycaster = new T.Raycaster( new T.Vector3(0,10,0), new T.Vector3( 0, - 1, 0 ), 0, 100 );
+
+
 function update(time) {
     for (let boid of curBoids)
         for (let i=0;i<mask.length;++i) 
             for (let j=0;j<mask[i].length;++j)  
                 MoveMesh(boid, i, j)
 
-    if(renderer.camera.position.y <= 5){
-        renderer.camera.position.y = 5
-    }
-    if(renderer.camera.position.y >= 50){
-        renderer.camera.position.y = 50
+    raycaster.ray.origin.copy( renderer.camera.position );
+    raycaster.ray.origin.y += 50;
+
+    var intersect = raycaster.intersectObjects( objects )[0]
+
+    if (intersect != undefined){
+    renderer.camera.position.y = intersect.point.y + 5
     }
     if(renderer.camera.position.x <= -(dim/2-100)){
         renderer.camera.position.x = -(dim/2-100)

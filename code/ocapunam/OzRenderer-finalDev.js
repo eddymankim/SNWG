@@ -104,7 +104,7 @@ export default class ozRenderer {
             ground = 0xF2E9CF,
             webgl = { antialias: true, shadowMapEnabled: true },
             position = { x:0, y:10, z:0 },
-            fog = { color: 0x87889c, near: 1e1, far: 1e2 },
+            fog = { color: 0x87889c, near: 1e2, far: 1e4/2 },
             cam = { fov: 60, aspect: width/height, near: 0.1, far: 2e4 },
             update = (time) => { },
             hdr={ exposure:1.5, tonemapping:THREE.LinearToneMapping, },
@@ -157,7 +157,7 @@ export default class ozRenderer {
             /// 6a. The fog constructor takes 3 arguments:
             ///     a color for the fog, and near and far distances for fading.
             ///
-            // scene.fog = new THREE.Fog(...Object.values(fog))
+            scene.fog = new THREE.Fog(...Object.values(fog))
             scene.background = new THREE.Color(background)
 
 
@@ -195,7 +195,7 @@ export default class ozRenderer {
         /// 7c. The `OrbitControls` are not included with THREE.js by default,
         ///     but they are included in the library module so you can use them.
         ///
-        var controls = new THREE.FirstPersonControls(camera);
+        let controls = this.controls = new THREE.FirstPersonControls(camera);
         controls.lookSpeed = 0.3;
         controls.movementSpeed = 20;
         controls.noFly = true;
