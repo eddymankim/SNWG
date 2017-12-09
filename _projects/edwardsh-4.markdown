@@ -6,9 +6,16 @@ thumbnail: shin_thumbnail.png
 week-assignment: 4
 ---
 
-A simple JavaScript program.
 
 <!DOCTYPE html>
+<p>
+This is a minature mad-libs program that uses prompt() to ask the user for the appropriate input and then creates a
+    message based on those inputs. While I have extensive knowledge on JavaScript, I decided I wanted to back track 
+    a bit to reinforce the basics and see if I can advance in my programming at a different perspective. I especially
+    feel this would be useful since I will be learning and using a lot of three.js. Considering I will be doing a lot
+    of visual work for most of the semester, I thought I would use this chance to make something fun and humorous through 
+    words. This, I hope, would give me a bit of practice in being creative.
+</p>
 
 <script type="text/javascript">
     prompt("What's up? ");
