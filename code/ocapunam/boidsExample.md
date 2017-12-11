@@ -6,26 +6,57 @@ author: Ozguc
 ---
 <script deferred type="module">
 
-import * as T from '../lib/module.js'
-import BoidsRenderer from '../ocapunam/BoidsRenderer.js'
+import * as THREE from '../ocapunam/module.js'
+import {Boid, Swarm} from '../ocapunam/boids.js'
 
-let time = 0
 
-let boids = new BoidsRenderer({
-	boidCount: 100,
-	update: (dt) => update(dt),
-})
+let scene, camera
+let rtTexture 
+let swarm
 
-function update(dt) {
-     time += dt
-     console.log(boids.boidsList)
+let sWidth = window.innerWidth
+let sHeight = window.innerHeight
+
+let boidCount = 100
+
+let renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true } )
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize(sWidth, sHeight)
+    renderer.autoClear = false;
+
+
+    document.body.appendChild(renderer.domElement)
+
+function init(){
+    
+    scene = new THREE.Scene()
+
+    camera = new THREE.OrthographicCamera( 0, sWidth, 0, sHeight, -10000, 10000 )
+    camera.position.z = 1000
+
+    swarm = new Swarm(sWidth, sHeight)
+    swarm.createBoids(scene, boidCount)
+    swarm.id = setInterval(swarm.animate, 10000)
+
+    rtTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter, format: THREE.RGBFormat } )
+    
+
+}
+    
+function animate(){
+    requestAnimationFrame(animate)
+    swarm.animate()
+    console.log(rtTexture)
+    render()
 }
 
-
-
-
-
-boids.init()
+function render() { 
+    renderer.render(scene, camera)
+    renderer.render(scene,camera,rtTexture)
+} 
+    
+    init()
+    animate()
 
 </script>
 

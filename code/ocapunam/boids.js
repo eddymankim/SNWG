@@ -8,10 +8,10 @@ export function Boid(swarm) {
     this.y = Math.random() * swarm.height;
     this.heading = Math.random() * 2 * Math.PI - Math.PI;
     this.radius = 3
-    // this.mesh = new THREE.Mesh(
-    //     new THREE.SphereGeometry(this.radius, 6, 6),
-    //     new THREE.MeshBasicMaterial({ transparent: true, color: 0xFFFFFF, opacity:.1}))
-    // this.mesh.position.set(this.x, this.y)
+    this.mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(this.radius, 6, 6),
+        new THREE.MeshBasicMaterial({ transparent: true, color: 0xFFFFFF, opacity:.1}))
+    this.mesh.position.set(this.x, this.y)
 }
 
 Boid.prototype.speed = .5;
@@ -117,7 +117,7 @@ Boid.prototype.move = function(swarm) {
     this.y = Boid.wrap(this.y + Math.sin(this.heading) * this.speed,
                        -padding, height + padding * 2);
 
-    // this.mesh.position.set(this.x, this.y, 0)
+    this.mesh.position.set(this.x, this.y, 0)
 
 }
 
@@ -139,7 +139,7 @@ Swarm.prototype.createBoids = function(scene, n=1) {
     for (var i=0; i<n; ++i) {   
         var curBoid = new Boid(this)
         this.boids.push(curBoid)
-        // scene.add(curBoid.mesh)
+        scene.add(curBoid.mesh)
     }
 }
 
@@ -151,6 +151,3 @@ Object.defineProperty(Swarm.prototype, 'height', {get: function() { return this.
 Swarm.step = function (swarm) {
     for (var i = 0; i < swarm.boids.length; i++) swarm.boids[i].step(swarm)
 }
-
-
-
