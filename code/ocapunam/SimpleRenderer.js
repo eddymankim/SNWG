@@ -36,7 +36,7 @@ export default class SimpleRenderer {
 
 
         let scene = new THREE.Scene()
-            scene.fog = new THREE.Fog(...Object.values(fog))
+            //scene.fog = new THREE.Fog(...Object.values(fog))
             scene.background = new THREE.Color(background)
             scene.add(new THREE.AmbientLight(ambient))
 
@@ -49,6 +49,11 @@ export default class SimpleRenderer {
         let sun = new THREE.HemisphereLight(light, ground, 0.5)
             sun.position.set(1,2,0)
             scene.add(sun)
+
+        let dir  = new THREE.DirectionalLight(light, 0.5)
+            dir.position.set(1,2,0)
+            dir.castShadow = true
+            scene.add(dir)
 
         let controls = new THREE.OrbitControls(camera,renderer.domElement)
 
