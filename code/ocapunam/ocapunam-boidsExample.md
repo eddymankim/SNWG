@@ -46,7 +46,6 @@ function init(){
 function animate(){
     requestAnimationFrame(animate)
     swarm.animate()
-    console.log(rtTexture)
     render()
 }
 
