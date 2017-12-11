@@ -5,6 +5,7 @@ title: roomscape
 permalink: /code/acassel-final/
 thumbnail: acassel-thumbnail.png
 assignment: 99
+final: true
 ---
 
 <script src="../acassel/ammo.js"></script>
@@ -491,9 +492,4 @@ document.addEventListener ('keypress', keyListener);
 
 ///////ADD SYNCHOPATED HIGH HATS
 
-  </script>
-  </body>
-</html>
-
-
-
+</script>

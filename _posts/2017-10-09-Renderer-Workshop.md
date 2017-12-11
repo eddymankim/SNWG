@@ -1,5 +1,5 @@
 ---
-layout: null
+layout: post
 title: Renderer Workshop
 permalink: /code/renderer-workshop/
 author: Ben Scott

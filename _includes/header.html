@@ -1,16 +1,18 @@
-<header class="site-header">
-  <div class="row">
-    {% include icon.html %}
-    <nav class="nav-bar small-8 large-10 columns">
-      <!-- <div class="trigger"> -->
-        <!--
-        {% for my_page in site.pages %}
-          {% if my_page.title %}
-          <a class="nav-item" href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a>
-          {% endif %}
-        {% endfor %}
-        -->
-      <!-- </div> -->
+<header class='site-header'>
+  <div class='row'>
+    <a href="{{site.baseurl}}/">
+      {% include logo.html %}</a>
+    <nav class='nav-bar small-8 large-10 columns'>
+      <!--
+      <div class='trigger'>
+      {% for my_page in site.pages %}
+        {% if my_page.title %}
+        <a class='nav-item' href='{{site.baseurl}}/about/'>About</a>
+        <a class='nav-item' href='{{ my_page.url | prepend: site.baseurl }}'>{{ my_page.title }}</a>
+        {% endif %}
+      {% endfor %}
+      -->
+      </div>
     </nav>
   </div>
 </header>
