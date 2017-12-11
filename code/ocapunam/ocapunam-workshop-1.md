@@ -83,7 +83,7 @@ function addLight(x, y, z){
     let o = new T.Object3D()
     o.add(createPylon(x, y, z))
     thing.add(o)
-    
+
     thing.traverse(function(children){
     objects.push(children)
     })
@@ -102,7 +102,7 @@ let renderer = new ozRenderer({
     position: { x: 0, y: 10, z: 15 },
     update: (t) => update(t),
     path: '../../data/evan-erdos/' })
-    
+
     thing.position.set(0,2.5,0)
 
 
@@ -113,8 +113,8 @@ function onDocumentMouseMove(event) {
     event.preventDefault();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    
-    raycaster.setFromCamera( mouse, this.camera );    
+
+    raycaster.setFromCamera( mouse, renderer.camera );
 }
 
 function handleKeyPressed(event) {
@@ -126,7 +126,7 @@ function handleKeyPressed(event) {
     ///if (objects.length > 10){
     ///  objects.pop(0);
     ///  thing.remove(objects.pop(0));}
-}
+    }
 }
 
 function getRandom(min, max) {

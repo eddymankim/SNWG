@@ -1,5 +1,5 @@
 ---
-layout: full
+layout: null
 title: Flash, Pop, and Hiss
 permalink: /code/edwardsh-effects-workshop/
 author: Edward Shin
@@ -196,9 +196,9 @@ async function onload(context, load) {
         lamp.scene.position.set(0,10,0)
         lamp.scene.scale.set(6, 6, 6)
         context.add(lamp.scene)
-        
+
     let myMaterial = new T.MeshToonMaterial({})
-        
+
     let [lamp2] = await load('brass-lantern.gltf')
         context.importEnv(lamp2.scene)
         lamp2.scene.position.set(24, 14, 14)
@@ -209,9 +209,9 @@ async function onload(context, load) {
             }
         })
         context.add(lamp2.scene)
-        
+
     let myMaterial2 = new T.MeshPhysicalMaterial({})
-        
+
     let [lamp3] = await load('brass-lantern.gltf')
         context.importEnv(lamp3.scene)
         lamp3.scene.position.set(-48, 29, -2)
@@ -222,14 +222,14 @@ async function onload(context, load) {
             }
         })
         context.add(lamp3.scene)
-        
-        
+
+
     let myMaterial3 = new T.MeshStandardMaterial({
-        color: 0xFFFFFF, 
-        emissive: 0xFFAAAA, 
+        color: 0xFFFFFF,
+        emissive: 0xFFAAAA,
         emissiveIntensity: 0.4,
         roughness: 0.0})
-        
+
     let [lamp4] = await load('brass-lantern.gltf')
         context.importEnv(lamp4.scene)
         lamp4.scene.position.set(-3, -1, 26)
@@ -317,7 +317,7 @@ window.renderer = new T.Renderer({
         }),
 */
 
-        new Effects.ColorShiftPass({
+        new Effects.DreamPass({
             pow: [2.1, 1.5, 1.6],
             mul: [1.1, 0.8, 1.2],
             add: [0.1, 0.2, 0.2],
@@ -328,11 +328,11 @@ window.renderer = new T.Renderer({
 
         new Effects.GlitchPass(),
 
-        new Effects.ShaderPass(Shaders.Bleach),
+        // new Effects.ShaderPass(Shaders.Bleach),
         // new Effects.ShaderPass(Shaders.Sepia),
         // new Effects.ShaderPass(Shaders.Color),
-        new Effects.ShaderPass(Shaders.Technicolor),
-        new Effects.ShaderPass(Shaders.Vignette),
+        // new Effects.ShaderPass(Shaders.Technicolor),
+        // new Effects.ShaderPass(Shaders.Vignette),
 
     ],
 

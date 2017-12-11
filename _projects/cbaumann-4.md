@@ -3,7 +3,7 @@ layout: post
 author: "Camille Baumann-Jaeger"
 title: "Javascript Trials"
 thumbnail: cbaumann-thumbnail4.png
-week-assignment: 4
+assignment: 4
 ---
 
 My first introduction into creating interactive elements with javascript was an arduous one. I have not had a lot of experience coing with Javascript and am enthusiastic about learning what I can do. My goal for this journal entry was to make a single, interactive feature using Javascript. For the purposes of this entry, I will make a

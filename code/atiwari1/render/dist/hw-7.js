@@ -43,7 +43,7 @@ function r2d(deg) {
 var basis = new THREE.Vector3(4.0, 0.0, 0.0);
 var right = basis.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), r2d(30));
 var down = right.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), r2d(60));
-var data = '/data/atiwari1/models/';
+var data = '/code/atiwari1/models/';
 var h = Math.sqrt(3);
 var bathtubs = "Antique+Bathtub\nBasic\nBathtub\nBATHTUB+DROPIN\nCabrits\nMarlborough\nmonaco\nmonaco (1)\nNordhem_Apelviken_w_Tjorn\nOnsen\nonsen_vasca\nSketchupPersonalProject\nUrquiola".split('\n').map(function (x) { return 'bathtubs/' + x + '/model.dae'; });
 console.log(bathtubs);
@@ -166,7 +166,7 @@ function main() {
                     renderer = new ToonRenderer({
                         position: { x: 0, y: 1, z: 5 },
                         update: function (dt) { },
-                        path: '../../data/atiwari1',
+                        path: '../../code/atiwari1',
                         width: 700,
                         height: 700,
                         elt: '#RenderCanvas'

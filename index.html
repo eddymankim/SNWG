@@ -2,19 +2,18 @@
 layout: default
 ---
 
-  {% assign project_order = site.projects %}
-  {% assign weeknumb = 1 %}
+{% assign projects = site.projects | sort:"assignment" | reverse %}
 
-  {% for project in project_order %}
-  <div class="small-12 medium-4 large-3 columns thumbnail-tile">
-      <a class="post-link" href="{{ project.url | prepend: site.baseurl | sort: 'week-assignment' | reverse }}">
-          <div class="thumbnail-container">
-            <img class="thumbnail-image" src="img/thumbnails/{{ project.thumbnail }}">
-            <span class="thumbnail-text">{{ project.title }}</span>
-            {% if project.banner %}
-            <span class="banner">{{ project.banner }}</span>
-            {% endif %}
-          </div>
-      </a>
-  </div>
-  {% endfor %}
+{% for project in projects %}
+<div class="small-12 medium-4 large-3 columns thumbnail-tile">
+  <a class="post-link" href="{{site.baseurl}}{{project.url}}">
+    <div class="thumbnail-container">
+      <img class="thumbnail-image" src="img/thumbnails/{{project.thumbnail}}">
+      <span class="thumbnail-text">{{project.title}}</span>
+      {% if project.banner %}
+      <span class="banner">{{project.banner}}</span>
+      {% endif %}
+    </div>
+  </a>
+</div>
+{% endfor %}

@@ -1,5 +1,5 @@
 ---
-layout: full
+layout: null
 title: Importing Files
 permalink: /code/importing-files/
 author: Ben Scott
@@ -170,7 +170,7 @@ async function load() {
     let albedo = await T.load('planet-albedo.png')
     let normal = await T.load('planet-normal.png')
     terrain.add(lampMesh.scene)
-    
+
     /*
     let material = new T.MeshPhysicalMaterial({
         color: 0x00EEFF,
@@ -181,7 +181,7 @@ async function load() {
         noramlMap: normal,
     })
     */
-    
+
 }
 
 

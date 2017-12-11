@@ -164,7 +164,7 @@ export default class ozRenderer {
         ///     While these don't usually need to change,
         ///     it's good to have them in the argument just in case.
         ///
-        let camera = new THREE.PerspectiveCamera(...Object.values(cam))
+        let camera = this.camera = new THREE.PerspectiveCamera(...Object.values(cam))
 
 
             ///
