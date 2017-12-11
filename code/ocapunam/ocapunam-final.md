@@ -4,6 +4,7 @@ title: Final Development
 permalink: /code/ocapunam-final/
 author: Ozguc
 ---
+
 <body>
 <div id="info"><center>Welcome to Wanderland!<br/>
         Press <b>R</b> to Reset, <b>WASD</b> to Move.</center>
@@ -100,8 +101,8 @@ raycaster = new T.Raycaster( new T.Vector3(0,10,0), new T.Vector3( 0, - 1, 0 ), 
 
 function update(time) {
     for (let boid of curBoids)
-        for (let i=0;i<mask.length;++i) 
-            for (let j=0;j<mask[i].length;++j)  
+        for (let i=0;i<mask.length;++i)
+            for (let j=0;j<mask[i].length;++j)
                 MoveMesh(boid, i, j)
 
     raycaster.ray.origin.copy( renderer.camera.position );
@@ -147,7 +148,7 @@ function onDocumentKeyDown(event) {
         ResetGround()
     }
 };
- 
+
 
 
 </script>

@@ -1,12 +1,18 @@
 ---
-layout: code
+layout: full
 author: Edward Shin
 title: Realms & Bridges
 thumbnail: shin_thumb_final.gif
+permalink: /code/edwardsh-final/
 code: edwardsh/final/week_15
-assignment: 99
+assignment: 16
+final: true
 ---
 
+
+<script src="/code/edwardsh/final/week_15.js" deferred type="module"></script>
+
+<!--
 <h2>Objective:</h2>
 
 <p>
@@ -41,8 +47,9 @@ assignment: 99
 
 <h2>Images: </h2>
 
-<img src="img/edwardsh/world1_2.png" alt="World 1" height="400" width="600">
+<img src="/img/edwardsh/world1_2.png" alt="World 1" height="400" width="600">
 
-<img src="img/edwardsh/world2_2.png" alt="World 2" height="400" width="600">
+<img src="/img/edwardsh/world2_2.png" alt="World 2" height="400" width="600">
 
-<img src="img/edwardsh/world3_2.png" alt="World 3" height="400" width="600">
+<img src="/img/edwardsh/world3_2.png" alt="World 3" height="400" width="600">
+ -->

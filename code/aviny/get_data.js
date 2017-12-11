@@ -9,7 +9,7 @@ var filtered;
 var mounds = [];
 
 function getNextResults(response){
-    console.log(response);          
+    console.log(response);
     for(i=0;i<response.statuses.length;i++){
         statuses.push(response.statuses[i].text);
     }
@@ -88,7 +88,7 @@ var mound;
 var objLoader = new THREE.OBJLoader();
 
 
-objLoader.load('../code/aviny/models/mound.obj', function (obj) {
+objLoader.load('../aviny/models/mound.obj', function (obj) {
     obj.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = cubeBumpMaterial2;
@@ -133,7 +133,7 @@ container.appendChild( renderer.domElement );
 onWindowResize();
 
 var loader = new THREE.FontLoader();
-loader.load( '../code/aviny/helvetica.json', function ( font_a ) {
+loader.load( '../aviny/helvetica.json', function ( font_a ) {
     font = font_a;
 } ); //end load function
 
@@ -207,7 +207,7 @@ function onReady() {
         text.scale.set(0.0125,0.0125,0.0125);
         text.position.set(xCoor, yCoor, Sz*10+2);
         scene.add( text );
-        
+
     }
 
     for(i=0;i<100;i++){

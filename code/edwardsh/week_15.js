@@ -4,10 +4,10 @@
 // Start: 11-09-17
 // End: 12-08-17
 
-import * as THREE from '../lib/module.js'
+import * as THREE from './module.js'
 
 var scene, skybox, camera, raycaster, renderer;    // three.js elements
-var nodes, bridgePieces, numBPieces, bridgeSize, bridgeSpace, 
+var nodes, bridgePieces, numBPieces, bridgeSize, bridgeSpace,
     gridLength, nodeSize, nodeSpace, end1, end2, nodeRange;  // parts for node and bridge
 
 var player, playerXAxis, playerYAxis, bridge, activeNode, otherSideNode, blackScreen;    // to be used for moving player and bridge
@@ -37,7 +37,7 @@ var Colors = {
 	pink: 0xF5986E,
 	brownDark: 0x23190f,
 	blue: 0x68c3c0,
-    lightBlue: 0xa1ccea, 
+    lightBlue: 0xa1ccea,
     black: 0x000000,
     green: 0x72ef6b
 };
@@ -89,9 +89,9 @@ scene.add(shadowLight);
 nodes = [];   // list of rotation nodes;
 bridgePieces = [];    // list of bridge pieces
 numBPieces = 5;       // number of bridge pieces
-bridgeSize = 1;       
+bridgeSize = 1;
 bridgeSpace = 0.125;    // spacing between bridge pieces
-gridLength = 4;         
+gridLength = 4;
 nodeSize = 1;
 nodeSpace = ((numBPieces + 1) * bridgeSize) + ((numBPieces + 2) * bridgeSpace);     // spacing between nodes
 nodeRange = 0.5;
@@ -186,74 +186,74 @@ function setScene() {
     makeBridge();
     makeNatureGrid();
     turnOffWorld();   // world is off on for the start
-    
+
     setActiveNode();
     resetOtherNode();
 
     goalNode = otherSideNode;
     goalNode.material.color.setHex( Colors.red );
-    
+
     scene.add(player);
     scene.add(playerXAxis);
     scene.add(playerYAxis);
-    
+
     player.add(playerXAxis);
     player.add(playerYAxis);
-    
+
     goal = new Goal();
     scene.add(goal);
-    
+
     goal.position.x = goalNode.getWorldPosition().x;
     goal.position.y = goalNode.getWorldPosition().y + goalHeight;
     goal.position.z = goalNode.getWorldPosition().z;
-    
+
     // this line oddly needed, or the goal will not show
     console.log(goal.getWorldPosition());
-    
+
     goalNode.updateMatrixWorld();
     THREE.SceneUtils.attach(goal, scene, goalNode);   // parent the goalNode to goal so the goal rotates with the goalNode
-    
+
     player.updateMatrixWorld();
     THREE.SceneUtils.attach(camera, scene, player);
     camera.position.y = cameraHeight;
-    
-    
+
+
     scene.add(blackScreen);
     blackScreen.position.y = cameraHeight;
     blackScreen.position.z = -0.1;
     blackScreen.scale.y = 0.01;
-    
+
     // this line oddly needed, or the black screen will not show
     console.log(blackScreen.getWorldPosition());
     console.log(orientMap.getWorldPosition());
     console.log(orientRef.getWorldPosition());
-    
+
     camera.updateMatrixWorld();
     THREE.SceneUtils.attach(blackScreen, scene, camera);
     THREE.SceneUtils.attach(orientMap, scene, camera);
     THREE.SceneUtils.attach(orientRef, scene, camera);
-    
+
 }
 
 function makeNodeGrid() {
     var start = -(gridLength) / 2;
-    
+
     for (var i = start; i < start + gridLength; i++) {
         var x = i * nodeSpace;
-        
+
         for (var j = start; j < start + gridLength; j++) {
             var y = j * nodeSpace;
-            
+
             for (var k = start; k < start + gridLength; k++) {
                 var z = k * nodeSpace;
                 var newNode = new Node();
-                
+
                 newNode.position.set(x, y, z);
                 nodes.push(newNode);
             }
         }
     }
-    
+
     // add nodes to the scene
     for (var i = 0; i < nodes.length; i++) {
         scene.add(nodes[i]);
@@ -264,41 +264,41 @@ function makeBridge() {
     for (var i = 0; i < numBPieces; i++) {
         var z = -(i + 1) * (bridgeSize + bridgeSpace);
         var newBPiece = new BridgePiece();
-        
+
         newBPiece.position.z = z;
         bridge.add(newBPiece);
         bridgePieces.push(newBPiece);
     }
-    
+
     end1 = new EndPiece();
     end2 = new EndPiece();
     end2.position.z = -(numBPieces + 1) * (bridgeSize + bridgeSpace);
     bridge.add(end1);
     bridge.add(end2);
-    
+
     scene.add(bridge);
-    
+
 }
 
 function makeNatureGrid() {
     var start = (-(natureLength + 1) / 2) + 0.5;
-    
+
     for (var i = start; i < start + natureLength; i++) {
         var x = i * nodeSpace;
-        
+
         for (var j = start; j < start + natureLength; j++) {
             var y = j * nodeSpace;
-            
+
             for (var k = start; k < start + natureLength; k++) {
                 var z = k * nodeSpace;
                 var newNode = new NatureNode();
-                
+
                 newNode.position.set(x, y, z);
                 natureSources.push(newNode);
             }
         }
     }
-    
+
     // add nodes to the scene
     for (var i = 0; i < natureSources.length; i++) {
         scene.add(natureSources[i]);
@@ -309,92 +309,92 @@ function rotateCamera() {
     if(xIsRotating) {
         if(blackScreen.material.opacity === 1)
             rotIncX = originalRotInc * 4;
-        
+
         else
             rotIncX = originalRotInc;
-        
+
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(xAxis, rotIncX);
         player.applyQuaternion(q);
-        
+
         var q2 = new THREE.Quaternion();
         q2.setFromAxisAngle(orientXAxis, rotIncX);
         orientMap.applyQuaternion(q2);
-        
+
         remainingRot -= rotIncX;
-        
+
         blacking();
-        
+
         if(remainingRot <= 0) {
             remainingRot = originalRot;
-            
+
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
             THREE.SceneUtils.detach(activeNode, player, scene);
-            
+
             blackScreen.scale.y = 0;
             blackScreen.material.opacity = 0;
-            
+
             updateAxis();
             resetOtherNode();
             xIsRotating = false;
         }
     }
-    
+
     else if(yIsRotating) {
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(yAxis, rotIncY);
         player.applyQuaternion(q);
-        
+
         var q2 = new THREE.Quaternion();
         q2.setFromAxisAngle(orientYAxis, rotIncY);
         orientMap.applyQuaternion(q2);
-        
+
         remainingRot -= (rotIncY);
-        
+
         if(remainingRot <= 0) {
             remainingRot = originalRot;
-            
+
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
             THREE.SceneUtils.detach(activeNode, player, scene);
-            
+
             updateAxis();
             resetOtherNode();
             yIsRotating = false;
         }
     }
-    
+
     else if(zIsRotating) {
         if(blackScreen.material.opacity === 1)
             rotIncZ = originalRotInc * 4;
-        
+
         else
             rotIncZ = originalRotInc;
-        
+
         var q = new THREE.Quaternion();
         q.setFromAxisAngle(zAxis, rotIncZ);
         player.applyQuaternion(q);
-        
+
         var q2 = new THREE.Quaternion();
         q2.setFromAxisAngle(orientZAxis, rotIncZ);
         orientMap.applyQuaternion(q2);
-        
+
         remainingRot -= rotIncZ;
-        
+
         blacking();
-        
-        
+
+
         if(remainingRot <= 0) {
             remainingRot = originalRot;
-            
+
             player.updateMatrixWorld();
             THREE.SceneUtils.detach(bridge, player, scene);
             THREE.SceneUtils.detach(activeNode, player, scene);
-            
+
             blackScreen.scale.y = 0;
             blackScreen.material.opacity = 0;
-            
+
             updateAxis();
             resetOtherNode();
             zIsRotating = false;
@@ -414,27 +414,27 @@ function moveCamera() {
     if(cameraIsMoving) {
         player.translateZ(-stepInc);
         remainingSteps -= stepInc;
-        
+
         if(remainingSteps <= 0) {
             remainingSteps = nodeSpace;
-            
+
             bridge.translateZ(-remainingSteps);
             bridge.updateMatrixWorld();
-            
+
             setActiveNode();
             resetOtherNode();
             setBridgeOpacity(0.0);
-            
+
             // to ensure accuracy of player's position relative to the node
-            player.position.set(activeNode.getWorldPosition().x, 
-                                activeNode.getWorldPosition().y, 
-                                activeNode.getWorldPosition().z); 
-            
+            player.position.set(activeNode.getWorldPosition().x,
+                                activeNode.getWorldPosition().y,
+                                activeNode.getWorldPosition().z);
+
             player.updateMatrixWorld();
             //THREE.SceneUtils.detach(camera, player, scene);
-            
+
             updateAxis();
-            
+
             cameraIsMoving = false;
             bridgeIsReforming = true;
         }
@@ -459,12 +459,12 @@ function setBridgeOpacity(newVal) {
 function reformBridge(deltaTime) {
     if(bridgeIsReforming) {
         changeBridgeOpacity(opacityInc * deltaTime * speed);
-        
+
         if(otherSideNode === null) {
             if(bridgePieces[0].material.opacity >= nodelessOpacity)
                 bridgeIsReforming = false;
         }
-        
+
         else {
             if(bridgePieces[0].material.opacity >= nodeOpacity)
                 bridgeIsReforming = false;
@@ -472,7 +472,7 @@ function reformBridge(deltaTime) {
     }
 }
 
-// reset goal's position 
+// reset goal's position
 function resetGoal() {
     if(remainingSteps <= 1) {
         var dx = Math.pow((camera.getWorldPosition().x - goal.getWorldPosition().x), 2);
@@ -492,7 +492,7 @@ function resetGoal() {
             goalNode.material.color.setHex( Colors.brown );
             goalNode = nodes[rand];
             goalNode.material.color.setHex( Colors.red );
-            
+
             // this line oddly needed, or the goal will not show
             console.log(goalNode.getWorldPosition());
 
@@ -542,20 +542,20 @@ function resetGoal() {
                     goal.position.z = goalNode.getWorldPosition().z - goalHeight;
                     break;
             }
-            
+
             // this line oddly needed, or the goal will not show
             console.log(goal.getWorldPosition());
-            
+
             // parent goal Node to goal again
             goalNode.updateMatrixWorld();
             THREE.SceneUtils.attach(goal, scene, goalNode);
-            
+
             // this line oddly needed, or the goal will not show
             console.log(goal.getWorldPosition());
-            
+
             resetWorld();
         }
-        
+
     }
 }
 
@@ -573,7 +573,7 @@ function setActiveNode() {
         var dy = Math.pow((end1.getWorldPosition().y - curNode.getWorldPosition().y), 2);
         var dz = Math.pow((end1.getWorldPosition().z - curNode.getWorldPosition().z), 2);
         var dist = Math.sqrt(dx + dy + dz);
-        
+
         if(dist < nodeRange) {
             activeNode = nodes[i];
             break;
@@ -588,7 +588,7 @@ function resetOtherNode() {
         var dy = Math.pow((end2.getWorldPosition().y - curNode.getWorldPosition().y), 2);
         var dz = Math.pow((end2.getWorldPosition().z - curNode.getWorldPosition().z), 2);
         var dist = Math.sqrt(dx + dy + dz);
-        
+
         // set the new other node if found near the end of the bridge
         if(dist < nodeRange) {
             otherSideNode = nodes[i];
@@ -596,7 +596,7 @@ function resetOtherNode() {
             return;
         }
     }
-    
+
     // if the bridge goes out of bounds
     otherSideNode = null;
     setBridgeOpacity(nodelessOpacity);
@@ -606,7 +606,7 @@ function resetOtherNode() {
 function updateCamera() {
     var angleX = normalize(mousePos.y, -1, 1, maxMouseX, minMouseX);
     var angleY = normalize(mousePos.x, -1, 1, maxMouseY, minMouseY);
-    
+
     camera.rotation.x = angleX;
     camera.rotation.y = angleY;
 }
@@ -629,18 +629,18 @@ function blacking() {
         blackProgress -= rotInc;
         blackScreen.material.opacity = blackProgress / (Math.PI / 16);
     }
-    
+
     // "blackening" screen
     else if(remainingRot > (7 * Math.PI / 16) && remainingRot < (Math.PI / 2)) {
         blackProgress += rotInc;
         blackScreen.material.opacity = blackProgress / (Math.PI / 16);
     }
-    
+
     else {
         blackScreen.material.opacity = 1;
     }
-    
-    
+
+
 }
 
 // reset the game when player reaches the goal;
@@ -653,34 +653,34 @@ function resetWorld() {
         natureIsReforming = true;
         return;
     }
-    
+
     removeElements();
-    
+
     // increase number of colors to choose from every round
     gameRound++;
     if(gameRound % 1 === 0 && elemColChance < maxElemChance) {
         elemColChance++;
     }
-    
+
     var chance =  Math.floor(Math.random() * 3);
-    
+
     switch(chance) {
         case 0:
             world1();
             break;
-            
+
         case 1:
             world2();
             break;
-            
+
         case 2:
             world3();
             break;
-            
+
         default:
             break;
     }
-    
+
     natureIsReforming = true;
     formingElements = true;
 }
@@ -696,7 +696,7 @@ function turnOffWorld() {
     }
 }
 
-// animating the appearance of a new environment 
+// animating the appearance of a new environment
 function animateWorld() {
     if(natureIsReforming) {
         for(var i = 0; i < natureSources.length; i++) {
@@ -706,7 +706,7 @@ function animateWorld() {
             natureSources[i].getObjectByName("brace3").material.opacity += natureOpInc;
             natureSources[i].getObjectByName("brace4").material.opacity += natureOpInc;
         }
-        
+
         remainingNatureOp += natureOpInc;
         if(remainingNatureOp >= totalNatureOp) {
             remainingNatureOp = 0;
@@ -716,12 +716,12 @@ function animateWorld() {
 }
 
 
-// functions for resetting the world 
+// functions for resetting the world
 function makeGrid() {
     for(var i = 0; i < natureSources.length; i++) {
         natureSources[i].getObjectByName("brace2").rotation.z = -Math.PI / 2;
         natureSources[i].getObjectByName("brace3").rotation.x = -Math.PI / 2;
-        
+
         natureSources[i].rotation.y = 0;
     }
 }
@@ -731,7 +731,7 @@ function world1() {
         var newPos = natureSources[i].getWorldPosition();
         var newColor = randomElemColor();
         var newElem = new Element1(newPos, newColor);
-        
+
         elements.push(newElem);
         scene.add(newElem);
     }
@@ -740,7 +740,7 @@ function world1() {
 function world2() {
     for(var i = 0; i < nodes.length; i++) {
         var chance = Math.random();
-        
+
         if(chance < 0.2) {
             var newPos = nodes[i].getWorldPosition();
             var newColor = randomElemColor();
@@ -749,7 +749,7 @@ function world2() {
             elements.push(newElem);
             scene.add(newElem);
         }
-        
+
     }
 }
 
@@ -758,7 +758,7 @@ function world3() {
         var newPos = natureSources[i].getWorldPosition();
         var newColor = randomElemColor();
         var newElem = new Element3(newPos, newColor);
-        
+
         elements.push(newElem);
         scene.add(newElem);
     }
@@ -769,7 +769,7 @@ function removeElements() {
     for(var i = 0; i < elements.length; i++) {
         scene.remove(elements[i]);
     }
-    
+
     elements = [];
 }
 
@@ -777,17 +777,17 @@ function removeElements() {
 function formElements(deltaTime) {
     if(formingElements) {
         var scaleInc = Math.round(elementScaleInc * deltaTime * speed);
-        
+
         for(var i = 0; i < elements.length; i++) {
             var element = elements[i];
-            
+
             element.scale.x += elementScaleInc;
             element.scale.y += elementScaleInc;
             element.scale.z += elementScaleInc;
         }
-        
+
         remainingElementScale += elementScaleInc;
-        
+
         if(remainingElementScale >= totalElementScale) {
             formingElements = false;
             remainingElementScale = 0;
@@ -798,46 +798,46 @@ function formElements(deltaTime) {
 // return a random color
 function randomElemColor() {
     var chance = Math.floor(Math.random() * elemColChance);
-    
+
     switch(chance) {
         case 0:
             return ElemColors.blue;
-            
+
         case 1:
             return ElemColors.green;
-            
+
         case 2:
             return ElemColors.gray;
-            
+
         case 3:
             return ElemColors.purple;
-            
+
         case 4:
             return ElemColors.yellowG;
-            
+
         case 5:
             return ElemColors.magenta;
-            
+
         case 6:
             return ElemColors.orange;
-            
+
         default:
             return null;
     }
-    
+
     return null;
 }
 
 function fadeText(deltaTime) {
-    if(uiDone || !uiRead) 
+    if(uiDone || !uiRead)
         return;
-    
+
     textMesh.material.opacity -= deltaTime;
     if(textMesh.material.opacity <= 0){
         scene.remove(textMesh);
         uiDone = true;
     }
-        
+
 }
 
 
@@ -857,7 +857,7 @@ function Node() {
 
     return node;
 }
-    
+
 // pieces of the moving bridge
 function BridgePiece() {
     var pieceGeo = new THREE.BoxGeometry((nodeSize * 0.85), nodeSize, nodeSize);
@@ -883,7 +883,7 @@ function Goal() {
     var goalGeo = new THREE.DodecahedronGeometry(goalSize);
     var goalMat = new THREE.MeshLambertMaterial( {color: Colors.pink } );
     var goalMesh = new THREE.Mesh(goalGeo, goalMat);
-    
+
     return goalMesh;
 }
 
@@ -901,30 +901,30 @@ function BlackScreen() {
 // core of the nature nodes with braces that move to change the experience
 function NatureNode() {
     var node = new THREE.Object3D();
-    
+
     var coreGeo = new THREE.BoxGeometry(nodeSize * 0.5, nodeSize * 0.5, nodeSize * 0.5);
     var coreMat = new THREE.MeshLambertMaterial( { color: Colors.blue, transparent: true, opacity: 1 } );
-    var core = new THREE.Mesh(coreGeo, coreMat);    
+    var core = new THREE.Mesh(coreGeo, coreMat);
     core.name = "core";
-    
+
     var braceGeo = new THREE.BoxGeometry(0.2, nodeSpace * 1.45, 0.2);
     var braceMat = new THREE.MeshLambertMaterial( { color: Colors.blue, transparent: true, opacity: 1  } );
     var brace1 = new THREE.Mesh(braceGeo, braceMat);
     var brace2 = new THREE.Mesh(braceGeo, braceMat);
     var brace3 = new THREE.Mesh(braceGeo, braceMat);
     var brace4 = new THREE.Mesh(braceGeo, braceMat);
-    
+
     brace1.name = "brace1";
     brace2.name = "brace2";
     brace3.name = "brace3";
     brace4.name = "brace4";
-    
+
     node.add(core);
     node.add(brace1);
     node.add(brace2);
     node.add(brace3);
     node.add(brace4);
-    
+
     brace2.rotation.z = -Math.PI / 2;
     brace3.rotation.x = -Math.PI / 2;
 
@@ -932,18 +932,18 @@ function NatureNode() {
 }
 
 
-// nature element: city-esque 
+// nature element: city-esque
 function Element1(newPos, eColor) {
     var elemGeo = new THREE.BoxGeometry(((Math.random() * 4) + 1), ((Math.random() * 4) + 1), ((Math.random() * 6) + 1));
     var elemMat = new THREE.MeshLambertMaterial( { color: eColor, transparent: true, opacity: 0.9 } );
-    var elem = new THREE.Mesh(elemGeo, elemMat);   
-    
+    var elem = new THREE.Mesh(elemGeo, elemMat);
+
     elem.position.x = newPos.x;
     elem.position.y = newPos.y;
     elem.position.z = newPos.z;
-    
+
     elem.scale.set(0, 0, 0);
-    
+
     return elem;
 }
 
@@ -952,20 +952,20 @@ function Element2(newPos, eColor) {
     var wallsX = new Walls(eColor);
     var wallsY = new Walls(eColor);
     var wallsZ = new Walls(eColor);
-    
+
     wallsY.rotation.z = Math.PI / 2;
     wallsZ.rotation.y = Math.PI / 2;
-    
+
     var elem = new THREE.Object3D();
-    
+
     elem.add(wallsX);
     elem.add(wallsY);
     elem.add(wallsZ);
-    
+
     elem.scale.set(0, 0, 0);
-    
+
     elem.position.set(newPos.x, newPos.y, newPos.z);
-    
+
     return elem;
 }
 
@@ -973,17 +973,17 @@ function Element2(newPos, eColor) {
 function Walls(eColor) {
     var wallGeo = new THREE.BoxGeometry(nodeSize * 0.1, nodeSize * 6, nodeSize * 6);
     var wallMat = new THREE.MeshLambertMaterial( { color: eColor, transparent: true, opacity: 0.55 } );
-    var wall1 = new THREE.Mesh(wallGeo, wallMat);  
+    var wall1 = new THREE.Mesh(wallGeo, wallMat);
     var wall2 = new THREE.Mesh(wallGeo, wallMat);
-    
+
     wall1.position.x = (nodeSize * 3);
     wall2.position.x = -(nodeSize * 3);
-    
+
     var walls = new THREE.Object3D();
-    
+
     walls.add(wall1);
     walls.add(wall2);
-    
+
     return walls;
 }
 
@@ -991,30 +991,30 @@ function Walls(eColor) {
 function Element3(newPos, eColor) {
     var elem = new THREE.Object3D();
     var size = Math.floor((Math.random() * 4)) + 2;
-    
+
     for(var i = 0; i < size; i++) {
         var cubeGeo = new THREE.BoxGeometry(nodeSize, nodeSize, nodeSize);
         var cubeMat = new THREE.MeshLambertMaterial( { color: eColor, transparent: true, opacity: 0.8 } );
-        var cube = new THREE.Mesh(cubeGeo, cubeMat);   
-        
+        var cube = new THREE.Mesh(cubeGeo, cubeMat);
+
         cube.scale.x = (Math.random() * 4);
         cube.scale.y = (Math.random() * 4);
         cube.scale.z = (Math.random() * 4);
-        
+
         cube.rotation.x = (Math.random() * Math.PI);
         cube.rotation.y = (Math.random() * Math.PI);
         cube.rotation.z = (Math.random() * Math.PI);
-        
+
         cube.position.x += (Math.random() * 2) - 1;
         cube.position.y += (Math.random() * 2) - 1;
         cube.position.z += (Math.random() * 2) - 1;
-        
+
         elem.add(cube);
     }
-    
+
     elem.position.set(newPos.x, newPos.y, newPos.z);
     elem.scale.set(0, 0, 0);
-    
+
     return elem;
 }
 
@@ -1023,33 +1023,33 @@ function Orient() {
     var orient = new THREE.Object3D();
     var orientXAxis = new THREE.Object3D();
     var orientYAxis = new THREE.Object3D();
-    
+
     orientXAxis.name = "xAxis";
     orientYAxis.name = "yAxis";
     orientXAxis.rotation.y = Math.PI / 2;
     orientYAxis.rotation.x = Math.PI / 2;
     orient.add(orientXAxis);
     orient.add(orientYAxis);
-    
+
     var headGeo = new THREE.CylinderGeometry(0.01, 0.1, 0.2, 4);
     var headMat = new THREE.MeshLambertMaterial( { color: Colors.red, transparent: true, opacity: 1 } );
     var head = new THREE.Mesh(headGeo, headMat);
     head.name = "head";
-    
+
     var bodyGeo = new THREE.CylinderGeometry(0.03, 0.07, 0.25, 4);
     var bodyMat = new THREE.MeshLambertMaterial( { color: Colors.white, transparent: true, opacity: 1 } );
     var body = new THREE.Mesh(bodyGeo, bodyMat);
     body.name = "body";
-    
+
     head.position.y = 0.14;
     head.rotation.x = -Math.PI / 2;
-    
+
     orient.add(body);
     orient.add(head);
-    
+
     orient.scale.set(0.7, 0.7, 0.7);
     orient.rotation.y = (Math.PI / 16);
-    
+
     return orient;
 }
 
@@ -1057,15 +1057,15 @@ function Orient() {
 // axis representing original direction of player
 function OrientRefAxis() {
     var ref = new THREE.Object3D();
-    
+
     var axisGeo = new THREE.BoxGeometry(0.01, 0.01, 1);
     var axisMat = new THREE.MeshLambertMaterial( { color: Colors.green } );
-    var axis = new THREE.Mesh(axisGeo, axisMat);  
-    
+    var axis = new THREE.Mesh(axisGeo, axisMat);
+
     ref.add(axis);
     axis.position.z -= 0.5;
     ref.rotation.y = -Math.PI + (Math.PI / 16);
-    
+
     return ref;
 }
 
@@ -1079,48 +1079,48 @@ function OrientRefAxis() {
 // controls for player to move around in the world
 function onKeyPress( event ) {
     var k = String.fromCharCode(event.keyCode);
-    
+
     if(k === 'x' || k === 'X') {
         if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving) {
             // prepare black screen objetc for fading transition
             blackScreen.scale.y = 1;
-            
+
             player.updateMatrixWorld();
             THREE.SceneUtils.attach(bridge, scene, player);
             THREE.SceneUtils.attach(activeNode, scene, player);
-            
+
             xIsRotating = true;
             uiRead = true;
         }
     }
-    
+
     else if(k === 'y' || k === 'Y') {
         if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving) {
             player.updateMatrixWorld();
             THREE.SceneUtils.attach(bridge, scene, player);
             THREE.SceneUtils.attach(activeNode, scene, player);
-            
+
             yIsRotating = true;
             uiRead = true;
         }
     }
-    
+
     else if(k === 'z' || k === 'Z') {
         if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving) {
             // prepare black screen objetc for fading transition
             blackScreen.scale.y = 1;
-            
+
             player.updateMatrixWorld();
             THREE.SceneUtils.attach(bridge, scene, player);
             THREE.SceneUtils.attach(activeNode, scene, player);
-            
+
             zIsRotating = true;
             uiRead = true;
         }
     }
 }
 
-// click mouse to move player only when player and/or nodes are not moving 
+// click mouse to move player only when player and/or nodes are not moving
 // and only if there is a node on the other side of the bridge
 function onMouseClick( event ) {
     if(!xIsRotating && !yIsRotating && !zIsRotating && !cameraIsMoving && (otherSideNode !== null)) {
@@ -1134,7 +1134,7 @@ function onMouseClick( event ) {
 function onMouseMove( event ) {
     var tx = -1 + (event.clientX / window.innerWidth) * 2;
     var ty = -1 + (event.clientY / window.innerHeight) * 2;
-    
+
     mousePos = {x: tx, y: ty};
 }
 
@@ -1144,7 +1144,7 @@ async function onLoad( event ) {
 
     var font = await load('../../code/edwardsh/fonts/optimer_bold.typeface.json');
     var message = "click: forward\n  x: x-axis\n  y: y-axis\n  z: z-axis";
-    
+
     var geometry = new THREE.TextGeometry( message, {
             font: font,
             size: 0.4,
@@ -1155,17 +1155,17 @@ async function onLoad( event ) {
             bevelSize: 1,
             bevelSegments: 3
     } );
-    
-    
+
+
     var pos = otherSideNode.getWorldPosition();
-    
+
     var material = new THREE.MeshLambertMaterial( { color: Colors.blue,  transparent: true, opacity: 1 } );
     textMesh = new THREE.Mesh(geometry, material);
-    
+
     textMesh.scale.set(1.2, 1.2, 1.2);
     textMesh.position.set(pos.x - 1.4, pos.y + (cameraHeight * 5.3), pos.z);
     console.log(textMesh.getWorldPosition());
-    
+
     scene.add(textMesh);
 }
 
@@ -1174,30 +1174,30 @@ async function onLoad( event ) {
 
 // IMPLEMENTATION
 
-function loop() {	
+function loop() {
     var deltaTime = clock.getDelta();
-    
+
     rotateCamera();
     moveCamera();
     updateCamera();
-    
+
     resetGoal();
-    
+
     reformBridge(deltaTime);
     animateGoal(deltaTime);
-    
+
     animateWorld(deltaTime);
     formElements(deltaTime);
-    
+
     fadeText(deltaTime);
-    
+
     renderer.render(scene, camera);
     requestAnimationFrame( loop );
 }
 
 function init() {
     setScene();
-    
+
     document.querySelector("#RenderCanvas").appendChild(renderer.domElement);
     document.addEventListener("keypress", onKeyPress, false);
     document.addEventListener("click", onMouseClick, false);
@@ -1208,15 +1208,15 @@ function init() {
 
 init();
 loop();
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+

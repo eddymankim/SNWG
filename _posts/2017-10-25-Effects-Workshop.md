@@ -1,5 +1,5 @@
 ---
-layout: null
+layout: post
 title: Flash, Pop, and Hiss
 permalink: /code/effects-workshop/
 author: Ben Scott

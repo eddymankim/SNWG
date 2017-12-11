@@ -1,12 +1,11 @@
 ---
-layout: page
+layout: post
 ---
 
-<div class="page-content" style="margin: 2em">
+<div class="page-content" style="margin:2em">
     <div id='RenderCanvas'></div>
     {% if page.code %}
     <script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
     {% endif %}
     {{ content }}
 </div>
-

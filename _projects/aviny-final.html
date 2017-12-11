@@ -1,11 +1,14 @@
 ---
-layout: post
+layout: full
 author: Andrew Viny
 title: Tweet mountain
 thumbnail: tweet.png
+permalink: /code/aviny-final/
 assignment: 99
+final: true
 ---
 
+<!--
 <html>
 <head>
 	<meta charset=utf-8>
@@ -19,13 +22,17 @@ assignment: 99
 	<br>
 	<div style="font-family:'arial'; font-size: 12px"> Tweet Mountain is a virtual environment, constructed from lines and shaped by tweets.  When you load Tweet Mountain, this site pulls the last 900 tweets @realDonaldTrump, and pulls out the most common words (a little bit of filtering is done to remove boring words like "it's", "and", "or", etc).  These words deform the surface of lines and create a landscape.  This project presented a number of challenges.  I had to learn how to grab live data from Twitter, filter, sort, and create meaningful information from it.  I also had to devise a way to construct a seamless environment which would visualize this information. </div>
 	<br>
+-->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../code/aviny/oauth-1.0a.js"></script>
+	<script src="../aviny/oauth-1.0a.js"></script>
 	<script src="http://threejs.org/build/three.js"></script>
-	<script src="../code/aviny/OBJ_loader.js"></script>
-	<script src="../code/aviny/OrbitControls2.js"></script>
-	<script src="../code/aviny/blacklist.js"></script>
-	<script src="../code/aviny/get_data.js"></script>
+	<script src="../aviny/OBJ_loader.js"></script>
+	<script src="../aviny/OrbitControls2.js"></script>
+	<script src="../aviny/blacklist.js"></script>
+	<script src="../aviny/get_data.js"></script>
+
+<!--
 	<br>
 	<div style="font-family:'arial'; font-size: 18px"> Data</div>
 	<div style="font-family:'arial'; font-size: 12px"> Getting this data from Twitter was more complicated than I anticipated.  The API limits you to 100 Tweets for each request.  To get a large enough sample to make the most common words representative of the current conversation, I needed to make multiple calls collecting the data 100 tweets at a time.  The next issue came with OAuth.  To get around these limitations I utilized a service called oauth.io. </div>
@@ -37,3 +44,4 @@ assignment: 99
 	<div style="font-family:'arial'; font-size: 12px"> Early in the developement of this project I flipped the orientation of the camera so that the z axis was oriented vertically.  This allowed me to more easly understand where things like my mounds, my cameras and my lines where being places or moved in space while I was building the project.  Unfortunately when I went to add motion at the end I found that the pointer-lock cnotrols I had intended to use didn't support this orientation.  Unfortunately I had to shift to using Orbital controls for this reason.  Even these controls required a great deal of adjustment to work in thr correct orientation. </div>
 </body>
 </html>
+ -->

@@ -5,6 +5,7 @@ layout: default
 {% assign projects = site.projects | sort:"assignment" | reverse %}
 
 {% for project in projects %}
+{% if project.final == true %}
 <div class="small-12 medium-4 large-3 columns thumbnail-tile">
   <a class="post-link" href="{{site.baseurl}}{{project.url}}">
     <div class="thumbnail-container">
@@ -16,4 +17,5 @@ layout: default
     </div>
   </a>
 </div>
+{% endif %}
 {% endfor %}

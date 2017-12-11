@@ -2,7 +2,14 @@
 <html>
   {% include head.html %}
   <body>
-    <style> body { margin: 0; overflow: hidden; color: #cccccc; } </style>
+    <style>
+    body { margin:0; overflow:hidden; color:#ccc }
+    canvas { display:block }
+    .logo {
+      position:fixed; top:0.5em; left:0.25em;
+      width:10%; height:4em; z-index:99; }
+    </style>
+    {% include logo.html %}
     {% if page.name and page.code %}
     <script src='{{site.baseurl}}/code/{{page.code}}.js' deferred type='module'></script>
     {% endif %}
