@@ -3,7 +3,7 @@ layout: full
 author: Nico
 title: Three Box Trail
 thumbnail: Nico-W5.png
-week-assignment: 5
+week: 5
 ---
 
 <script src= "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
