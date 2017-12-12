@@ -2,7 +2,7 @@
 layout: code
 author: Edward Shin
 title: Realms & Bridges
-thumbnail: shin_thumb_final.gif
+thumbnail: shin_thumb_final_v2.gif
 week-assignment: 15
 code: edwardsh_final/week_15
 ---
