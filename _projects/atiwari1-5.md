@@ -6,7 +6,7 @@ thumbnail: atiwari1-5-boids.png
 assignment: 5
 author: aman
 ---
-<link rel="stylesheet" href="https://cdn.rawgit.com/dataarts/dat.gui/2659494a/build/dat.gui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dataarts/dat.gui@2659494a/build/dat.gui.css">
 
 Here is a simple Boids simulation I made.
 You can mess with the parameters in the datgui tray on the top left, and look around by dragging your mouse.
